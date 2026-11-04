@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>FreeCAD Carry – Projektmappe</title>
+<style>
+:root{
+  --bg:#121519; --panel:#171c22; --panel2:#1e242b; --line:#303943;
+  --text:#e8edf3; --muted:#96a3b1; --accent:#5b9bd5; --accent2:#82c0f5;
+  --orange:#f0a83c; --paper:#ffffff;
+  --mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0;display:flex;flex-direction:column;overflow:hidden;color:var(--text);
+  background:radial-gradient(1100px 600px at 20% -10%,#1d2733 0%,var(--bg) 60%) fixed;
+  font:14px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;
+}
+button{font:inherit;color:inherit}
+.ico{width:1.15em;height:1.15em;vertical-align:-0.22em;flex:none}
+
+/* ---------- Kopf ---------- */
+header.top{
+  display:flex;align-items:center;gap:16px;padding:9px 18px;flex:none;
+  background:rgba(18,21,25,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);z-index:30;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:.2px;white-space:nowrap}
+.brand .logo{width:28px;height:28px}
+.brand small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.pager{flex:1;display:flex;align-items:center;gap:12px;max-width:560px;min-width:120px}
+.progress{flex:1;height:5px;background:#2a313a;border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#427cb8,#82c0f5);transition:width .3s ease}
+.pagelabel{font:600 12px var(--mono);color:var(--muted);white-space:nowrap}
+.tools{display:flex;align-items:center;gap:6px;margin-left:auto}
+.tool{
+  display:inline-flex;align-items:center;gap:6px;background:#232a31;border:1px solid var(--line);
+  border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:600;cursor:pointer;transition:.15s;
+}
+.tool:hover{background:#2d3640;border-color:#46515d}
+.tool.primary{background:linear-gradient(180deg,#3f80c0,#346da7);border-color:#4c90d1;color:#fff}
+.zoom{font:600 11.5px var(--mono);color:#cbd6e1;min-width:48px;text-align:center}
+.menu-btn{display:none}
+
+/* ---------- Layout ---------- */
+.app{flex:1;display:grid;grid-template-columns:266px minmax(0,1fr);min-height:0}
+
+/* ---------- Seitenleiste ---------- */
+.side{
+  border-right:1px solid var(--line);background:rgba(23,26,31,.8);
+  padding:14px 12px 22px;overflow:auto;
+}
+.side h2{font-size:10.5px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin:4px 6px 8px}
+.chapter{margin-bottom:12px}
+.ch-head{
+  display:flex;align-items:baseline;gap:8px;width:100%;background:none;border:0;text-align:left;
+  padding:6px 6px 4px;border-radius:7px;cursor:pointer;
+}
+.ch-head:hover{background:#232a31}
+.ch-title{font-size:12.5px;font-weight:650;color:#dce4ec;line-height:1.3}
+.ch-note{font-size:10.5px;color:#7f8c99}
+.ch-pages{display:flex;flex-wrap:wrap;gap:4px;padding:3px 6px 0}
+.pbtn{
+  width:30px;height:26px;border-radius:6px;border:1px solid #333c46;background:#1d232a;
+  color:#a9b5c2;font:600 11px var(--mono);cursor:pointer;transition:.12s;
+}
+.pbtn:hover{border-color:#536172;color:#fff}
+.pbtn.current{background:var(--accent);border-color:var(--accent);color:#0d1520}
+.pbtn.intro{width:auto;padding:0 9px}
+.parts{list-style:none;margin:0;padding:0 6px;display:flex;flex-direction:column;gap:5px;font-size:12px;color:#b9c4cf}
+.parts li{display:flex;align-items:center;gap:7px}
+.parts li::before{content:"";width:6px;height:6px;border-radius:2px;background:#4f8bc4;flex:none}
+.credit{font-size:10.5px;color:#74808d;line-height:1.5;margin:18px 6px 0;border-top:1px solid #2a323b;padding-top:12px}
+.credit b{color:#a8b5c2;font-weight:600}
+
+/* ---------- Bühne ---------- */
+.stage{position:relative;overflow:auto;min-width:0;padding:0 24px 48px;scroll-behavior:smooth}
+.backdrop{display:none}
+.pagebar{
+  position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:10px 0;margin:0 -24px 10px;background:rgba(18,21,25,.86);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(48,57,67,.7);
+}
+.navbtn{
+  width:34px;height:32px;border-radius:8px;border:1px solid #36414c;background:#232a31;color:#e6edf5;
+  font-size:15px;cursor:pointer;
+}
+.navbtn:hover{background:#303a45}
+.navbtn:disabled{opacity:.3;cursor:default}
+.pageinfo{font-size:12.5px;color:#b9c4cf;min-width:170px;text-align:center}
+.pageinfo b{color:#fff}
+.paper{
+  margin:0 auto;background:var(--paper);border-radius:3px;overflow:hidden;
+  box-shadow:0 26px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04);
+  width:100%;max-width:1050px;
+}
+.paper img{display:block;width:100%;height:auto;background:#fff;cursor:zoom-in}
+.hint{text-align:center;font-size:11.5px;color:#6f7c89;margin:10px 0 0}
+
+/* ---------- Lightbox ---------- */
+.lightbox{
+  position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+  background:rgba(4,7,11,.94);padding:18px;
+}
+.lightbox.show{display:flex}
+.lightbox img{max-width:95vw;max-height:92vh;background:#fff;box-shadow:0 30px 90px rgba(0,0,0,.8)}
+.lb-close{
+  position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:50%;
+  border:1px solid #3f4a56;background:rgba(20,25,31,.85);color:#dfe7ef;font-size:18px;cursor:pointer;
+}
+.lb-nav{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;
+  background:rgba(18,22,27,.92);border:1px solid #36414c;border-radius:99px;padding:5px 8px;font-size:12px;color:#b9c4cf}
+.lb-nav button{width:34px;height:34px;border-radius:50%;border:0;background:#2a333c;color:#e8eef5;cursor:pointer;font-size:15px}
+.lb-nav span{min-width:90px;text-align:center}
+
+/* ---------- Mobil ---------- */
+@media (max-width:920px){
+  .app{grid-template-columns:1fr}
+  .side{
+    position:fixed;top:0;bottom:0;left:0;width:280px;z-index:60;transform:translateX(-100%);
+    transition:transform .2s ease;background:#151a20;box-shadow:20px 0 60px rgba(0,0,0,.5);
+  }
+  .side.open{transform:none}
+  .menu-btn{display:inline-flex}
+  .stage{padding:0 12px 40px}
+  .pagebar{margin:0 -12px 8px}
+  .brand small{display:none}
+  .pager{display:none}
+  .tools .lbl{display:none}
+  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:55;display:none}
+  .backdrop.show{display:block}
+}
+@media print{
+  header.top,.side,.pagebar,.hint{display:none!important}
+  .stage{overflow:visible;padding:0}
+  .paper{box-shadow:none;max-width:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <button class="tool menu-btn" id="menuBtn" aria-label="Seitenleiste">☰</button>
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2.2 21 7.3v9.4L12 21.8 3 16.7V7.3Z" fill="#2f5f96"/>
+      <path d="M12 2.2 21 7.3 12 12.4 3 7.3Z" fill="#79aede"/>
+      <path d="M12 12.4v9.4L3 16.7V7.3Z" fill="#24476f"/>
+    </svg>
+    <div>FreeCAD Carry<small>Projektmappe · Chassi, Rad, Radlager, Achse, Baugruppe</small></div>
+  </div>
+  <div class="pager">
+    <span class="pagelabel" id="pageLabel">Seite 2</span>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+  <div class="tools">
+    <button class="tool" id="zoomOut" aria-label="kleiner">−</button>
+    <span class="zoom" id="zoomLabel">100 %</span>
+    <button class="tool" id="zoomIn" aria-label="größer">+</button>
+    <button class="tool" id="fullBtn"><span class="lbl">Vollbild</span></button>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="side" id="side">
+    <h2>Kapitel</h2>
+    <div id="chapters"></div>
+    <h2>Bauteile</h2>
+    <ul class="parts">
+      <li>Chassi (Platte, Löcher, Senkungen)</li>
+      <li>Rad (Rotationskörper, polares Muster)</li>
+      <li>Radlager (Linienzug, Hilfsebenen)</li>
+      <li>Achse und Schrauben</li>
+      <li>Baugruppe Carry</li>
+    </ul>
+    <p class="credit">
+      <b>Quelle:</b> Jürgen Gräber, „FreeCAD Anleitung II“ (2020),
+      Originalseiten für den NWT-Unterricht.<br><br>
+      Diese Mappe enthält nur das Projekt <b>Carry</b> (Seiten 2–25).
+      Das Uhren-Projekt ist nicht enthalten.
+    </p>
+  </aside>
+  <div class="backdrop" id="backdrop"></div>
+
+  <main class="stage" id="stage">
+    <div class="pagebar">
+      <button class="navbtn" id="prevBtn" aria-label="vorherige Seite">←</button>
+      <div class="pageinfo" id="pageInfo"><b>Seite 2</b> · Projekt Carry</div>
+      <button class="navbtn" id="nextBtn" aria-label="nächste Seite">→</button>
+    </div>
+    <div class="paper" id="paper">
+      <img id="pageImg" src="pages/page-02.jpg" alt="Projekt Carry – Seite 2">
+    </div>
+    <p class="hint">Seite anklicken zum Vergrößern · ← → blättern · + / − zoomen</p>
+  </main>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Schließen">✕</button>
+  <img id="lbImg" alt="Seite in groß">
+  <div class="lb-nav">
+    <button id="lbPrev" aria-label="vorherige Seite">←</button>
+    <span id="lbCaption">Seite 2</span>
+    <button id="lbNext" aria-label="nächste Seite">→</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s, r){ return (r||document).querySelector(s); };
+
+  var FIRST = 2, LAST = 25;
+
+  var CHAPTERS = [
+    { title:'Projekt Carry', note:'Ziel & Bauteile', from:2, to:2 },
+    { title:'Kapitel 1 · Chassi', note:'Muster & Senkungen', from:3, to:6 },
+    { title:'Kapitel 2 · Rad', note:'Rotationskörper & polares Muster', from:7, to:10 },
+    { title:'Kapitel 3 · Radlager', note:'Linienzug & Hilfsebenen', from:11, to:16 },
+    { title:'Kapitel 4 · Achse & Schrauben', note:'Geometrische Körper & Fasteners', from:17, to:19 },
+    { title:'Kapitel 5 · Baugruppe', note:'Carry zusammensetzen', from:20, to:25 }
+  ];
+
+  var page = -1;
+  var zoom = 1;
+  var ZOOMS = [1, 1.35, 1.7, 2.1, 2.6, 3.2];
+  var stage = $('#stage');
+  var paper = $('#paper');
+  var img = $('#pageImg');
+  var lightbox = $('#lightbox');
+  var lbImg = $('#lbImg');
+
+  function imgSrc(p){ return 'pages/page-' + String(p).padStart(2, '0') + '.jpg'; }
+
+  function chapterOf(p){
+    for (var i = 0; i < CHAPTERS.length; i++){
+      if (p >= CHAPTERS[i].from && p <= CHAPTERS[i].to) return CHAPTERS[i];
+    }
+    return CHAPTERS[0];
+  }
+
+  function buildSidebar(){
+    var wrap = $('#chapters');
+    wrap.innerHTML = CHAPTERS.map(function(ch, idx){
+      var pages = '';
+      for (var p = ch.from; p <= ch.to; p++){
+        pages += '<button class="pbtn' + (p === page ? ' current' : '') + '" data-page="' + p + '">' + p + '</button>';
+      }
+      return '<div class="chapter" data-ch="' + idx + '">' +
+               '<button class="ch-head" data-goto="' + ch.from + '">' +
+                 '<span><span class="ch-title">' + ch.title + '</span><br><span class="ch-note">' + ch.note + '</span></span>' +
+               '</button>' +
+               '<div class="ch-pages">' + pages + '</div>' +
+             '</div>';
+    }).join('');
+    wrap.onclick = function(e){
+      var b = e.target.closest('[data-page], [data-goto]');
+      if (!b) return;
+      setPage(parseInt(b.getAttribute('data-page') || b.getAttribute('data-goto'), 10));
+    };
+  }
+
+  function markActive(){
+    document.querySelectorAll('.pbtn').forEach(function(b){
+      b.classList.toggle('current', parseInt(b.getAttribute('data-page'), 10) === page);
+    });
+  }
+
+  function applyZoom(){
+    var base = Math.max(320, Math.min(stage.clientWidth - 48, 1050));
+    paper.style.width = Math.round(base * zoom) + 'px';
+    $('#zoomLabel').textContent = Math.round(zoom * 100) + ' %';
+  }
+
+  function updateLb(){
+    lbImg.src = imgSrc(page);
+    lbImg.alt = 'Seite ' + page;
+    $('#lbCaption').textContent = 'Seite ' + page;
+  }
+
+  function setPage(p, keepScroll){
+    p = Math.max(FIRST, Math.min(LAST, p));
+    if (p === page && img.getAttribute('src') === imgSrc(p)) return;
+    page = p;
+    img.src = imgSrc(p);
+    img.alt = 'Seite ' + p;
+    var ch = chapterOf(p);
+    $('#pageInfo').innerHTML = '<b>Seite ' + p + '</b> · ' + ch.title;
+    $('#pageLabel').textContent = 'Seite ' + p;
+    $('#bar').style.width = ((p - FIRST + 1) / (LAST - FIRST + 1) * 100) + '%';
+    $('#prevBtn').disabled = p <= FIRST;
+    $('#nextBtn').disabled = p >= LAST;
+    markActive();
+    if (!keepScroll) stage.scrollTop = 0;
+    applyZoom();
+    requestAnimationFrame(applyZoom);
+    if (lightbox.classList.contains('show')) updateLb();
+    try { history.replaceState(null, '', '#seite-' + p); } catch(e) {}
+    try { localStorage.setItem('carry-page', String(p)); } catch(e) {}
+  }
+
+  function openLightbox(){
+    updateLb();
+    lightbox.classList.add('show');
+  }
+  function closeLightbox(){ lightbox.classList.remove('show'); }
+
+  // Seiten vorladen
+  for (var p = FIRST; p <= LAST; p++){ var im = new Image(); im.src = imgSrc(p); }
+
+  // Startseite aus Hash / Speicher
+  var start = FIRST;
+  var m = /seite-(\d+)/.exec(location.hash);
+  if (m) start = parseInt(m[1], 10);
+  else { try { var s = parseInt(localStorage.getItem('carry-page') || '', 10); if (s >= FIRST && s <= LAST) start = s; } catch(e) {} }
+
+  buildSidebar();
+  setPage(start, true);
+  $('#pageImg').addEventListener('load', applyZoom);
+
+  $('#prevBtn').addEventListener('click', function(){ setPage(page - 1); });
+  $('#nextBtn').addEventListener('click', function(){ setPage(page + 1); });
+  $('#pageImg').addEventListener('click', openLightbox);
+  $('#fullBtn').addEventListener('click', openLightbox);
+  $('#lbClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+  $('#lbPrev').addEventListener('click', function(e){ e.stopPropagation(); setPage(page - 1); });
+  $('#lbNext').addEventListener('click', function(e){ e.stopPropagation(); setPage(page + 1); });
+
+  function zoomBy(dir){
+    var i = ZOOMS.indexOf(zoom);
+    if (i < 0) i = 0;
+    i = Math.max(0, Math.min(ZOOMS.length - 1, i + dir));
+    zoom = ZOOMS[i];
+    applyZoom();
+  }
+  $('#zoomIn').addEventListener('click', function(){ zoomBy(1); });
+  $('#zoomOut').addEventListener('click', function(){ zoomBy(-1); });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ closeLightbox(); closeMenu(); return; }
+    if (e.key === 'ArrowRight'){ e.preventDefault(); setPage(page + 1); }
+    if (e.key === 'ArrowLeft'){ e.preventDefault(); setPage(page - 1); }
+    if (e.key === '+' || e.key === '='){ e.preventDefault(); zoomBy(1); }
+    if (e.key === '-'){ e.preventDefault(); zoomBy(-1); }
+    if (e.key === 'Home'){ e.preventDefault(); setPage(FIRST); }
+    if (e.key === 'End'){ e.preventDefault(); setPage(LAST); }
+  });
+
+  // Mobile Seitenleiste
+  function openMenu(){ $('#side').classList.add('open'); $('#backdrop').classList.add('show'); }
+  function closeMenu(){ $('#side').classList.remove('open'); $('#backdrop').classList.remove('show'); }
+  $('#menuBtn').addEventListener('click', openMenu);
+  $('#backdrop').addEventListener('click', closeMenu);
+  $('#side').addEventListener('click', function(e){ if (e.target.closest('[data-page],[data-goto]')) closeMenu(); });
+
+  window.addEventListener('resize', applyZoom);
+})();
+</script>
+</body>
+</html>
