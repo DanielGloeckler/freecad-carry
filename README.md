@@ -1,40 +1,30 @@
-# FreeCAD Carry – Chassi Schritt für Schritt
+# FreeCAD Carry – Chassi & Rad Schritt für Schritt
 
-**Live:** <https://danielgloeckler.github.io/freecad-carry/>
+**Chassi:** <https://danielgloeckler.github.io/freecad-carry/>  
+**Rad:** <https://danielgloeckler.github.io/freecad-carry/rad.html>  
+**Originalseiten:** <https://danielgloeckler.github.io/freecad-carry/original.html>
 
-Kapitel 1 des Carry-Projekts als interaktive Schritt-für-Schritt-Anleitung mit
-**eigenen Screenshots aus FreeCAD 1.1** und **Lupen** auf dem jeweiligen
-Klickpunkt. Die Originalseiten aus „FreeCAD Anleitung II“ bleiben als
-Leseausgabe erhalten: **<https://danielgloeckler.github.io/freecad-carry/original.html>**
+Eigene Screenshots aus **FreeCAD 1.1**, jeweils mit **Lupe** auf dem
+Klickpunkt. Kapitel für Kapitel; die Originalseiten aus „FreeCAD Anleitung II“
+bleiben als Leseausgabe erhalten.
 
-## Die 13 Schritte
+## Kapitel 1 – Chassi (13 Schritte)
 
-1. Neues Chassi (Körper anlegen)
-2. Skizze und Rechteck (4 Freiheitsgrade)
-3. Lage über Symmetrie (2 Freiheitsgrade)
-4. Bemaßung 116 × 82 mm
-5. Aufpolstern 5 mm
-6. Grundplatte
-7. Loch-Skizze (5 Kreise Ø3)
-8. Tasche durch alles
-9. Lineares Muster 9 × (96 mm)
-10. 45 Löcher
-11. Senkungen 0,75 mm
-12. Rot einfärben
-13. Speichern als `Chassi.FCStd`
+Neues Chassi → Skizze/Rechteck → Symmetrie → **116 × 82 mm** → 5 mm
+aufpolstern → Platte → 5 Löcher skizzieren → Tasche → lineares Muster 9 ×
+(96 mm) → 45 Löcher → Senkungen 0,75 mm → rot → speichern.
 
-## Bedienung
+## Kapitel 2 – Rad (11 Schritte)
 
-- **Weiter / Zurück** oder `←` `→`
-- **Orange Markierung + Lupe** = hier klicken
-- **Bild anklicken** → Vollbild
-- Direktlink: `index.html?schritt=9`
-- `original.html` = die 24 Originalseiten (Seiten 2–25) als PDF-Leseausgabe
+Profil auf XZ → bemaßen (20/25/16/3) → **360° rotieren** → Radkörper →
+Loch Ø5 → **polares Muster 6 ×** → 6 Löcher → grün → **Gummiring** als
+zweiter Körper → fertig → speichern.
+
+Hinweis: Die zentrale Achsbohrung kommt mit dem Kapitel **Achse/Radlager**.
 
 ## Nächste Kapitel
 
-Rad, Radlager, Achse/Schrauben und die Baugruppe folgen im gleichen Stil –
-jeweils mit eigenen Screenshots und Lupen.
+Radlager, Achse/Schrauben und die Baugruppe folgen im gleichen Stil.
 
 ## Quelle
 
