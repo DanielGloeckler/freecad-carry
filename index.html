@@ -6,6 +6,12 @@
 <meta name="color-scheme" content="dark">
 <title>FreeCAD Carry – Kursübersicht</title>
 <link rel="stylesheet" href="assets/kurs.css">
+<script>
+/* Alte Links auf Kapitel 1 (index.html?schritt=...) weiterleiten */
+if (/[?&]schritt=/.test(location.search)) {
+  location.replace('chassi.html' + location.search);
+}
+</script>
 <style>
 :root{
   --bg:#121519; --panel:#1a1f24; --line:#333b45;
