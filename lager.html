@@ -235,6 +235,7 @@ table.shortcuts td:first-child{width:52%}
   .ch-body{padding:15px 16px 24px}
 }
 </style>
+<link rel="stylesheet" href="assets/kurs.css">
 </head>
 <body>
 
@@ -256,6 +257,7 @@ table.shortcuts td:first-child{width:52%}
     <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
   </div>
 </header>
+<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 3 · Radlager</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 0 erledigt</span></div></div>
 
 <div class="app">
   <nav class="outline">
@@ -263,7 +265,7 @@ table.shortcuts td:first-child{width:52%}
     <ol class="steplist" id="steplist"></ol>
     <p class="foot">
       <span class="dotline"><i></i> Orange = hier klicken</span>
-      Kapitel 3 · Radlager.<br><a href="index.html" style="color:#82c0f5">Chassi</a> · <a href="rad.html" style="color:#82c0f5">Rad</a> · <a href="lager.html" style="color:#82c0f5">Radlager</a> · <a href="achse.html" style="color:#82c0f5">Achse</a> · <a href="baugruppe.html" style="color:#82c0f5">Baugruppe</a> · <a href="original.html" style="color:#82c0f5">Original (PDF)</a>    </p>
+      Kapitel 3 · Radlager.<br><a href="index.html" style="color:#82c0f5">Kurs</a> · <a href="chassi.html" style="color:#82c0f5">Chassi</a> · <a href="rad.html" style="color:#82c0f5">Rad</a> · <a href="lager.html" style="color:#82c0f5">Radlager</a> · <a href="achse.html" style="color:#82c0f5">Achse</a> · <a href="baugruppe.html" style="color:#82c0f5">Baugruppe</a> · <a href="original.html" style="color:#82c0f5">Original (PDF)</a>    </p>
   </nav>
 
   <main class="stage" id="stage">
@@ -693,9 +695,10 @@ table.shortcuts td:first-child{width:52%}
       <div class="ch-cap"><b>Carry</b> · Transportfahrzeug<span>Alle Kapitel auf einen Blick</span></div>
     </div>
     <div class="ch-body">
+      <a class="ch-course" href="index.html">← Zur Kursübersicht</a>
       <h2>Kapitel wählen</h2>
       <div class="ch-grid">
-        <a class="ch-card" href="index.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">13 Schritte · Platte mit 45 Löchern</span></span></a>
+        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">13 Schritte · Platte mit 45 Löchern</span></span></a>
         <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">14 Schritte · Radkörper und Gummiring</span></span></a>
         <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">8 Schritte · Bogenform mit Bohrungen</span></span></a>
         <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">9 Schritte · M3×20 und Mutter</span></span></a>
@@ -761,6 +764,7 @@ table.shortcuts td:first-child{width:52%}
   });
 })();
 </script>
+<script src="assets/kurs.js"></script>
 </body>
 </html>
 

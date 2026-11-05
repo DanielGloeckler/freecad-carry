@@ -1,11 +1,16 @@
-# FreeCAD Carry – komplette Schritt-für-Schritt-Anleitung
+# FreeCAD Carry – Lernplattform (Kurs)
 
-**Startseite (Chassi):** <https://danielgloeckler.github.io/freecad-carry/>  
+**Kursübersicht:** <https://danielgloeckler.github.io/freecad-carry/>  
+**Kapitel 1 – Chassi:** <https://danielgloeckler.github.io/freecad-carry/chassi.html>  
 **Rad:** <https://danielgloeckler.github.io/freecad-carry/rad.html>  
 **Radlager:** <https://danielgloeckler.github.io/freecad-carry/lager.html>  
 **Achse & Schrauben:** <https://danielgloeckler.github.io/freecad-carry/achse.html>  
 **Baugruppe:** <https://danielgloeckler.github.io/freecad-carry/baugruppe.html>  
 **Originalseiten (PDF):** <https://danielgloeckler.github.io/freecad-carry/original.html>
+
+Aufbau wie eine Lernplattform: **Kursstartseite** mit Fortschritt, fünf
+**Kapitel** als Abschnitte und pro Kapitel eine **Kursleiste** mit Rücksprung
+zur Übersicht. Der Fortschritt wird im Browser gespeichert.
 
 Eigene Screenshots aus **FreeCAD 1.1**, jeweils mit **Lupe** auf dem
 Klickpunkt. Über den Button **Kapitel** (oder die Taste **K**) öffnet sich
