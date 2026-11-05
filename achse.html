@@ -250,14 +250,14 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 9</span>
+    <span class="progressnum" id="progressNum">1 / 14</span>
   </div>
   <div class="top-actions"><button class="btn ghost" id="chOpen" aria-haspopup="dialog" aria-controls="chOverlay" title="Kapitelübersicht (K)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="lbl">Kapitel</span></button>
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
     <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
   </div>
 </header>
-<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 4 · Achse & Schrauben</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 0 erledigt</span></div></div>
+<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 4 · Achse & Schrauben</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 9 erledigt</span></div></div>
 
 <div class="app">
   <nav class="outline">
@@ -291,7 +291,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 9</span>
+    <span id="lbCaption">1 / 14</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -308,16 +308,14 @@ table.shortcuts td:first-child{width:52%}
      ===================================================================== */
   var STEPS = [
     {
-        "short": "Zylinder",
-        "title": "Achse als Zylinder",
+        "short": "Zylinder erzeugen",
+        "title": "Zylinder erzeugen",
         "img": "assets/ach_01_zylinder.jpg",
         "alt": "Dialog Parameter des Grundkörpers mit Radius 2 und Höhe 104",
-        "lead": "Neues Dokument, Arbeitsbereich <b>Part Design</b>, dann <b>Zu addierender Zylinder</b>.",
+        "lead": "Neues Dokument, <b>Part Design</b>, dann <b>Zu addierender Zylinder</b>.",
         "list": [
-            "<b>Radius 2,00 mm</b> und <b>Höhe 104,00 mm</b> eintragen, mit <b>OK</b> bestätigen."
+            "Es öffnet sich der Dialog für den Grundkörper."
         ],
-        "hint": "Im PDF ist die Achse 84 mm lang. Unser Chassi ist 82 mm breit (PDF: 62 mm), deshalb 104 mm.",
-        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_achse.svg\" alt=\"Achse D4 x 104 mm mit R1\"></div>",
         "focus": [
             0.9,
             0.298,
@@ -328,18 +326,62 @@ table.shortcuts td:first-child{width:52%}
             0.32,
             0.62
         ],
-        "zoom": 2.2
+        "zoom": 2.2,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_achse.svg\" alt=\"Achse D4 x 104 mm mit R1\"></div>"
     },
     {
-        "short": "Abrunden",
+        "short": "Radius 2 mm",
+        "title": "Radius 2 mm",
+        "img": "assets/ach_01_zylinder.jpg",
+        "alt": "Dialog Parameter des Grundkörpers mit Radius 2 und Höhe 104",
+        "lead": "Im Dialog <b>Radius 2,00 mm</b> eintragen.",
+        "list": [
+            "Das ist der Durchmesser 4 mm der Achse."
+        ],
+        "focus": [
+            0.9,
+            0.298,
+            0.13,
+            0.045
+        ],
+        "lens": [
+            0.32,
+            0.62
+        ],
+        "zoom": 2.2,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_achse.svg\" alt=\"Achse D4 x 104 mm mit R1\"></div>"
+    },
+    {
+        "short": "Höhe 104 mm",
+        "title": "Höhe 104 mm",
+        "img": "assets/ach_01_zylinder.jpg",
+        "alt": "Dialog Parameter des Grundkörpers mit Radius 2 und Höhe 104",
+        "lead": "Bei <b>Höhe 104,00 mm</b> eintragen und mit <b>OK</b> bestätigen.",
+        "list": [
+            "Im PDF sind es 84 mm – unser Chassi ist breiter."
+        ],
+        "focus": [
+            0.9,
+            0.298,
+            0.13,
+            0.045
+        ],
+        "lens": [
+            0.32,
+            0.62
+        ],
+        "zoom": 2.2,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_achse.svg\" alt=\"Achse D4 x 104 mm mit R1\"></div>"
+    },
+    {
+        "short": "Kanten abrunden",
         "title": "Kanten abrunden",
         "img": "assets/ach_02_abrunden.jpg",
         "alt": "Fillet-Dialog mit Radius 1 mm und zwei ausgewählten Kreiskanten",
-        "lead": "Beide <b>Kreiskanten</b> markieren (Strg gedrückt halten), dann <b>Kanten abrunden</b>.",
+        "lead": "Beide <b>Kreiskanten</b> markieren (Strg halten) und <b>Kanten abrunden</b> wählen.",
         "list": [
-            "Radius <b>1,00 mm</b> eintragen."
+            "Die Enden werden abgerundet."
         ],
-        "hint": "Die Rundung macht die Enden stabiler und sieht sauber aus.",
         "focus": [
             0.922,
             0.533,
@@ -353,13 +395,34 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 2.2
     },
     {
-        "short": "Farbe",
-        "title": "Achse braun einfärben",
+        "short": "Radius 1 mm",
+        "title": "Radius 1 mm",
+        "img": "assets/ach_02_abrunden.jpg",
+        "alt": "Fillet-Dialog mit Radius 1 mm und zwei ausgewählten Kreiskanten",
+        "lead": "Radius <b>1,00 mm</b> eintragen und mit <b>OK</b> bestätigen.",
+        "list": [
+            "Die Achse ist fertig."
+        ],
+        "focus": [
+            0.922,
+            0.533,
+            0.12,
+            0.04
+        ],
+        "lens": [
+            0.28,
+            0.3
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Braun einfärben",
+        "title": "Braun einfärben",
         "img": "assets/ach_03_braun.jpg",
         "alt": "Braune Achse in der 3D-Ansicht",
-        "lead": "M2 auf den Body → <b>Darstellung</b> → <b>Flächenfarbe</b> → braun.",
+        "lead": "M2 auf den Körper → <b>Darstellung</b> → <b>Flächenfarbe</b> → <b>braun</b>.",
         "list": [
-            "Die Achse wird später aus einem Rundholzstab gesägt."
+            "Die Achse wird später aus Rundholz gesägt."
         ],
         "focus": [
             0.422,
@@ -374,11 +437,14 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 3.0
     },
     {
-        "short": "Speichern",
+        "short": "Achse speichern",
         "title": "Achse speichern",
         "img": "assets/ach_04_speichern.jpg",
         "alt": "Datei-Menü mit Speichern",
         "lead": "Als <span class=\"mono\">Achse.FCStd</span> im Ordner „Carry“ speichern.",
+        "list": [
+            "Jetzt folgen die Schrauben."
+        ],
         "focus": [
             0.037,
             0.184,
@@ -392,15 +458,14 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 2.2
     },
     {
-        "short": "Fasteners",
-        "title": "Arbeitsbereich Fasteners installieren",
+        "short": "Fasteners installieren",
+        "title": "Fasteners installieren",
         "img": "assets/ach_05_addon.jpg",
         "alt": "Werkzeuge-Menü mit Addon-Manager",
-        "lead": "Unter <b>Werkzeuge</b> den <b>Addon-Manager</b> öffnen und den Arbeitsbereich <b>Fasteners</b> installieren.",
+        "lead": "Unter <b>Werkzeuge → Addon-Manager</b> den Arbeitsbereich <b>Fasteners</b> installieren.",
         "list": [
             "Danach FreeCAD neu starten."
         ],
-        "hint": "Fasteners erzeugt Schrauben und Muttern nach Norm (ISO/DIN).",
         "focus": [
             0.15,
             0.05,
@@ -415,15 +480,13 @@ table.shortcuts td:first-child{width:52%}
     },
     {
         "short": "Werkzeugleiste",
-        "title": "Die Fasteners-Werkzeugleiste",
+        "title": "Werkzeugleiste",
         "img": "assets/ach_06_fasteners.jpg",
         "alt": "Werkzeugleiste von Fasteners mit Schrauben und Muttern",
-        "lead": "Im Arbeitsbereich <b>Fasteners</b> liegen alle Schrauben- und Mutterformen als Symbole bereit.",
+        "lead": "Im Arbeitsbereich <b>Fasteners</b> liegen alle Schrauben- und Mutterformen bereit.",
         "list": [
-            "Obere Reihen: Schrauben (Zylinder-, Senk-, Sechskantkopf).",
-            "Darunter: Muttern, Unterlegscheiben und Gewindestangen."
+            "Für den Carry brauchst du nur Senkkopfschraube und Sechskantmutter."
         ],
-        "hint": "Für den Carry brauchst du nur die Senkkopfschraube und die Sechskantmutter.",
         "focus": [
             0.3,
             0.09,
@@ -437,17 +500,14 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 2.0
     },
     {
-        "short": "Schraube",
-        "title": "Senkkopfschraube M3 × 20",
+        "short": "Senkkopfschraube",
+        "title": "Senkkopfschraube",
         "img": "assets/ach_07_schraube.jpg",
         "alt": "Schraube M3x20 mit Eigenschaften Diameter M3 und Laenge 20",
-        "lead": "Im Arbeitsbereich <b>Fasteners</b> die <b>Senkkopfschraube</b> anklicken – ein Rohling erscheint.",
+        "lead": "Die <b>Senkkopfschraube</b> anklicken – ein Rohling erscheint.",
         "list": [
-            "Im Reiter <b>Daten</b>: <b>Diameter M3</b>, <b>Length Custom</b> und <b>Length Custom 20,00 mm</b>.",
-            "<b>Thread true</b> zeigt das Gewinde."
+            "Typ ISO 7046."
         ],
-        "hint": "Typ ISO 7046 – genau die Schraube aus dem PDF.",
-        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_schraube.svg\" alt=\"Senkkopfschraube ISO 7046 M3 x 20\"></div>",
         "focus": [
             0.1,
             0.866,
@@ -458,19 +518,62 @@ table.shortcuts td:first-child{width:52%}
             0.66,
             0.36
         ],
-        "zoom": 2.0
+        "zoom": 2.0,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_schraube.svg\" alt=\"Senkkopfschraube ISO 7046 M3 x 20\"></div>"
     },
     {
-        "short": "Mutter",
-        "title": "Sechskantmutter M3",
+        "short": "M3 einstellen",
+        "title": "M3 einstellen",
+        "img": "assets/ach_07_schraube.jpg",
+        "alt": "Schraube M3x20 mit Eigenschaften Diameter M3 und Laenge 20",
+        "lead": "Im Reiter <b>Daten</b>: <b>Diameter M3</b>.",
+        "list": [
+            "Mit <b>Thread true</b> wird das Gewinde angezeigt."
+        ],
+        "focus": [
+            0.1,
+            0.866,
+            0.14,
+            0.028
+        ],
+        "lens": [
+            0.66,
+            0.36
+        ],
+        "zoom": 2.0,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_schraube.svg\" alt=\"Senkkopfschraube ISO 7046 M3 x 20\"></div>"
+    },
+    {
+        "short": "Länge 20 mm",
+        "title": "Länge 20 mm",
+        "img": "assets/ach_07_schraube.jpg",
+        "alt": "Schraube M3x20 mit Eigenschaften Diameter M3 und Laenge 20",
+        "lead": "<b>Length Custom</b> und <b>LengthCustom 20,00 mm</b> eintragen.",
+        "list": [
+            "Das ist die Schraube aus dem PDF."
+        ],
+        "focus": [
+            0.1,
+            0.866,
+            0.14,
+            0.028
+        ],
+        "lens": [
+            0.66,
+            0.36
+        ],
+        "zoom": 2.0,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_schraube.svg\" alt=\"Senkkopfschraube ISO 7046 M3 x 20\"></div>"
+    },
+    {
+        "short": "Mutter M3",
+        "title": "Mutter M3",
         "img": "assets/ach_08_mutter.jpg",
         "alt": "Mutter M3 mit Eigenschaften Diameter M3 und Type ISO4035",
-        "lead": "Neues Dokument, im Arbeitsbereich <b>Fasteners</b> die <b>Mutter</b> anklicken.",
+        "lead": "Neues Dokument, im Arbeitsbereich Fasteners die <b>Mutter</b> anklicken und <b>Diameter M3</b> wählen.",
         "list": [
-            "<b>Diameter M3</b>, Typ <b>ISO 4035</b>, Thread bleibt <b>false</b>."
+            "Typ ISO 4035."
         ],
-        "hint": "Gewinde wird bei Muttern erst ab M6 angezeigt.",
-        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_mutter.svg\" alt=\"Sechskantmutter ISO 4035 M3\"></div>",
         "focus": [
             0.09,
             0.92,
@@ -481,23 +584,18 @@ table.shortcuts td:first-child{width:52%}
             0.62,
             0.36
         ],
-        "zoom": 2.0
+        "zoom": 2.0,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_mutter.svg\" alt=\"Sechskantmutter ISO 4035 M3\"></div>"
     },
     {
         "short": "Alle Teile",
-        "title": "Achse, Schraube, Mutter",
+        "title": "Alle Teile",
         "img": "assets/ach_09_teile.jpg",
         "alt": "Achse, Schraube und Mutter nebeneinander",
-        "lead": "Alle Teile sind fertig und im Ordner „Carry“ gespeichert.",
+        "lead": "Achse, Schraube und Mutter sind fertig und gespeichert.",
         "list": [
             "<span class=\"mono\">Achse.FCStd</span>, <span class=\"mono\">Schraube M3.FCStd</span>, <span class=\"mono\">Mutter M3.FCStd</span>"
-        ],
-        "hint": "Jetzt fehlt nur noch die Baugruppe.",
-        "lens": [
-            0.73,
-            0.26
-        ],
-        "zoom": 1.3
+        ]
     }
 ]
 
@@ -719,11 +817,11 @@ table.shortcuts td:first-child{width:52%}
       <a class="ch-course" href="index.html">← Zur Kursübersicht</a>
       <h2>Kapitel wählen</h2>
       <div class="ch-grid">
-        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">13 Schritte · Platte mit 45 Löchern</span></span></a>
-        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">14 Schritte · Radkörper und Gummiring</span></span></a>
-        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">8 Schritte · Bogenform mit Bohrungen</span></span></a>
-        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">9 Schritte · M3×20 und Mutter</span></span></a>
-        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">8 Schritte · Carry zusammenbauen</span></span></a>
+        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">33 Schritte · Platte mit 45 Löchern</span></span></a>
+        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">22 Schritte · Radkörper und Gummiring</span></span></a>
+        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">13 Schritte · Bogenform mit Bohrungen</span></span></a>
+        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">14 Schritte · M3×20 und Mutter</span></span></a>
+        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">10 Schritte · Carry zusammenbauen</span></span></a>
         <a class="ch-card" href="original.html"><span class="ch-num">PDF</span><span><span class="ch-t">Originalseiten</span><span class="ch-s">24 Seiten als Leseausgabe</span></span></a>
       </div>
       <p class="ch-note">Tipp: Mit <kbd>K</kbd> öffnest du diese Übersicht jederzeit.</p>

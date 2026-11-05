@@ -5,11 +5,11 @@
   'use strict';
 
   var KEYMAP = {
-    'chassi.html':    { key: 'freecad-carry-chassi',    n: 13, num: 1, title: 'Chassi' },
-    'rad.html':       { key: 'freecad-carry-rad',       n: 14, num: 2, title: 'Rad' },
-    'lager.html':     { key: 'freecad-carry-lager',     n: 8,  num: 3, title: 'Radlager' },
-    'achse.html':     { key: 'freecad-carry-achse',     n: 9,  num: 4, title: 'Achse & Schrauben' },
-    'baugruppe.html': { key: 'freecad-carry-baugruppe', n: 8,  num: 5, title: 'Baugruppe' }
+    'chassi.html':    { key: 'freecad-carry-chassi',    n: 33, num: 1, title: 'Chassi' },
+    'rad.html':       { key: 'freecad-carry-rad',       n: 22, num: 2, title: 'Rad' },
+    'lager.html':     { key: 'freecad-carry-lager',     n: 13,  num: 3, title: 'Radlager' },
+    'achse.html':     { key: 'freecad-carry-achse',     n: 14,  num: 4, title: 'Achse & Schrauben' },
+    'baugruppe.html': { key: 'freecad-carry-baugruppe', n: 10,  num: 5, title: 'Baugruppe' }
   };
 
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }

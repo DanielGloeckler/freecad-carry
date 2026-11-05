@@ -250,14 +250,14 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 8</span>
+    <span class="progressnum" id="progressNum">1 / 10</span>
   </div>
   <div class="top-actions"><button class="btn ghost" id="chOpen" aria-haspopup="dialog" aria-controls="chOverlay" title="Kapitelübersicht (K)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="lbl">Kapitel</span></button>
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
     <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
   </div>
 </header>
-<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 5 · Baugruppe</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 0 erledigt</span></div></div>
+<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 5 · Baugruppe</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 8 erledigt</span></div></div>
 
 <div class="app">
   <nav class="outline">
@@ -291,7 +291,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 8</span>
+    <span id="lbCaption">1 / 10</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -309,15 +309,13 @@ table.shortcuts td:first-child{width:52%}
   var STEPS = [
     {
         "short": "Vorbereitung",
-        "title": "Alle Teile in einem Ordner",
+        "title": "Vorbereitung",
         "img": "assets/bg_01_leer.jpg",
         "alt": "FreeCAD mit leerem Dokument im Arbeitsbereich A2plus",
         "lead": "Lege alle Einzelteile in den Ordner <b>Carry</b>. Neues Dokument, Arbeitsbereich <b>A2plus</b>.",
         "list": [
-            "<b>Neue Baugruppe</b> anklicken und als <span class=\"mono\">Carry.FCStd</span> speichern."
+            "Als <span class=\"mono\">Carry.FCStd</span> speichern."
         ],
-        "hint": "A2plus findet die Teile über die Dateinamen im gleichen Ordner.",
-        "diagram": "<div class=\"diagram\" style=\"font-family:Cascadia Mono,Consolas,monospace;font-size:11.5px;color:#26323e\"><div style=\"font-family:Segoe UI,sans-serif;font-weight:600;margin-bottom:6px\">Ordner „Carry“</div>Chassi.FCStd<br>Radlager.FCStd<br>Rad.FCStd<br>Achse.FCStd<br>Schraube M3.FCStd<br>Mutter M3.FCStd</div>",
         "focus": [
             0.209,
             0.047,
@@ -328,16 +326,17 @@ table.shortcuts td:first-child{width:52%}
             0.65,
             0.3
         ],
-        "zoom": 2.0
+        "zoom": 2.0,
+        "diagram": "<div class=\"diagram\" style=\"font-family:Cascadia Mono,Consolas,monospace;font-size:11.5px;color:#26323e\"><div style=\"font-family:Segoe UI,sans-serif;font-weight:600;margin-bottom:6px\">Ordner „Carry“</div>Chassi.FCStd<br>Radlager.FCStd<br>Rad.FCStd<br>Achse.FCStd<br>Schraube M3.FCStd<br>Mutter M3.FCStd</div>"
     },
     {
-        "short": "Chassi",
+        "short": "Chassi einfügen",
         "title": "Chassi einfügen",
         "img": "assets/bg_02_chassi.jpg",
         "alt": "Rotes Chassi in der Baugruppe",
         "lead": "Über das <b>Bauteil-Symbol</b> das <b>Chassi</b> auswählen.",
         "list": [
-            "Das Chassi ist das erste Teil und bleibt <b>fest</b>."
+            "Das Chassi bleibt <b>fest</b>."
         ],
         "focus": [
             0.5,
@@ -352,16 +351,14 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 1.4
     },
     {
-        "short": "Radlager",
-        "title": "Radlager einfügen und ausrichten",
+        "short": "Radlager einfügen",
+        "title": "Radlager einfügen",
         "img": "assets/bg_03_lager.jpg",
         "alt": "Radlager unter dem Chassi",
-        "lead": "Radlager einfügen, in die Nähe der Bohrungen ziehen und mit <b>Kreis-Kante</b> verbinden.",
+        "lead": "Radlager einfügen und in die Nähe der Bohrungen ziehen.",
         "list": [
-            "Im Dialog <b>Offset</b> einstellen, dann <b>Accept</b>.",
-            "Mit dem zweiten Loch gerade ausrichten."
+            "Noch nicht ausrichten – das kommt im nächsten Schritt."
         ],
-        "hint": "Steht das Radlager schief, hilft die zweite Bohrung oder „Flip direction“.",
         "focus": [
             0.54,
             0.7,
@@ -375,15 +372,36 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 1.7
     },
     {
-        "short": "Schraube",
-        "title": "Mutter und Schraube einsetzen",
+        "short": "Radlager ausrichten",
+        "title": "Radlager ausrichten",
+        "img": "assets/bg_03_lager.jpg",
+        "alt": "Radlager unter dem Chassi",
+        "lead": "Die <b>Kreis-Kante</b> des Radlagers und eine Bohrung im Chassi wählen, <b>Offset</b> einstellen, <b>Accept</b>.",
+        "list": [
+            "Mit dem zweiten Loch gerade ausrichten."
+        ],
+        "hint": "Steht es schief, hilft die zweite Bohrung oder „Flip direction“.",
+        "focus": [
+            0.54,
+            0.7,
+            0.22,
+            0.2
+        ],
+        "lens": [
+            0.25,
+            0.3
+        ],
+        "zoom": 1.7
+    },
+    {
+        "short": "Mutter und Schraube",
+        "title": "Mutter und Schraube",
         "img": "assets/bg_04_schraube.jpg",
         "alt": "Schraubenkopf im Chassi",
-        "lead": "Mutter M3 und Schraube M3 einfügen und über die Kreise verbinden.",
+        "lead": "Mutter M3 und Schraube M3 einsetzen und über die Kreise verbinden.",
         "list": [
-            "Mutter sitzt in der <b>Vertiefung</b> auf der Unterseite des Radlagers."
+            "Die Mutter sitzt in der Vertiefung auf der Unterseite."
         ],
-        "hint": "Der Schraubenkopf verschwindet bündig in der Senkung des Chassis.",
         "focus": [
             0.52,
             0.38,
@@ -397,7 +415,7 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 1.9
     },
     {
-        "short": "4 Radlager",
+        "short": "Alle vier Radlager",
         "title": "Alle vier Radlager",
         "img": "assets/bg_05_lager4.jpg",
         "alt": "Vier Radlager mit Schrauben unter dem Chassi",
@@ -418,15 +436,35 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 2.0
     },
     {
-        "short": "Achsen",
+        "short": "Achsen einfügen",
         "title": "Achsen einfügen",
         "img": "assets/bg_06_achsen.jpg",
         "alt": "Zwei Achsen durch die Radlager",
-        "lead": "Achse einfügen und den <b>äußeren Kreis</b> der Achse mit dem äußeren Kreis im Radlager verbinden.",
+        "lead": "Achse einfügen und den äußeren Kreis der Achse mit dem äußeren Kreis im Radlager verbinden.",
         "list": [
-            "Offset <b>−7,00 mm</b> – damit rutscht die Achse in die richtige Position."
+            "Zweite Achse genauso."
         ],
-        "hint": "Beim gegenüberliegenden Radlager ist der Offset −77,00 mm.",
+        "focus": [
+            0.385,
+            0.723,
+            0.09,
+            0.06
+        ],
+        "lens": [
+            0.72,
+            0.3
+        ],
+        "zoom": 2.4
+    },
+    {
+        "short": "Offset −7 mm",
+        "title": "Offset −7 mm",
+        "img": "assets/bg_06_achsen.jpg",
+        "alt": "Zwei Achsen durch die Radlager",
+        "lead": "Im Dialog <b>Offset −7,00 mm</b> eintragen und <b>Accept</b>.",
+        "list": [
+            "Beim gegenüberliegenden Radlager −77,00 mm."
+        ],
         "focus": [
             0.385,
             0.723,
@@ -441,14 +479,13 @@ table.shortcuts td:first-child{width:52%}
     },
     {
         "short": "Räder",
-        "title": "Räder aufstecken",
+        "title": "Räder",
         "img": "assets/bg_07_raeder.jpg",
         "alt": "Vier grüne Räder mit schwarzen Gummiringen",
         "lead": "Rad einfügen, äußeren Kreis der Achse mit dem inneren Kreis im Rad verbinden.",
         "list": [
-            "Alle vier Räder einsetzen."
+            "1 mm Abstand zwischen Radlager und Rad."
         ],
-        "hint": "Zwischen Radlager und Rad bleibt 1 mm Abstand.",
         "focus": [
             0.385,
             0.72,
@@ -463,19 +500,13 @@ table.shortcuts td:first-child{width:52%}
     },
     {
         "short": "Fertig",
-        "title": "Carry ist fertig",
+        "title": "Fertig",
         "img": "assets/bg_09_fertig.jpg",
         "alt": "Fertige Baugruppe Carry",
         "lead": "Der Carry steht: Chassi, 4 Radlager, 8 Schrauben, 8 Muttern, 2 Achsen und 4 Räder.",
         "list": [
-            "Änderungen an einem Teil: Datei ändern, speichern, in A2plus <b>Teile aktualisieren</b>."
-        ],
-        "hint": "Zum Fahren kommen O-Ringe 34 × 3 mm als Reifen auf die Räder.",
-        "lens": [
-            0.73,
-            0.26
-        ],
-        "zoom": 1.3
+            "Zum Fahren O-Ringe 34 × 3 mm als Reifen."
+        ]
     }
 ]
 
@@ -697,11 +728,11 @@ table.shortcuts td:first-child{width:52%}
       <a class="ch-course" href="index.html">← Zur Kursübersicht</a>
       <h2>Kapitel wählen</h2>
       <div class="ch-grid">
-        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">13 Schritte · Platte mit 45 Löchern</span></span></a>
-        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">14 Schritte · Radkörper und Gummiring</span></span></a>
-        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">8 Schritte · Bogenform mit Bohrungen</span></span></a>
-        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">9 Schritte · M3×20 und Mutter</span></span></a>
-        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">8 Schritte · Carry zusammenbauen</span></span></a>
+        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">33 Schritte · Platte mit 45 Löchern</span></span></a>
+        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">22 Schritte · Radkörper und Gummiring</span></span></a>
+        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">13 Schritte · Bogenform mit Bohrungen</span></span></a>
+        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">14 Schritte · M3×20 und Mutter</span></span></a>
+        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">10 Schritte · Carry zusammenbauen</span></span></a>
         <a class="ch-card" href="original.html"><span class="ch-num">PDF</span><span><span class="ch-t">Originalseiten</span><span class="ch-s">24 Seiten als Leseausgabe</span></span></a>
       </div>
       <p class="ch-note">Tipp: Mit <kbd>K</kbd> öffnest du diese Übersicht jederzeit.</p>

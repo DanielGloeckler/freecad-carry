@@ -250,14 +250,14 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 14</span>
+    <span class="progressnum" id="progressNum">1 / 22</span>
   </div>
   <div class="top-actions"><button class="btn ghost" id="chOpen" aria-haspopup="dialog" aria-controls="chOverlay" title="Kapitelübersicht (K)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="lbl">Kapitel</span></button>
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
     <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
   </div>
 </header>
-<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 2 · Rad</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 0 erledigt</span></div></div>
+<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 2 · Rad</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 14 erledigt</span></div></div>
 
 <div class="app">
   <nav class="outline">
@@ -292,7 +292,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 14</span>
+    <span id="lbCaption">1 / 22</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -311,136 +311,460 @@ table.shortcuts td:first-child{width:52%}
 var QUERSCHNITT = '<div class="diagram"><img src="assets/schema_profil.svg" alt="Halber Radquerschnitt mit den Maßen 20, 16, 3 und R25"></div>';
 var STEPS = [
     {
-      short:'XZ-Ebene', title:'Die XZ-Ebene wählen',
-      img:'assets/rad_00_ebene.jpg',
-      alt:'Dialog Befestigung auswählen mit markierter XZ-Ebene',
-      lead:'Neue Skizze anklicken. Im Dialog <b>Befestigung auswählen</b> die <b>XZ-Ebene</b> markieren und mit <b>OK</b> bestätigen.',
-      list:['<b>XY</b> = Draufsicht, <b>XZ</b> = Seitenansicht – hier liegt die Radachse waagerecht.',
-            '<b>YZ</b> = Ansicht von rechts.'],
-      hint:'Im Bild ist die XZ-Ebene bereits markiert (blau).',
-      diagram: ACHSEN,
-      focus:[0.8700, 0.2760, 0.1600, 0.0400], lens:[0.4200, 0.4200], zoom:3.0
+        "short": "Arbeitsbereich und Skizze",
+        "title": "Arbeitsbereich und Skizze",
+        "img": "assets/rad_00_ebene.jpg",
+        "alt": "Dialog Befestigung auswählen mit markierter XZ-Ebene",
+        "lead": "Neues Dokument, Arbeitsbereich <b>Part Design</b>, dann <b>Neue Skizze</b> anklicken.",
+        "list": [
+            "Es öffnet sich der Dialog <b>Befestigung auswählen</b>."
+        ],
+        "focus": [
+            0.87,
+            0.276,
+            0.16,
+            0.04
+        ],
+        "lens": [
+            0.42,
+            0.42
+        ],
+        "zoom": 3.0
     },
     {
-      short:'Form zeichnen', title:'Die Form zeichnen',
-      img:'assets/rad_01_profil.jpg',
-      alt:'Radprofil als geschlossener Linienzug',
-      lead:'Wähle das <b>Linienzug-Werkzeug</b> (Symbol oben in der Skizzenleiste).',
-      list:['Zeichne die Kontur <b>A → B → C → D → E → F → G → H</b> und schließe bei A.',
-            'A → B: 20 mm auf der Achse. B → C: 25 mm nach oben.',
-            'C → D → E: 2 mm nach links, 3 mm nach unten. E → F: 16 mm nach links.',
-            'F → G: 3 mm nach oben. G → H: 2 mm nach links. H → A: 25 mm nach unten.'],
-      hint:'Die genauen Längen musst du noch nicht treffen – das kommt im nächsten Schritt.',
-      diagram: QUERSCHNITT,
-      focus:[0.1360,0.0910,0.0240,0.0340], lens:[0.6200,0.3200], zoom:2.6
+        "short": "XZ-Ebene wählen",
+        "title": "XZ-Ebene wählen",
+        "img": "assets/rad_00_ebene.jpg",
+        "alt": "Dialog Befestigung auswählen mit markierter XZ-Ebene",
+        "lead": "Im Dialog die <b>XZ-Ebene</b> markieren und mit <b>OK</b> bestätigen.",
+        "list": [
+            "XZ = Seitenansicht – hier liegt die Radachse waagerecht."
+        ],
+        "hint": "Im Bild ist die XZ-Ebene bereits blau markiert.",
+        "focus": [
+            0.87,
+            0.276,
+            0.16,
+            0.04
+        ],
+        "lens": [
+            0.42,
+            0.42
+        ],
+        "zoom": 3.0
     },
     {
-      short:'Maße', title:'Profil bemaßen',
-      img:'assets/rad_02_masse.jpg',
-      alt:'Bemaßtes Radprofil mit 20, 25, 16 und 3 mm',
-      lead:'Jetzt das <b>Bemaßungs-Werkzeug</b> wählen und die vier Maße eintragen:',
-      list:['<b>20 mm</b> – Breite (A–B). <b>25 mm</b> – Außenradius (B–C).',
-            '<b>16 mm</b> – Nutbreite (E–F). <b>3 mm</b> – Nuttiefe (D–E).'],
-      hint:'Die Skizze wird grün – vollständig bestimmt.',
-      diagram: QUERSCHNITT,
-      focus:[0.6270,0.0960,0.0240,0.0340], lens:[0.3500,0.5500], zoom:2.6
+        "short": "Linienzug-Werkzeug",
+        "title": "Linienzug-Werkzeug",
+        "img": "assets/rad_01_profil.jpg",
+        "alt": "Radprofil als geschlossener Linienzug",
+        "lead": "In der Skizzenleiste das <b>Linienzug-Werkzeug</b> anklicken.",
+        "list": [
+            "Damit wird die Kontur in einem Zug gezeichnet."
+        ],
+        "focus": [
+            0.136,
+            0.091,
+            0.024,
+            0.034
+        ],
+        "lens": [
+            0.62,
+            0.32
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Rotieren', title:'Rotationskörper erzeugen',
-      img:'assets/03_revolution.jpg',
-      alt:'Parameter der Rotation mit Winkel 360 Grad',
-      lead:'<b>Rotieren</b> um die <b>horizontale Skizzenachse</b>.',
-      list:['Im Feld <b>Winkel</b> steht <b>360,00°</b> – so entsteht der volle Radkörper.'],
-      hint:'Achse: „Horizontale Skizzenachse“, dann mit OK bestätigen.',
-      focus:[0.8600, 0.3600, 0.1200, 0.0400], lens:[0.3000, 0.3500], zoom:2.2
+        "short": "Kontur A–H zeichnen",
+        "title": "Kontur A–H zeichnen",
+        "img": "assets/rad_01_profil.jpg",
+        "alt": "Radprofil als geschlossener Linienzug",
+        "lead": "Die Kontur <b>A → B → C → D → E → F → G → H</b> zeichnen und bei A schließen.",
+        "list": [
+            "Mit der <b>M-Taste</b> zwischen Linie und Bogen wechseln."
+        ],
+        "hint": "Die genauen Längen müssen noch nicht stimmen.",
+        "focus": [
+            0.136,
+            0.091,
+            0.024,
+            0.034
+        ],
+        "lens": [
+            0.62,
+            0.32
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Innenseite', title:'Innenseite anklicken',
-      img:'assets/04_rad.jpg',
-      alt:'Radkörper – die Innenseite für die Lochskizze',
-      lead:'Klick die <b>Innenseite des Rads</b> an – auf dieser Fläche entsteht die Loch-Skizze.',
-      list:['Die Fläche wird grün markiert.'],
-      hint:'Danach im Panel Aufgaben auf „Neue Skizze“.',
-      focus:[0.4500, 0.4500, 0.2500, 0.2500], lens:[0.7200, 0.2500], zoom:1.6
+        "short": "Skizze schließen",
+        "title": "Skizze schließen",
+        "img": "assets/rad_01_profil.jpg",
+        "alt": "Radprofil als geschlossener Linienzug",
+        "lead": "Auf <b>Skizze schließen</b> klicken.",
+        "list": [
+            "Die Kontur bleibt im Modellbaum."
+        ],
+        "focus": [
+            0.136,
+            0.091,
+            0.024,
+            0.034
+        ],
+        "lens": [
+            0.62,
+            0.32
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Loch', title:'Kreis zeichnen',
-      img:'assets/06_loch.jpg',
-      alt:'Kreisskizze auf der Radinnenseite',
-      lead:'Wähle das <b>Kreis-Werkzeug</b> (Symbol oben) und setze den Kreis <b>Ø5</b> bei 15 mm vom Zentrum.',
-      list:['Der Kreis wird später zum Muster vervielfacht.'],
-      hint:'Kreis anklicken, Radius 2,5 mm eintragen, Skizze schließen, Tasche „durch alles“.',
-      focus:[0.1920,0.0960,0.0240,0.0340], lens:[0.6200,0.3200], zoom:2.6
+        "short": "Bemaßungswerkzeug",
+        "title": "Bemaßungswerkzeug",
+        "img": "assets/rad_02_masse.jpg",
+        "alt": "Bemaßtes Radprofil mit 20, 25, 16 und 3 mm",
+        "lead": "Das <b>Bemaßungs-Werkzeug</b> wählen.",
+        "list": [
+            "Damit werden die vier Maße festgelegt."
+        ],
+        "focus": [
+            0.627,
+            0.096,
+            0.024,
+            0.034
+        ],
+        "lens": [
+            0.35,
+            0.55
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Muster finden', title:'Polares Muster finden',
-      img:'assets/07_muster.jpg',
-      alt:'Part-Design-Symbolleiste mit Polar-Muster',
-      lead:'Markiere im Modellbaum die <b>Loch-Tasche</b>. In der Symbolleiste findest du <b>Polares Muster</b> (Kreis mit Pfeil).',
-      list:['Alternativ: Rechtsklick auf die Tasche → <b>Polares Muster</b>.'],
-      hint:'Das Symbol sitzt bei den Transformations-Werkzeugen.',
-      focus:[0.5110, 0.0750, 0.0300, 0.0450], lens:[0.6500, 0.2800], zoom:3.0
+        "short": "Maße 20 / 25 / 16 / 3",
+        "title": "Maße 20 / 25 / 16 / 3",
+        "img": "assets/rad_02_masse.jpg",
+        "alt": "Bemaßtes Radprofil mit 20, 25, 16 und 3 mm",
+        "lead": "Die vier Maße eintragen: <b>20</b>, <b>25</b>, <b>16</b> und <b>3 mm</b>.",
+        "list": [
+            "Die Skizze wird grün – vollständig bestimmt."
+        ],
+        "focus": [
+            0.627,
+            0.096,
+            0.024,
+            0.034
+        ],
+        "lens": [
+            0.35,
+            0.55
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Muster', title:'Polares Muster 6 ×',
-      img:'assets/07_muster.jpg',
-      alt:'Dialog Polares Muster mit 6 Vorkommen',
-      lead:'<b>Polares Muster</b> um die Radachse: <b>6 Vorkommen</b>, 300°.',
-      list:['Die Löcher verteilen sich gleichmäßig auf dem Rad.'],
-      focus:[0.8500, 0.5800, 0.1300, 0.1000], lens:[0.3000, 0.3500], zoom:1.8
+        "short": "Rotieren",
+        "title": "Rotieren",
+        "img": "assets/03_revolution.jpg",
+        "alt": "Parameter der Rotation mit Winkel 360 Grad",
+        "lead": "<b>Rotieren</b> anklicken und die <b>horizontale Skizzenachse</b> wählen.",
+        "list": [
+            "Damit entsteht der runde Radkörper."
+        ],
+        "focus": [
+            0.86,
+            0.36,
+            0.12,
+            0.04
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 2.2
     },
     {
-      short:'6 Löcher', title:'Sechs Löcher',
-      img:'assets/08_loecher.jpg',
-      alt:'Radkörper mit sechs Löchern',
-      lead:'Das Rad hat jetzt <b>6 Löcher</b>.',
-      list:['Als Nächstes kommt die Farbe.'],
-      focus:[0.4500, 0.5000, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "360° und OK",
+        "title": "360° und OK",
+        "img": "assets/03_revolution.jpg",
+        "alt": "Parameter der Rotation mit Winkel 360 Grad",
+        "lead": "Im Feld <b>Winkel 360,00°</b> eintragen und mit <b>OK</b> bestätigen.",
+        "list": [
+            "Der Radkörper ist fertig."
+        ],
+        "focus": [
+            0.86,
+            0.36,
+            0.12,
+            0.04
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 2.2
     },
     {
-      short:'Grün', title:'Rad grün einfärben',
-      img:'assets/09_gruen.jpg',
-      alt:'Grüner Radkörper',
-      lead:'M2 auf <b>Rad</b> im Modellbaum → <b>Darstellung</b> → <b>Flächenfarbe</b> → grün.',
-      list:['Der ganze Radkörper wird grün.'],
-      focus:[0.4500, 0.5000, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "Innenseite",
+        "title": "Innenseite",
+        "img": "assets/04_rad.jpg",
+        "alt": "Radkörper – die Innenseite für die Lochskizze",
+        "lead": "Die <b>Innenseite</b> des Rads anklicken – sie wird grün markiert.",
+        "list": [
+            "Dort entsteht die Loch-Skizze."
+        ],
+        "focus": [
+            0.45,
+            0.45,
+            0.25,
+            0.25
+        ],
+        "lens": [
+            0.72,
+            0.25
+        ],
+        "zoom": 1.6
     },
     {
-      short:'Gummiring-Skizze', title:'Gummiring skizzieren',
-      img:'assets/10_gummi.jpg',
-      alt:'Kreis für den Gummiring auf der XZ-Ebene',
-      lead:'Der Gummiring wird ein <b>eigener Körper</b> – so kann er schwarz eingefärbt werden.',
-      list:['Im Panel Aufgaben auf <b>Neuer Körper</b>.',
-            'In diesem Körper: <b>Neue Skizze</b> auf der <b>XZ-Ebene</b> (wie beim Radprofil).',
-            '<b>Kreis</b> mit Mittelpunkt auf der <b>X-Achse</b>: Radius <b>2,2 mm</b>, Mittelpunkt <b>23 mm</b> von der Radachse (z = 23).'],
-      hint:'Die Skizze ist der Querschnitt des Rings – er sitzt später in der Nut des Rads.',
-      focus:[0.3190, 0.2480, 0.1000, 0.1000], lens:[0.7200, 0.3000], zoom:2.2
+        "short": "Kreis-Werkzeug",
+        "title": "Kreis-Werkzeug",
+        "img": "assets/06_loch.jpg",
+        "alt": "Kreisskizze auf der Radinnenseite",
+        "lead": "Das <b>Kreis-Werkzeug</b> wählen.",
+        "list": [
+            "Der Kreis wird später zum Muster vervielfacht."
+        ],
+        "focus": [
+            0.192,
+            0.096,
+            0.024,
+            0.034
+        ],
+        "lens": [
+            0.62,
+            0.32
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Gummiring rotieren', title:'Gummiring rotieren',
-      img:'assets/11_gummi_rev.jpg',
-      alt:'Parameter der Rotation für den Gummiring',
-      lead:'<b>Rotieren</b> um die <b>horizontale X-Achse</b>, 360°.',
-      list:['Farbe <b>schwarz</b> – der Ring sitzt in der Nut.'],
-      hint:'Zwei Körper: Radkörper (grün) und Gummiring (schwarz).',
-      focus:[0.9220,0.3350,0.1150,0.0320], lens:[0.2800,0.5800], zoom:1.8
+        "short": "Kreis Ø5",
+        "title": "Kreis Ø5",
+        "img": "assets/06_loch.jpg",
+        "alt": "Kreisskizze auf der Radinnenseite",
+        "lead": "Kreis <b>Ø5 mm</b> bei <b>15 mm</b> vom Zentrum setzen.",
+        "list": [
+            "Skizze schließen, dann <b>Tasche durch alles</b>."
+        ],
+        "focus": [
+            0.192,
+            0.096,
+            0.024,
+            0.034
+        ],
+        "lens": [
+            0.62,
+            0.32
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Fertig', title:'Rad mit Reifen',
-      img:'assets/12_fertig.jpg',
-      alt:'Fertiges grünes Rad mit schwarzem Gummiring',
-      lead:'Das <b>Rad</b> ist fertig: Ø50 mm, 20 mm breit, 6 Löcher und Gummiring.',
-      list:['Zwei Körper: Radkörper und Gummiring.'], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "Muster finden",
+        "title": "Muster finden",
+        "img": "assets/07_muster.jpg",
+        "alt": "Part-Design-Symbolleiste mit Polar-Muster",
+        "lead": "Im Modellbaum die <b>Loch-Tasche</b> markieren und <b>Polares Muster</b> suchen.",
+        "list": [
+            "Symbol: Kreis mit Pfeil bei den Transformations-Werkzeugen."
+        ],
+        "hint": "Alternativ: Rechtsklick auf die Tasche.",
+        "focus": [
+            0.511,
+            0.075,
+            0.03,
+            0.045
+        ],
+        "lens": [
+            0.65,
+            0.28
+        ],
+        "zoom": 3.0
     },
     {
-      short:'Speichern', title:'Rad speichern',
-      img:'assets/13_speichern.jpg',
-      alt:'Datei-Menü mit Speichern',
-      lead:'Als <span class="mono">Rad.FCStd</span> speichern.',
-      list:['Gleicher Ordner „Carry“ wie das Chassi.'],
-      focus:[0.0370, 0.1840, 0.0700, 0.0240], lens:[0.6200, 0.4800], zoom:2.2
+        "short": "6 Vorkommen",
+        "title": "6 Vorkommen",
+        "img": "assets/07_muster.jpg",
+        "alt": "Dialog Polares Muster mit 6 Vorkommen",
+        "lead": "<b>6 Vorkommen</b> und <b>300°</b> eintragen.",
+        "list": [
+            "Die Löcher verteilen sich gleichmäßig."
+        ],
+        "focus": [
+            0.85,
+            0.58,
+            0.13,
+            0.1
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 1.8
+    },
+    {
+        "short": "OK",
+        "title": "OK",
+        "img": "assets/07_muster.jpg",
+        "alt": "Dialog Polares Muster mit 6 Vorkommen",
+        "lead": "Mit <b>OK</b> bestätigen.",
+        "list": [
+            "Die sechs Löcher sind fertig."
+        ],
+        "focus": [
+            0.85,
+            0.58,
+            0.13,
+            0.1
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 1.8
+    },
+    {
+        "short": "6 Löcher",
+        "title": "6 Löcher",
+        "img": "assets/08_loecher.jpg",
+        "alt": "Radkörper mit sechs Löchern",
+        "lead": "Das Rad hat jetzt <b>6 Löcher</b>.",
+        "list": [
+            "Jetzt kommt die Farbe."
+        ],
+        "focus": [
+            0.45,
+            0.5,
+            0.3,
+            0.3
+        ],
+        "lens": [
+            0.72,
+            0.25
+        ],
+        "zoom": 1.4
+    },
+    {
+        "short": "Grün einfärben",
+        "title": "Grün einfärben",
+        "img": "assets/09_gruen.jpg",
+        "alt": "Grüner Radkörper",
+        "lead": "M2 auf den Körper → <b>Darstellung</b> → <b>Flächenfarbe</b> → <b>grün</b>.",
+        "list": [
+            "Der Radkörper wird grün."
+        ],
+        "focus": [
+            0.45,
+            0.5,
+            0.3,
+            0.3
+        ],
+        "lens": [
+            0.72,
+            0.25
+        ],
+        "zoom": 1.4
+    },
+    {
+        "short": "Neuer Körper",
+        "title": "Neuer Körper",
+        "img": "assets/10_gummi.jpg",
+        "alt": "Kreis für den Gummiring auf der XZ-Ebene",
+        "lead": "Im Panel Aufgaben auf <b>Neuer Körper</b> – der Gummiring wird ein eigenes Teil.",
+        "list": [
+            "So kann er schwarz eingefärbt werden."
+        ],
+        "focus": [
+            0.319,
+            0.248,
+            0.1,
+            0.1
+        ],
+        "lens": [
+            0.72,
+            0.3
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Kreis R2,2",
+        "title": "Kreis R2,2",
+        "img": "assets/10_gummi.jpg",
+        "alt": "Kreis für den Gummiring auf der XZ-Ebene",
+        "lead": "Neue Skizze auf der <b>XZ-Ebene</b>: Kreis <b>R2,2</b>, Mittelpunkt <b>23 mm</b> von der Achse.",
+        "list": [
+            "Die Skizze ist der Querschnitt des Rings."
+        ],
+        "focus": [
+            0.319,
+            0.248,
+            0.1,
+            0.1
+        ],
+        "lens": [
+            0.72,
+            0.3
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Gummiring rotieren",
+        "title": "Gummiring rotieren",
+        "img": "assets/11_gummi_rev.jpg",
+        "alt": "Parameter der Rotation für den Gummiring",
+        "lead": "<b>Rotieren</b> um die <b>horizontale X-Achse</b>, <b>360°</b>, dann <b>OK</b>.",
+        "list": [
+            "Farbe <b>schwarz</b> – der Ring sitzt in der Nut."
+        ],
+        "focus": [
+            0.922,
+            0.335,
+            0.115,
+            0.032
+        ],
+        "lens": [
+            0.28,
+            0.58
+        ],
+        "zoom": 1.8
+    },
+    {
+        "short": "Fertig",
+        "title": "Fertig",
+        "img": "assets/12_fertig.jpg",
+        "alt": "Fertiges grünes Rad mit schwarzem Gummiring",
+        "lead": "Das <b>Rad</b> ist fertig: Ø50 mm, 20 mm breit, 6 Löcher und Gummiring.",
+        "list": [
+            "Zwei Körper: Radkörper und Gummiring."
+        ]
+    },
+    {
+        "short": "Speichern",
+        "title": "Speichern",
+        "img": "assets/13_speichern.jpg",
+        "alt": "Datei-Menü mit Speichern",
+        "lead": "Als <span class=\"mono\">Rad.FCStd</span> im Ordner „Carry“ speichern.",
+        "list": [
+            "Gleicher Ordner wie das Chassi."
+        ],
+        "focus": [
+            0.037,
+            0.184,
+            0.07,
+            0.024
+        ],
+        "lens": [
+            0.62,
+            0.48
+        ],
+        "zoom": 2.2
     }
-  ];
+];
 
   var N = STEPS.length;
   var FINAL_IMG = 'assets/12_fertig.jpg';
@@ -678,11 +1002,11 @@ var STEPS = [
       <a class="ch-course" href="index.html">← Zur Kursübersicht</a>
       <h2>Kapitel wählen</h2>
       <div class="ch-grid">
-        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">13 Schritte · Platte mit 45 Löchern</span></span></a>
-        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">14 Schritte · Radkörper und Gummiring</span></span></a>
-        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">8 Schritte · Bogenform mit Bohrungen</span></span></a>
-        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">9 Schritte · M3×20 und Mutter</span></span></a>
-        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">8 Schritte · Carry zusammenbauen</span></span></a>
+        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">33 Schritte · Platte mit 45 Löchern</span></span></a>
+        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">22 Schritte · Radkörper und Gummiring</span></span></a>
+        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">13 Schritte · Bogenform mit Bohrungen</span></span></a>
+        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">14 Schritte · M3×20 und Mutter</span></span></a>
+        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">10 Schritte · Carry zusammenbauen</span></span></a>
         <a class="ch-card" href="original.html"><span class="ch-num">PDF</span><span><span class="ch-t">Originalseiten</span><span class="ch-s">24 Seiten als Leseausgabe</span></span></a>
       </div>
       <p class="ch-note">Tipp: Mit <kbd>K</kbd> öffnest du diese Übersicht jederzeit.</p>

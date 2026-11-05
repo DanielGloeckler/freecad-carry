@@ -250,14 +250,14 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 8</span>
+    <span class="progressnum" id="progressNum">1 / 13</span>
   </div>
   <div class="top-actions"><button class="btn ghost" id="chOpen" aria-haspopup="dialog" aria-controls="chOverlay" title="Kapitelübersicht (K)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="lbl">Kapitel</span></button>
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
     <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
   </div>
 </header>
-<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 3 · Radlager</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 0 erledigt</span></div></div>
+<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 3 · Radlager</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 8 erledigt</span></div></div>
 
 <div class="app">
   <nav class="outline">
@@ -291,7 +291,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 8</span>
+    <span id="lbCaption">1 / 13</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -308,37 +308,57 @@ table.shortcuts td:first-child{width:52%}
      ===================================================================== */
   var STEPS = [
     {
-        "short": "Profil",
-        "title": "Halterprofil zeichnen",
+        "short": "Skizze und Linienzug",
+        "title": "Skizze und Linienzug",
         "img": "assets/la2_01_profil.jpg",
         "alt": "Bogenprofil des Radlagers auf der XZ-Ebene",
-        "lead": "Neue Skizze auf der <b>XZ-Ebene</b>. Zeichne die Bogenform: <b>40 mm</b> breit, <b>25 mm</b> hoch, Seiten <b>5 mm</b> gerade.",
+        "lead": "Neue Skizze auf der <b>XZ-Ebene</b>, dann das <b>Linienzug-Werkzeug</b>.",
         "list": [
-            "<b>Linienzug</b> starten und mit der <b>M-Taste</b> zwischen Linie und Bogen wechseln.",
-            "Von der unteren Ecke nach oben, dann mit <b>Bogen</b> über den Scheitel zur anderen Seite."
+            "Die Bogenform entsteht in einem Zug."
         ],
-        "hint": "Die zwei Schultern und der obere Bogen haben je <b>R10</b>.",
-        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>",
-        "lens": [
-            0.74,
-            0.3
-        ],
-        "zoom": 1.25,
         "focus": [
             0.52,
             0.45,
             0.28,
             0.28
-        ]
+        ],
+        "lens": [
+            0.74,
+            0.3
+        ],
+        "zoom": 1.25,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>"
     },
     {
-        "short": "Aufpolstern",
-        "title": "10 mm symmetrisch aufpolstern",
+        "short": "Bogenform zeichnen",
+        "title": "Bogenform zeichnen",
+        "img": "assets/la2_01_profil.jpg",
+        "alt": "Bogenprofil des Radlagers auf der XZ-Ebene",
+        "lead": "Kontur zeichnen: <b>40 mm</b> breit, Seiten <b>5 mm</b>, Bögen <b>R10</b>, Höhe <b>25 mm</b>.",
+        "list": [
+            "Mit der M-Taste zwischen Linie und Bogen wechseln."
+        ],
+        "focus": [
+            0.52,
+            0.45,
+            0.28,
+            0.28
+        ],
+        "lens": [
+            0.74,
+            0.3
+        ],
+        "zoom": 1.25,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>"
+    },
+    {
+        "short": "10 mm aufpolstern",
+        "title": "10 mm aufpolstern",
         "img": "assets/la2_03_polstern.jpg",
         "alt": "Dialog Aufpolsterung mit Modus Symmetrisch und Tiefe 10 mm",
         "lead": "Im Panel Aufgaben: Modus <b>Symmetrisch</b>, Tiefe <b>10,00 mm</b>.",
         "list": [
-            "Damit liegt das Radlager <b>5 mm links und 5 mm rechts</b> der XZ-Ebene."
+            "Damit liegt das Radlager 5 mm links und rechts der XZ-Ebene."
         ],
         "focus": [
             0.912,
@@ -353,16 +373,35 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 2.6
     },
     {
-        "short": "Achsbohrung",
-        "title": "Bohrung Ø4,5 für die Achse",
+        "short": "OK",
+        "title": "OK",
+        "img": "assets/la2_03_polstern.jpg",
+        "alt": "Dialog Aufpolsterung mit Modus Symmetrisch und Tiefe 10 mm",
+        "lead": "Mit <b>OK</b> bestätigen.",
+        "list": [
+            "Der Körper ist fertig."
+        ],
+        "focus": [
+            0.912,
+            0.347,
+            0.135,
+            0.028
+        ],
+        "lens": [
+            0.3,
+            0.62
+        ],
+        "zoom": 2.6
+    },
+    {
+        "short": "Achsbohrung R2,25",
+        "title": "Achsbohrung R2,25",
         "img": "assets/la2_05_bohrung.jpg",
         "alt": "Kreisskizze R2,25 auf der Vorderseite",
         "lead": "Vorderseite anklicken, <b>Neue Skizze</b>, Kreis <b>R2,25</b> auf der Mittelachse, <b>15 mm</b> über der Unterkante.",
         "list": [
-            "Danach <b>Tasche durch alles</b>."
+            "Etwas größer als 2 mm, damit sich die Achse dreht."
         ],
-        "hint": "Etwas größer als 2 mm, damit sich die 4-mm-Achse gut dreht.",
-        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>",
         "focus": [
             0.53,
             0.474,
@@ -373,19 +412,40 @@ table.shortcuts td:first-child{width:52%}
             0.3,
             0.7
         ],
-        "zoom": 2.0
+        "zoom": 2.0,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>"
+    },
+    {
+        "short": "Tasche durch alles",
+        "title": "Tasche durch alles",
+        "img": "assets/la2_05_bohrung.jpg",
+        "alt": "Kreisskizze R2,25 auf der Vorderseite",
+        "lead": "Skizze schließen und <b>Tasche durch alles</b> erzeugen.",
+        "list": [
+            "Die Achsbohrung ist fertig."
+        ],
+        "focus": [
+            0.53,
+            0.474,
+            0.16,
+            0.07
+        ],
+        "lens": [
+            0.3,
+            0.7
+        ],
+        "zoom": 2.0,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>"
     },
     {
         "short": "Montagelöcher",
-        "title": "Zwei Bohrungen Ø3,5",
+        "title": "Montagelöcher",
         "img": "assets/la2_07_montage.jpg",
         "alt": "Unterseite mit zwei Kreisen R1,75 im Abstand von 12 mm",
         "lead": "Skizze auf der <b>Unterseite</b>: zwei Kreise <b>R1,75</b>, je <b>12 mm</b> links und rechts der Mitte.",
         "list": [
-            "Skizze schließen, <b>Tasche durch alles</b>."
+            "Danach <b>Tasche durch alles</b>."
         ],
-        "hint": "Durch diese Löcher kommen später die M3-Schrauben ins Chassi.",
-        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>",
         "focus": [
             0.26,
             0.52,
@@ -396,19 +456,40 @@ table.shortcuts td:first-child{width:52%}
             0.7,
             0.28
         ],
-        "zoom": 1.8
+        "zoom": 1.8,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>"
     },
     {
-        "short": "Muttern",
-        "title": "Muttern von unten versenken",
+        "short": "Tasche",
+        "title": "Tasche",
+        "img": "assets/la2_07_montage.jpg",
+        "alt": "Unterseite mit zwei Kreisen R1,75 im Abstand von 12 mm",
+        "lead": "Skizze schließen, <b>Tasche durch alles</b> erzeugen.",
+        "list": [
+            "Beide Löcher gehen durch den Körper."
+        ],
+        "focus": [
+            0.26,
+            0.52,
+            0.14,
+            0.12
+        ],
+        "lens": [
+            0.7,
+            0.28
+        ],
+        "zoom": 1.8,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>"
+    },
+    {
+        "short": "Mutternvertiefungen",
+        "title": "Mutternvertiefungen",
         "img": "assets/la2_09_muttern.jpg",
         "alt": "Sechskant-Skizzen auf der Unterseite",
-        "lead": "Auf der Unterseite je ein <b>Sechskant</b> um die Bohrung – <b>12 mm</b> tiefe Tasche.",
+        "lead": "Auf der Unterseite je ein <b>Sechskant</b> um die Bohrung zeichnen.",
         "list": [
-            "So dreht sich die M3-Mutter beim Festschrauben nicht mit."
+            "Damit die M3-Mutter nicht mitdreht."
         ],
-        "hint": "Ein gedrucktes Loch wird etwas kleiner – die Vertiefung schafft Platz.",
-        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>",
         "focus": [
             0.51,
             0.52,
@@ -419,26 +500,44 @@ table.shortcuts td:first-child{width:52%}
             0.28,
             0.3
         ],
-        "zoom": 1.8
+        "zoom": 1.8,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>"
+    },
+    {
+        "short": "12 mm tief",
+        "title": "12 mm tief",
+        "img": "assets/la2_09_muttern.jpg",
+        "alt": "Sechskant-Skizzen auf der Unterseite",
+        "lead": "<b>Tasche</b> mit <b>12 mm</b> Tiefe erzeugen.",
+        "list": [
+            "Die Mutter sitzt versenkt."
+        ],
+        "focus": [
+            0.51,
+            0.52,
+            0.14,
+            0.12
+        ],
+        "lens": [
+            0.28,
+            0.3
+        ],
+        "zoom": 1.8,
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>"
     },
     {
         "short": "Fertig",
-        "title": "Radlager fertig",
+        "title": "Fertig",
         "img": "assets/la2_10_fertig.jpg",
         "alt": "Fertiges Radlager in Bogenform",
         "lead": "Das <b>Radlager</b> ist fertig: 40 × 25 × 10 mm mit Achsbohrung Ø4,5.",
         "list": [
             "Farbe grau – bereit für die Baugruppe."
-        ],
-        "lens": [
-            0.72,
-            0.26
-        ],
-        "zoom": 1.4
+        ]
     },
     {
-        "short": "Unten",
-        "title": "Unterseite prüfen",
+        "short": "Unten prüfen",
+        "title": "Unten prüfen",
         "img": "assets/la2_13_unten.jpg",
         "alt": "Unteransicht mit Mutternvertiefungen und Bohrungen",
         "lead": "Von unten siehst du die zwei <b>Sechskant-Vertiefungen</b> mit den Bohrungen.",
@@ -459,12 +558,12 @@ table.shortcuts td:first-child{width:52%}
     },
     {
         "short": "Speichern",
-        "title": "Radlager speichern",
+        "title": "Speichern",
         "img": "assets/la2_12_speichern.jpg",
         "alt": "Datei-Menü mit Speichern",
         "lead": "Als <span class=\"mono\">Radlager.FCStd</span> speichern.",
         "list": [
-            "Gleicher Ordner „Carry“ wie Chassi und Rad."
+            "Gleicher Ordner „Carry“."
         ],
         "focus": [
             0.037,
@@ -698,11 +797,11 @@ table.shortcuts td:first-child{width:52%}
       <a class="ch-course" href="index.html">← Zur Kursübersicht</a>
       <h2>Kapitel wählen</h2>
       <div class="ch-grid">
-        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">13 Schritte · Platte mit 45 Löchern</span></span></a>
-        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">14 Schritte · Radkörper und Gummiring</span></span></a>
-        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">8 Schritte · Bogenform mit Bohrungen</span></span></a>
-        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">9 Schritte · M3×20 und Mutter</span></span></a>
-        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">8 Schritte · Carry zusammenbauen</span></span></a>
+        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">33 Schritte · Platte mit 45 Löchern</span></span></a>
+        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">22 Schritte · Radkörper und Gummiring</span></span></a>
+        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">13 Schritte · Bogenform mit Bohrungen</span></span></a>
+        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">14 Schritte · M3×20 und Mutter</span></span></a>
+        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">10 Schritte · Carry zusammenbauen</span></span></a>
         <a class="ch-card" href="original.html"><span class="ch-num">PDF</span><span><span class="ch-t">Originalseiten</span><span class="ch-s">24 Seiten als Leseausgabe</span></span></a>
       </div>
       <p class="ch-note">Tipp: Mit <kbd>K</kbd> öffnest du diese Übersicht jederzeit.</p>

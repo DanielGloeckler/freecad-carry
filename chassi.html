@@ -246,14 +246,14 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 13</span>
+    <span class="progressnum" id="progressNum">1 / 33</span>
   </div>
   <div class="top-actions"><button class="btn ghost" id="chOpen" aria-haspopup="dialog" aria-controls="chOverlay" title="Kapitelübersicht (K)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="lbl">Kapitel</span></button>
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
     <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
   </div>
 </header>
-<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 1 · Chassi</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 0 erledigt</span></div></div>
+<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 1 · Chassi</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 33 erledigt</span></div></div>
 
 <div class="app">
   <nav class="outline">
@@ -288,7 +288,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 13</span>
+    <span id="lbCaption">1 / 33</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -305,110 +305,681 @@ table.shortcuts td:first-child{width:52%}
      ===================================================================== */
   var STEPS = [
     {
-      short:'Neues Chassi', title:'Neues Chassi anlegen',
-      img:'assets/01_neues_dokument.jpg',
-      alt:'Leeres FreeCAD-Dokument mit Part-Design-Panel',
-      lead:'Neues Dokument, Arbeitsbereich <b>Part Design</b>. Im Panel Aufgaben auf <b>Neuer Körper</b>.',
-      list:['Der Körper „Chassi“ ist der Container für alle Teile.'],
-      focus:[0.7900, 0.2000, 0.0800, 0.0300], lens:[0.4500, 0.4500], zoom:2.4
+        "short": "Neues Dokument",
+        "title": "FreeCAD starten und Dokument anlegen",
+        "img": "assets/01_neues_dokument.jpg",
+        "alt": "Leeres FreeCAD-Dokument mit Part-Design-Arbeitsbereich",
+        "lead": "Starte <b>FreeCAD</b> und lege mit <kbd>Strg + N</kbd> ein neues Dokument an.",
+        "list": [
+            "Oben in der Leiste den Arbeitsbereich <b>Part Design</b> wählen."
+        ],
+        "focus": [
+            0.24,
+            0.046,
+            0.11,
+            0.03
+        ],
+        "lens": [
+            0.45,
+            0.45
+        ],
+        "zoom": 2.4
     },
     {
-      short:'Rechteck', title:'Skizze und Rechteck',
-      img:'assets/02_rechteck.jpg',
-      alt:'Rechteckskizze auf der XY-Ebene mit vier Freiheitsgraden',
-      lead:'Neue Skizze auf der <b>XY-Ebene</b>. Zeichne ein Rechteck – die Lage ist noch egal.',
-      list:['Es fehlen noch <b>4 Freiheitsgrade</b>: Größe und Lage.'],
-      hint:'Die roten Symbole sind Randbedingungen (horizontal, vertikal).',
-      focus:[0.8470, 0.2490, 0.1600, 0.0300], lens:[0.4500, 0.4000], zoom:2.2
+        "short": "Körper anlegen",
+        "title": "Einen Körper anlegen",
+        "img": "assets/01_neues_dokument.jpg",
+        "alt": "Panel Aufgaben mit dem Befehl Neuer Körper",
+        "lead": "Im Panel <b>Aufgaben</b> auf <b>Neuer Körper</b> klicken.",
+        "list": [
+            "Der Körper „Chassi“ ist der Container für alle Teile."
+        ],
+        "hint": "Ohne Körper kann keine Skizze erstellt werden.",
+        "focus": [
+            0.79,
+            0.2,
+            0.08,
+            0.03
+        ],
+        "lens": [
+            0.45,
+            0.45
+        ],
+        "zoom": 2.4
     },
     {
-      short:'Symmetrie', title:'Lage durch Symmetrie',
-      img:'assets/03_symmetrie.jpg',
-      alt:'Rechteck nach der Symmetrie, zwei Freiheitsgrade',
-      lead:'Zwei gegenüberliegende <b>Ecken</b> und den <b>Ursprung</b> wählen, dann <b>Symmetrie</b>.',
-      list:['Das Rechteck ist mittig – nur die Größe ist noch frei (2 Freiheitsgrade).'],
-      focus:[0.5970, 0.2750, 0.0500, 0.0700], lens:[0.3000, 0.3000], zoom:2.6
+        "short": "Skizze",
+        "title": "Neue Skizze auf der XY-Ebene",
+        "img": "assets/chassi_00_ebene.jpg",
+        "alt": "Dialog Befestigung auswählen mit markierter XY-Ebene",
+        "lead": "<b>Neue Skizze</b> anklicken. Im Dialog die <b>XY-Ebene</b> markieren und mit <b>OK</b> bestätigen.",
+        "list": [
+            "XY = Draufsicht von oben – hier liegt die Platte flach."
+        ],
+        "hint": "Die Ebene ist im Bild blau markiert.",
+        "focus": [
+            0.855,
+            0.401,
+            0.1,
+            0.026
+        ],
+        "lens": [
+            0.4,
+            0.55
+        ],
+        "zoom": 2.0
     },
     {
-      short:'116 × 82', title:'116 × 82 mm bemaßen',
-      img:'assets/04_masse.jpg',
-      alt:'Vollständig bestimmte Platten-Skizze mit 116 und 82 mm',
-      lead:'Bemaße mit <b>116 × 82 mm</b>.',
-      list:['Die Linien werden grün – die Skizze ist vollständig bestimmt.'],
-      focus:[0.4450,0.3520,0.1000,0.0280], lens:[0.7000,0.3000], zoom:2.2
+        "short": "Rechteck-Werkzeug",
+        "title": "Das Rechteck-Werkzeug wählen",
+        "img": "assets/02_rechteck.jpg",
+        "alt": "Skizzenleiste mit dem Rechteck-Werkzeug",
+        "lead": "In der Skizzenleiste das <b>Rechteck-Werkzeug</b> anklicken.",
+        "list": [
+            "Das Symbol zeigt ein Rechteck mit zwei roten Eckpunkten."
+        ],
+        "focus": [
+            0.236,
+            0.095,
+            0.026,
+            0.036
+        ],
+        "lens": [
+            0.62,
+            0.32
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Aufpolstern', title:'5 mm aufpolstern',
-      img:'assets/05_aufpolstern.jpg',
-      alt:'Parameter der Aufpolsterung mit Tiefe 5 mm',
-      lead:'Bei <b>Tiefe</b> den Wert <b>5,00 mm</b> eintragen, dann <b>OK</b>.',
-      list:['Die Grundplatte entsteht.'],
-      focus:[0.9270, 0.3500, 0.1200, 0.0400], lens:[0.1800, 0.6800], zoom:2.2
+        "short": "Rechteck zeichnen",
+        "title": "Ein Rechteck aufziehen",
+        "img": "assets/02_rechteck.jpg",
+        "alt": "Rechteckskizze auf der XY-Ebene",
+        "lead": "Mit gedrückter Maustaste ein <b>Rechteck</b> aufziehen.",
+        "list": [
+            "Größe und Lage sind noch egal – das kommt in den nächsten Schritten."
+        ],
+        "hint": "Die roten Symbole sind automatische Randbedingungen (horizontal/vertikal).",
+        "focus": [
+            0.42,
+            0.5,
+            0.36,
+            0.4
+        ],
+        "lens": [
+            0.72,
+            0.26
+        ],
+        "zoom": 1.4
     },
     {
-      short:'Platte', title:'Grundplatte fertig',
-      img:'assets/06_platte.jpg',
-      alt:'Fertige Grundplatte 116 x 82 x 5 mm',
-      lead:'Die <b>Grundplatte</b> ist fertig: 116 × 82 × 5 mm.',
-      list:['Jetzt kommen die Löcher.'], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "Skizze schließen",
+        "title": "Die Skizze schließen",
+        "img": "assets/02_rechteck.jpg",
+        "alt": "Schaltfläche Skizze schließen im Panel",
+        "lead": "Oben im Panel auf <b>Skizze schließen</b> klicken.",
+        "list": [
+            "Die Skizze bleibt im Modellbaum erhalten."
+        ],
+        "focus": [
+            0.855,
+            0.148,
+            0.1,
+            0.03
+        ],
+        "lens": [
+            0.62,
+            0.4
+        ],
+        "zoom": 2.2
     },
     {
-      short:'Loch-Skizze', title:'Löcher skizzieren',
-      img:'assets/07_loch_skizze.jpg',
-      alt:'Skizze auf der Deckfläche mit fünf Kreisen',
-      lead:'Neue Skizze auf der <b>Deckfläche</b>. Zeichne <b>5 Kreise Ø3</b> im Abstand von 15 mm.',
-      list:['Der erste Kreis sitzt links oben, 10 mm vom Rand.'],
-      focus:[0.3500, 0.4500, 0.2200, 0.3200], lens:[0.7000, 0.2500], zoom:1.5
+        "short": "Symmetrie wählen",
+        "title": "Ecken und Ursprung markieren",
+        "img": "assets/03_symmetrie.jpg",
+        "alt": "Rechteck mit markierten Ecken und Ursprung",
+        "lead": "Zwei <b>gegenüberliegende Ecken</b> anklicken und zuletzt den <b>Ursprung</b>.",
+        "list": [
+            "Die Reihenfolge ist wichtig: erst die Ecken, dann der Ursprung."
+        ],
+        "hint": "Der Ursprung ist der Punkt mit den roten Achsen.",
+        "focus": [
+            0.597,
+            0.275,
+            0.05,
+            0.07
+        ],
+        "lens": [
+            0.3,
+            0.3
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Tasche', title:'Tasche durch alles',
-      img:'assets/08_loch.jpg',
-      alt:'Fünf Löcher nach der Tasche durch alles',
-      lead:'Skizze schließen und eine <b>Tasche „durch alles“</b> erzeugen.',
-      list:['Die fünf Löcher sind durch die ganze Platte.'],
-      focus:[0.3200,0.3830,0.1400,0.2200], lens:[0.7200,0.3000], zoom:2.0
+        "short": "Symmetrie",
+        "title": "Symmetrie anwenden",
+        "img": "assets/03_symmetrie.jpg",
+        "alt": "Randbedingung Symmetrie in der Skizzenleiste",
+        "lead": "Auf das Symbol <b>Symmetrie</b> klicken.",
+        "list": [
+            "Das Rechteck sitzt jetzt mittig – nur die Größe ist noch frei."
+        ],
+        "focus": [
+            0.565,
+            0.1,
+            0.026,
+            0.036
+        ],
+        "lens": [
+            0.3,
+            0.55
+        ],
+        "zoom": 2.6
     },
     {
-      short:'Muster', title:'Lineares Muster 9 ×',
-      img:'assets/09_muster9.jpg',
-      alt:'Dialog Lineares Muster mit Länge 96 mm und 9 Vorkommen',
-      lead:'<b>Lineares Muster</b>: Länge <b>96 mm</b>, Vorkommen <b>9</b>.',
-      list:['Der Abstand beträgt 96 : 8 = <b>12 mm</b>.'],
-      focus:[0.8500, 0.5800, 0.1300, 0.1000], lens:[0.3000, 0.3500], zoom:1.8
+        "short": "Bemaßung",
+        "title": "Das Bemaßungswerkzeug wählen",
+        "img": "assets/04_masse.jpg",
+        "alt": "Bemaßungswerkzeug in der Skizzenleiste",
+        "lead": "Das <b>Bemaßungs-Werkzeug</b> anklicken (Lineal-Symbol).",
+        "list": [
+            "Damit werden die fehlenden Maße festgelegt."
+        ],
+        "focus": [
+            0.622,
+            0.1,
+            0.026,
+            0.036
+        ],
+        "lens": [
+            0.32,
+            0.55
+        ],
+        "zoom": 2.6
     },
     {
-      short:'45 Löcher', title:'45 Löcher im Raster',
-      img:'assets/10_muster45.jpg',
-      alt:'Grundplatte mit 45 Löchern im 9-x-5-Raster',
-      lead:'Das Raster ist fertig: <b>9 × 5 = 45 Löcher</b>.',
-      list:['Jetzt fehlen nur noch die Senkungen.'],
-      focus:[0.4700, 0.4500, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "116 mm",
+        "title": "Breite 116 mm eintragen",
+        "img": "assets/04_masse.jpg",
+        "alt": "Waagerechtes Maß 116 mm",
+        "lead": "Die untere Kante anklicken und <b>116 mm</b> eintragen.",
+        "list": [
+            "Mit <kbd>Enter</kbd> bestätigen."
+        ],
+        "focus": [
+            0.445,
+            0.352,
+            0.1,
+            0.028
+        ],
+        "lens": [
+            0.72,
+            0.3
+        ],
+        "zoom": 2.2
     },
     {
-      short:'Senkungen', title:'Senkungen 0,75 mm',
-      img:'assets/11_senkungen.jpg',
-      alt:'Dialog Fase mit Abstand 0,75 mm an allen Löchern',
-      lead:'<b>Fase</b> an allen Löchern: <b>0,75 mm</b>.',
-      list:['So verschwinden die Schraubenköpfe später in der Platte.'],
-      focus:[0.8500, 0.6100, 0.1300, 0.0400], lens:[0.3000, 0.3500], zoom:1.8
+        "short": "82 mm",
+        "title": "Höhe 82 mm eintragen",
+        "img": "assets/04_masse.jpg",
+        "alt": "Senkrechtes Maß 82 mm",
+        "lead": "Die seitliche Kante anklicken und <b>82 mm</b> eintragen.",
+        "list": [
+            "Jetzt ist die Skizze vollständig bestimmt – die Linien werden grün."
+        ],
+        "focus": [
+            0.61,
+            0.55,
+            0.04,
+            0.16
+        ],
+        "lens": [
+            0.3,
+            0.3
+        ],
+        "zoom": 2.0
     },
     {
-      short:'Rot', title:'Chassi rot einfärben',
-      img:'assets/12_rot.jpg',
-      alt:'Rotes Chassi mit 45 gesenkten Löchern',
-      lead:'Farbe <b>rot</b> – das Chassi ist fertig.',
-      list:['45 Löcher, alle gesenkt.'],
-      focus:[0.4700, 0.4500, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "Skizze schließen",
+        "title": "Skizze schließen",
+        "img": "assets/04_masse.jpg",
+        "alt": "Schaltfläche Skizze schließen",
+        "lead": "Auf <b>Skizze schließen</b> klicken.",
+        "list": [
+            "Die fertige Skizze liegt jetzt im Modellbaum."
+        ],
+        "focus": [
+            0.855,
+            0.148,
+            0.1,
+            0.03
+        ],
+        "lens": [
+            0.62,
+            0.4
+        ],
+        "zoom": 2.2
     },
     {
-      short:'Speichern', title:'Chassi speichern',
-      img:'assets/13_speichern.jpg',
-      alt:'Datei-Menü mit Speichern',
-      lead:'Als <span class="mono">Chassi.FCStd</span> speichern.',
-      list:['Im Verzeichnis „Carry“ – dort kommen später alle Teile zusammen.'],
-      focus:[0.0370, 0.1840, 0.0700, 0.0240], lens:[0.6200, 0.4800], zoom:2.2
+        "short": "Aufpolstern",
+        "title": "5 mm aufpolstern",
+        "img": "assets/05_aufpolstern.jpg",
+        "alt": "Dialog Aufpolsterung mit Tiefe 5 mm",
+        "lead": "Im Panel Aufgaben bei <b>Tiefe</b> den Wert <b>5,00 mm</b> eintragen.",
+        "list": [
+            "Die Grundplatte entsteht als Vorschau (grün)."
+        ],
+        "focus": [
+            0.927,
+            0.35,
+            0.12,
+            0.04
+        ],
+        "lens": [
+            0.3,
+            0.62
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "OK",
+        "title": "Aufpolsterung bestätigen",
+        "img": "assets/05_aufpolstern.jpg",
+        "alt": "OK-Schaltfläche im Aufgaben-Panel",
+        "lead": "Mit <b>OK</b> bestätigen.",
+        "list": [
+            "Die Platte ist jetzt ein fester Körper."
+        ],
+        "focus": [
+            0.793,
+            0.141,
+            0.08,
+            0.03
+        ],
+        "lens": [
+            0.3,
+            0.62
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Grundplatte",
+        "title": "Die Grundplatte ist fertig",
+        "img": "assets/06_platte.jpg",
+        "alt": "Fertige Grundplatte 116 x 82 x 5 mm",
+        "lead": "Die <b>Grundplatte</b> ist fertig: <b>116 × 82 × 5 mm</b>.",
+        "list": [
+            "Jetzt kommen die Löcher."
+        ]
+    },
+    {
+        "short": "Deckfläche",
+        "title": "Die Deckfläche anklicken",
+        "img": "assets/07_loch_skizze.jpg",
+        "alt": "Deckfläche der Platte für die neue Skizze",
+        "lead": "Die <b>Oberseite</b> der Platte anklicken – sie wird grün markiert.",
+        "list": [
+            "Auf dieser Fläche entsteht die Loch-Skizze."
+        ],
+        "focus": [
+            0.42,
+            0.55,
+            0.3,
+            0.26
+        ],
+        "lens": [
+            0.72,
+            0.26
+        ],
+        "zoom": 1.5
+    },
+    {
+        "short": "Kreis-Werkzeug",
+        "title": "Das Kreis-Werkzeug wählen",
+        "img": "assets/07_loch_skizze.jpg",
+        "alt": "Kreis-Werkzeug in der Skizzenleiste",
+        "lead": "In der Skizzenleiste das <b>Kreis-Werkzeug</b> anklicken.",
+        "list": [
+            "Es entsteht ein Kreis mit Mittelpunkt."
+        ],
+        "focus": [
+            0.19,
+            0.095,
+            0.026,
+            0.036
+        ],
+        "lens": [
+            0.62,
+            0.32
+        ],
+        "zoom": 2.6
+    },
+    {
+        "short": "Erster Kreis",
+        "title": "Den ersten Kreis setzen",
+        "img": "assets/07_loch_skizze.jpg",
+        "alt": "Erster Kreis links oben auf der Platte",
+        "lead": "Links oben einen <b>Kreis</b> aufziehen.",
+        "list": [
+            "Der genaue Abstand wird gleich bemaßt."
+        ],
+        "focus": [
+            0.35,
+            0.42,
+            0.06,
+            0.06
+        ],
+        "lens": [
+            0.72,
+            0.3
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Radius 1,5",
+        "title": "Radius 1,5 mm eintragen",
+        "img": "assets/07_loch_skizze.jpg",
+        "alt": "Bemaßung R1,5 mm am Kreis",
+        "lead": "Mit dem Bemaßungswerkzeug <b>R1,5 mm</b> eintragen.",
+        "list": [
+            "Das ergibt einen Lochdurchmesser von 3 mm."
+        ],
+        "focus": [
+            0.29,
+            0.44,
+            0.1,
+            0.1
+        ],
+        "lens": [
+            0.72,
+            0.3
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Fünf Kreise",
+        "title": "Fünf Kreise zeichnen",
+        "img": "assets/07_loch_skizze.jpg",
+        "alt": "Fünf Kreise in einer Spalte",
+        "lead": "Vier weitere Kreise darunter setzen – gleicher Abstand.",
+        "list": [
+            "Die Abstände werden später mit dem Muster vervielfacht."
+        ],
+        "focus": [
+            0.35,
+            0.45,
+            0.22,
+            0.32
+        ],
+        "lens": [
+            0.7,
+            0.25
+        ],
+        "zoom": 1.5
+    },
+    {
+        "short": "Skizze schließen",
+        "title": "Skizze schließen",
+        "img": "assets/07_loch_skizze.jpg",
+        "alt": "Schaltfläche Skizze schließen",
+        "lead": "Auf <b>Skizze schließen</b> klicken.",
+        "list": [
+            "Jetzt kann die Tasche erzeugt werden."
+        ],
+        "focus": [
+            0.855,
+            0.148,
+            0.1,
+            0.03
+        ],
+        "lens": [
+            0.62,
+            0.4
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Tasche",
+        "title": "Tasche durch alles",
+        "img": "assets/08_loch.jpg",
+        "alt": "Platte mit fünf Bohrlöchern",
+        "lead": "<b>Tasche</b> anklicken und <b>durch alles</b> wählen.",
+        "list": [
+            "Die fünf Löcher gehen durch die ganze Platte."
+        ],
+        "focus": [
+            0.32,
+            0.383,
+            0.14,
+            0.22
+        ],
+        "lens": [
+            0.72,
+            0.3
+        ],
+        "zoom": 2.0
+    },
+    {
+        "short": "Loch markieren",
+        "title": "Das Loch im Modellbaum markieren",
+        "img": "assets/09_muster9.jpg",
+        "alt": "Modellbaum mit markierter Tasche",
+        "lead": "Im Modellbaum die <b>Tasche</b> (Loch) anklicken.",
+        "list": [
+            "Sie wird blau hinterlegt."
+        ],
+        "focus": [
+            0.08,
+            0.285,
+            0.09,
+            0.03
+        ],
+        "lens": [
+            0.66,
+            0.34
+        ],
+        "zoom": 2.4
+    },
+    {
+        "short": "Muster",
+        "title": "Lineares Muster wählen",
+        "img": "assets/09_muster9.jpg",
+        "alt": "Werkzeug Lineares Muster in der Symbolleiste",
+        "lead": "Das Werkzeug <b>Lineares Muster</b> anklicken.",
+        "list": [
+            "Alternativ: Rechtsklick auf die Tasche → Lineares Muster."
+        ],
+        "focus": [
+            0.08,
+            0.285,
+            0.09,
+            0.03
+        ],
+        "lens": [
+            0.66,
+            0.34
+        ],
+        "zoom": 2.6
+    },
+    {
+        "short": "Länge 96",
+        "title": "Länge 96 mm eintragen",
+        "img": "assets/09_muster9.jpg",
+        "alt": "Dialog Lineares Muster mit Länge 96 mm",
+        "lead": "Bei <b>Länge</b> <b>96,00 mm</b> eintragen.",
+        "list": [
+            "96 : 8 = 12 mm Abstand zwischen den Löchern."
+        ],
+        "focus": [
+            0.85,
+            0.58,
+            0.13,
+            0.1
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 1.8
+    },
+    {
+        "short": "Vorkommen 9",
+        "title": "Vorkommen auf 9 setzen",
+        "img": "assets/09_muster9.jpg",
+        "alt": "Feld Vorkommen mit 9",
+        "lead": "Bei <b>Vorkommen</b> <b>9</b> eintragen.",
+        "list": [
+            "Damit entstehen 9 Löcher nebeneinander."
+        ],
+        "focus": [
+            0.85,
+            0.665,
+            0.13,
+            0.04
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 2.0
+    },
+    {
+        "short": "OK",
+        "title": "Muster bestätigen",
+        "img": "assets/09_muster9.jpg",
+        "alt": "OK-Schaltfläche im Aufgaben-Panel",
+        "lead": "Mit <b>OK</b> bestätigen.",
+        "list": [
+            "Die neun Löcher sind fertig."
+        ],
+        "focus": [
+            0.793,
+            0.141,
+            0.08,
+            0.03
+        ],
+        "lens": [
+            0.3,
+            0.62
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "45 Löcher",
+        "title": "45 Löcher im Raster",
+        "img": "assets/10_muster45.jpg",
+        "alt": "Grundplatte mit 45 Löchern",
+        "lead": "Das Raster ist fertig: <b>9 × 5 = 45 Löcher</b>.",
+        "list": [
+            "Jetzt fehlen nur noch die Senkungen."
+        ]
+    },
+    {
+        "short": "Fase",
+        "title": "Senkungen 0,75 mm",
+        "img": "assets/11_senkungen.jpg",
+        "alt": "Dialog Fase mit 0,75 mm",
+        "lead": "<b>Fase</b> an allen Löchern: <b>0,75 mm</b> eintragen.",
+        "list": [
+            "So verschwinden die Schraubenköpfe später in der Platte."
+        ],
+        "focus": [
+            0.85,
+            0.61,
+            0.13,
+            0.04
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 1.8
+    },
+    {
+        "short": "Alle Kanten",
+        "title": "Alle Kanten verwenden",
+        "img": "assets/11_senkungen.jpg",
+        "alt": "Kontrollkästchen Alle Kanten verwenden",
+        "lead": "Die Option <b>Alle Kanten verwenden</b> anhaken.",
+        "list": [
+            "Damit werden alle 45 Löcher auf einmal angesenkt."
+        ],
+        "focus": [
+            0.78,
+            0.66,
+            0.14,
+            0.03
+        ],
+        "lens": [
+            0.3,
+            0.35
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "OK",
+        "title": "Fase bestätigen",
+        "img": "assets/11_senkungen.jpg",
+        "alt": "OK-Schaltfläche im Aufgaben-Panel",
+        "lead": "Mit <b>OK</b> bestätigen.",
+        "list": [
+            "Alle Löcher sind jetzt gesenkt."
+        ],
+        "focus": [
+            0.793,
+            0.141,
+            0.08,
+            0.03
+        ],
+        "lens": [
+            0.3,
+            0.62
+        ],
+        "zoom": 2.2
+    },
+    {
+        "short": "Rot",
+        "title": "Chassi rot einfärben",
+        "img": "assets/12_rot.jpg",
+        "alt": "Rotes Chassi mit 45 gesenkten Löchern",
+        "lead": "M2 auf den Körper → <b>Darstellung</b> → <b>Flächenfarbe</b> → <b>rot</b>.",
+        "list": [
+            "45 Löcher, alle gesenkt – das Chassi ist fertig."
+        ],
+        "focus": [
+            0.47,
+            0.45,
+            0.3,
+            0.3
+        ],
+        "lens": [
+            0.72,
+            0.25
+        ],
+        "zoom": 1.4
+    },
+    {
+        "short": "Speichern",
+        "title": "Chassi speichern",
+        "img": "assets/13_speichern.jpg",
+        "alt": "Datei-Menü mit Speichern",
+        "lead": "Über <b>Datei → Speichern unter</b> als <span class=\"mono\">Chassi.FCStd</span> speichern.",
+        "list": [
+            "Im Verzeichnis „Carry“ – dort kommen später alle Teile zusammen."
+        ],
+        "focus": [
+            0.037,
+            0.184,
+            0.07,
+            0.024
+        ],
+        "lens": [
+            0.62,
+            0.48
+        ],
+        "zoom": 2.2
     }
-  ];
+];
 
   var N = STEPS.length;
   var FINAL_IMG = 'assets/12_rot.jpg';
@@ -645,11 +1216,11 @@ table.shortcuts td:first-child{width:52%}
       <a class="ch-course" href="index.html">← Zur Kursübersicht</a>
       <h2>Kapitel wählen</h2>
       <div class="ch-grid">
-        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">13 Schritte · Platte mit 45 Löchern</span></span></a>
-        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">14 Schritte · Radkörper und Gummiring</span></span></a>
-        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">8 Schritte · Bogenform mit Bohrungen</span></span></a>
-        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">9 Schritte · M3×20 und Mutter</span></span></a>
-        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">8 Schritte · Carry zusammenbauen</span></span></a>
+        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">33 Schritte · Platte mit 45 Löchern</span></span></a>
+        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">22 Schritte · Radkörper und Gummiring</span></span></a>
+        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">13 Schritte · Bogenform mit Bohrungen</span></span></a>
+        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">14 Schritte · M3×20 und Mutter</span></span></a>
+        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">10 Schritte · Carry zusammenbauen</span></span></a>
         <a class="ch-card" href="original.html"><span class="ch-num">PDF</span><span><span class="ch-t">Originalseiten</span><span class="ch-s">24 Seiten als Leseausgabe</span></span></a>
       </div>
       <p class="ch-note">Tipp: Mit <kbd>K</kbd> öffnest du diese Übersicht jederzeit.</p>
