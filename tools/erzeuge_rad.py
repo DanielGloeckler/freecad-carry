@@ -76,7 +76,7 @@ def run():
         doc.recompute()
         Gui.activeDocument().setEdit(sk.Name); pump(700)
         view = Gui.activeDocument().activeView()
-        view.setCameraType("Orthographic"); view.viewTop(); pump(300)
+        view.setCameraType("Orthographic"); view.viewFront(); pump(300)
         pts = [(-10,0), (10,0), (10,25), (8,25), (8,22), (-8,22), (-8,25), (-10,25)]
         for i in range(8):
             sk.addGeometry(Part.LineSegment(App.Vector(pts[i][0], pts[i][1], 0),
@@ -89,7 +89,7 @@ def run():
             sk.addConstraint(Sketcher.Constraint("Vertical", i))
         doc.recompute(); pump(400)
         view.fitAll(); pump(500)
-        shot("01_profil")
+        shot("rad_01_profil")
 
         c1 = sk.addConstraint(Sketcher.Constraint("Distance", 0, 20.0))
         c2 = sk.addConstraint(Sketcher.Constraint("Distance", 1, 25.0))
@@ -97,7 +97,7 @@ def run():
         c4 = sk.addConstraint(Sketcher.Constraint("Distance", 3, 3.0))
         doc.recompute(); pump(500)
         view.fitAll(); pump(500)
-        shot("02_masse")
+        shot("rad_02_masse")
 
         Gui.activeDocument().resetEdit(); pump(700)
         rev = body.newObject("PartDesign::Revolution", "Revolution")
