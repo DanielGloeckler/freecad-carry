@@ -317,17 +317,17 @@ table.shortcuts td:first-child{width:52%}
         ],
         "hint": "Die zwei Schultern und der obere Bogen haben je <b>R10</b>.",
         "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>",
+        "lens": [
+            0.74,
+            0.3
+        ],
+        "zoom": 1.25,
         "focus": [
             0.52,
             0.45,
             0.28,
             0.28
-        ],
-        "lens": [
-            0.7,
-            0.26
-        ],
-        "zoom": 1.5
+        ]
     },
     {
         "short": "Aufpolstern",
@@ -339,16 +339,16 @@ table.shortcuts td:first-child{width:52%}
             "Damit liegt das Radlager <b>5 mm links und 5 mm rechts</b> der XZ-Ebene."
         ],
         "focus": [
-            0.91,
-            0.345,
-            0.13,
-            0.045
+            0.912,
+            0.347,
+            0.135,
+            0.028
         ],
         "lens": [
-            0.32,
-            0.63
+            0.3,
+            0.62
         ],
-        "zoom": 2.2
+        "zoom": 2.6
     },
     {
         "short": "Achsbohrung",
@@ -428,12 +428,6 @@ table.shortcuts td:first-child{width:52%}
         "list": [
             "Farbe grau – bereit für die Baugruppe."
         ],
-        "focus": [
-            0.47,
-            0.47,
-            0.3,
-            0.3
-        ],
         "lens": [
             0.72,
             0.26
@@ -482,7 +476,7 @@ table.shortcuts td:first-child{width:52%}
         ],
         "zoom": 2.2
     }
-];
+]
 
   var N = STEPS.length;
   var FINAL_IMG = 'assets/la2_10_fertig.jpg';
@@ -605,7 +599,7 @@ table.shortcuts td:first-child{width:52%}
         '<button class="btn ghost" data-nav="prev" '+(progress === 0 ? 'disabled' : '')+'>← Zurück</button>'+
         '<button class="btn primary" data-nav="next">Weiter →</button>'+
       '</div>'+
-      '<p class="advance-hint">Die Lupe zeigt den Klickpunkt. Mit ← → blätterst du.</p>'+
+      '<p class="advance-hint">'+(s.focus ? 'Die Lupe zeigt den Klickpunkt. ' : '')+'Mit ← → blätterst du.</p>'+
     '</div>';
     reader.scrollTop = 0;
   }

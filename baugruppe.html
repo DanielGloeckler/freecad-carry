@@ -404,16 +404,16 @@ table.shortcuts td:first-child{width:52%}
             "Zwischenspeichern nicht vergessen."
         ],
         "focus": [
-            0.3,
-            0.62,
-            0.22,
-            0.22
+            0.44,
+            0.755,
+            0.12,
+            0.13
         ],
         "lens": [
-            0.73,
-            0.26
+            0.74,
+            0.28
         ],
-        "zoom": 1.5
+        "zoom": 2.0
     },
     {
         "short": "Achsen",
@@ -426,16 +426,16 @@ table.shortcuts td:first-child{width:52%}
         ],
         "hint": "Beim gegenüberliegenden Radlager ist der Offset −77,00 mm.",
         "focus": [
-            0.26,
-            0.63,
-            0.18,
-            0.12
+            0.385,
+            0.723,
+            0.09,
+            0.06
         ],
         "lens": [
-            0.73,
-            0.28
+            0.72,
+            0.3
         ],
-        "zoom": 1.8
+        "zoom": 2.4
     },
     {
         "short": "Räder",
@@ -448,16 +448,16 @@ table.shortcuts td:first-child{width:52%}
         ],
         "hint": "Zwischen Radlager und Rad bleibt 1 mm Abstand.",
         "focus": [
-            0.35,
-            0.4,
-            0.3,
-            0.3
-        ],
-        "lens": [
-            0.73,
+            0.385,
+            0.72,
+            0.16,
             0.26
         ],
-        "zoom": 1.4
+        "lens": [
+            0.72,
+            0.28
+        ],
+        "zoom": 1.6
     },
     {
         "short": "Fertig",
@@ -469,19 +469,13 @@ table.shortcuts td:first-child{width:52%}
             "Änderungen an einem Teil: Datei ändern, speichern, in A2plus <b>Teile aktualisieren</b>."
         ],
         "hint": "Zum Fahren kommen O-Ringe 34 × 3 mm als Reifen auf die Räder.",
-        "focus": [
-            0.5,
-            0.46,
-            0.35,
-            0.35
-        ],
         "lens": [
             0.73,
             0.26
         ],
         "zoom": 1.3
     }
-];
+]
 
   var N = STEPS.length;
   var FINAL_IMG = 'assets/bg_09_fertig.jpg';
@@ -604,7 +598,7 @@ table.shortcuts td:first-child{width:52%}
         '<button class="btn ghost" data-nav="prev" '+(progress === 0 ? 'disabled' : '')+'>← Zurück</button>'+
         '<button class="btn primary" data-nav="next">Weiter →</button>'+
       '</div>'+
-      '<p class="advance-hint">Die Lupe zeigt den Klickpunkt. Mit ← → blätterst du.</p>'+
+      '<p class="advance-hint">'+(s.focus ? 'Die Lupe zeigt den Klickpunkt. ' : '')+'Mit ← → blätterst du.</p>'+
     '</div>';
     reader.scrollTop = 0;
   }

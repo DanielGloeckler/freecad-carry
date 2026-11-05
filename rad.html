@@ -330,7 +330,7 @@ var STEPS = [
             'F → G: 3 mm nach oben. G → H: 2 mm nach links. H → A: 25 mm nach unten.'],
       hint:'Die genauen Längen musst du noch nicht treffen – das kommt im nächsten Schritt.',
       diagram: QUERSCHNITT,
-      focus:[0.1070, 0.0750, 0.0300, 0.0450], lens:[0.3500, 0.3000], zoom:3.0
+      focus:[0.1360,0.0910,0.0240,0.0340], lens:[0.6200,0.3200], zoom:2.6
     },
     {
       short:'Maße', title:'Profil bemaßen',
@@ -341,7 +341,7 @@ var STEPS = [
             '<b>16 mm</b> – Nutbreite (E–F). <b>3 mm</b> – Nuttiefe (D–E).'],
       hint:'Die Skizze wird grün – vollständig bestimmt.',
       diagram: QUERSCHNITT,
-      focus:[0.3790, 0.0750, 0.0320, 0.0450], lens:[0.6500, 0.2800], zoom:3.0
+      focus:[0.6270,0.0960,0.0240,0.0340], lens:[0.3500,0.5500], zoom:2.6
     },
     {
       short:'Rotieren', title:'Rotationskörper erzeugen',
@@ -368,7 +368,7 @@ var STEPS = [
       lead:'Wähle das <b>Kreis-Werkzeug</b> (Symbol oben) und setze den Kreis <b>Ø5</b> bei 15 mm vom Zentrum.',
       list:['Der Kreis wird später zum Muster vervielfacht.'],
       hint:'Kreis anklicken, Radius 2,5 mm eintragen, Skizze schließen, Tasche „durch alles“.',
-      focus:[0.1520, 0.0750, 0.0300, 0.0450], lens:[0.4000, 0.3000], zoom:3.0
+      focus:[0.1920,0.0960,0.0240,0.0340], lens:[0.6200,0.3200], zoom:2.6
     },
     {
       short:'Muster finden', title:'Polares Muster finden',
@@ -421,15 +421,14 @@ var STEPS = [
       lead:'<b>Rotieren</b> um die <b>horizontale X-Achse</b>, 360°.',
       list:['Farbe <b>schwarz</b> – der Ring sitzt in der Nut.'],
       hint:'Zwei Körper: Radkörper (grün) und Gummiring (schwarz).',
-      focus:[0.8500, 0.4400, 0.1200, 0.0800], lens:[0.3000, 0.3500], zoom:1.8
+      focus:[0.9220,0.3350,0.1150,0.0320], lens:[0.2800,0.5800], zoom:1.8
     },
     {
       short:'Fertig', title:'Rad mit Reifen',
       img:'assets/12_fertig.jpg',
       alt:'Fertiges grünes Rad mit schwarzem Gummiring',
       lead:'Das <b>Rad</b> ist fertig: Ø50 mm, 20 mm breit, 6 Löcher und Gummiring.',
-      list:['Zwei Körper: Radkörper und Gummiring.'],
-      focus:[0.4500, 0.5000, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+      list:['Zwei Körper: Radkörper und Gummiring.'], lens:[0.7200, 0.2500], zoom:1.4
     },
     {
       short:'Speichern', title:'Rad speichern',
@@ -562,7 +561,7 @@ var STEPS = [
         '<button class="btn ghost" data-nav="prev" '+(progress === 0 ? 'disabled' : '')+'>← Zurück</button>'+
         '<button class="btn primary" data-nav="next">Weiter →</button>'+
       '</div>'+
-      '<p class="advance-hint">Die Lupe zeigt den Klickpunkt. Mit ← → blätterst du.</p>'+
+      '<p class="advance-hint">'+(s.focus ? 'Die Lupe zeigt den Klickpunkt. ' : '')+'Mit ← → blätterst du.</p>'+
     '</div>';
     reader.scrollTop = 0;
   }

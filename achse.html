@@ -360,16 +360,16 @@ table.shortcuts td:first-child{width:52%}
             "Die Achse wird später aus einem Rundholzstab gesägt."
         ],
         "focus": [
-            0.52,
-            0.42,
-            0.3,
+            0.422,
+            0.45,
+            0.08,
             0.3
         ],
         "lens": [
-            0.72,
-            0.26
+            0.74,
+            0.3
         ],
-        "zoom": 1.5
+        "zoom": 3.0
     },
     {
         "short": "Speichern",
@@ -422,8 +422,16 @@ table.shortcuts td:first-child{width:52%}
             "Darunter: Muttern, Unterlegscheiben und Gewindestangen."
         ],
         "hint": "Für den Carry brauchst du nur die Senkkopfschraube und die Sechskantmutter.",
-        "focus": [0.3000, 0.0900, 0.1200, 0.0800],
-        "lens": [0.3000, 0.6500],
+        "focus": [
+            0.3,
+            0.09,
+            0.12,
+            0.08
+        ],
+        "lens": [
+            0.3,
+            0.65
+        ],
         "zoom": 2.0
     },
     {
@@ -483,19 +491,13 @@ table.shortcuts td:first-child{width:52%}
             "<span class=\"mono\">Achse.FCStd</span>, <span class=\"mono\">Schraube M3.FCStd</span>, <span class=\"mono\">Mutter M3.FCStd</span>"
         ],
         "hint": "Jetzt fehlt nur noch die Baugruppe.",
-        "focus": [
-            0.5,
-            0.5,
-            0.4,
-            0.3
-        ],
         "lens": [
             0.73,
             0.26
         ],
         "zoom": 1.3
     }
-];
+]
 
   var N = STEPS.length;
   var FINAL_IMG = 'assets/ach_09_teile.jpg';
@@ -618,7 +620,7 @@ table.shortcuts td:first-child{width:52%}
         '<button class="btn ghost" data-nav="prev" '+(progress === 0 ? 'disabled' : '')+'>← Zurück</button>'+
         '<button class="btn primary" data-nav="next">Weiter →</button>'+
       '</div>'+
-      '<p class="advance-hint">Die Lupe zeigt den Klickpunkt. Mit ← → blätterst du.</p>'+
+      '<p class="advance-hint">'+(s.focus ? 'Die Lupe zeigt den Klickpunkt. ' : '')+'Mit ← → blätterst du.</p>'+
     '</div>';
     reader.scrollTop = 0;
   }
