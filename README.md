@@ -9,7 +9,7 @@
 **Originalseiten (PDF):** <https://danielgloeckler.github.io/freecad-carry/original.html>
 
 Aufbau wie eine Lernplattform: **Kursstartseite** mit Fortschritt, fünf
-**Kapitel** als Abschnitte mit 92 Einzelschritten und pro Kapitel eine **Kursleiste** mit Rücksprung
+**Kapitel** als Abschnitte mit 89 Einzelschritten und pro Kapitel eine **Kursleiste** mit Rücksprung
 zur Übersicht. Der Fortschritt wird im Browser gespeichert.
 
 Eigene Screenshots aus **FreeCAD 1.1**, jeweils mit **Lupe** auf dem
@@ -18,11 +18,12 @@ auf jeder Seite eine kompakte Übersicht mit Bild des fertigen Carry – von
 dort lässt sich direkt in jedes Kapitel wechseln. Kapitel für Kapitel; die Originalseiten aus „FreeCAD Anleitung II“
 bleiben als Leseausgabe erhalten. Die Uhr aus dem PDF ist nicht enthalten.
 
-## Kapitel 1 – Chassi (33 Schritte)
+## Kapitel 1 – Chassi (30 Schritte)
 
 Neues Chassi → Skizze/Rechteck → Symmetrie → **116 × 82 mm** → 5 mm
-aufpolstern → Platte → 5 Löcher skizzieren → Tasche → lineares Muster 9 ×
-(96 mm) → 45 Löcher → Senkungen 0,75 mm → rot → speichern.
+aufpolstern → Platte → **ein** Kreis + Bemaßung → Tasche → **Mehrfach-
+Transformation mit zwei linearen Mustern** (9 × 96 mm und 5 × 60 mm) →
+45 Löcher → Senkungen 0,75 mm → rot → speichern.
 
 ## Kapitel 2 – Rad (22 Schritte)
 

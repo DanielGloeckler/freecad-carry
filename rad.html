@@ -355,12 +355,14 @@ var STEPS = [
     },
     {
         "short": "Linienzug-Werkzeug",
-        "title": "Linienzug-Werkzeug",
+        "title": "Das Linienzug-Werkzeug",
         "img": "assets/rad_01_profil.jpg",
         "alt": "Radprofil als geschlossener Linienzug",
-        "lead": "In der Skizzenleiste das <b>Linienzug-Werkzeug</b> anklicken.",
+        "lead": "In der Skizzenleiste das <b>Linienzug-Werkzeug</b> anklicken. Damit zeichnest du die ganze Kontur in einem Zug.",
         "list": [
-            "Damit wird die Kontur in einem Zug gezeichnet."
+            "Jeder <b>Klick</b> setzt den nächsten Punkt.",
+            "Mit der <b>M-Taste</b> wechselst du zwischen <b>Linie</b> und <b>Bogen</b>.",
+            "Mit <kbd>Esc</kbd> brichst du den Zug ab."
         ],
         "focus": [
             0.136,
@@ -372,18 +374,23 @@ var STEPS = [
             0.62,
             0.32
         ],
-        "zoom": 2.6
+        "zoom": 2.6,
+        "hint": "Das Symbol zeigt eine Linie mit mehreren Punkten."
     },
     {
         "short": "Kontur A–H zeichnen",
-        "title": "Kontur A–H zeichnen",
+        "title": "Kontur A–H in einem Zug zeichnen",
         "img": "assets/rad_01_profil.jpg",
         "alt": "Radprofil als geschlossener Linienzug",
-        "lead": "Die Kontur <b>A → B → C → D → E → F → G → H</b> zeichnen und bei A schließen.",
+        "lead": "Die Kontur <b>A → B → C → D → E → F → G → H</b> zeichnen und am Ende wieder auf <b>A</b> klicken – damit schließt sich der Linienzug.",
         "list": [
-            "Mit der <b>M-Taste</b> zwischen Linie und Bogen wechseln."
+            "A → B: <b>20 mm</b> gerade auf der Radachse.",
+            "B → C: <b>25 mm</b> senkrecht nach oben.",
+            "C → D → E: mit der <b>M-Taste</b> auf <b>Bogen</b> schalten (Nut).",
+            "E → F: <b>16 mm</b> gerade nach links.",
+            "F → G → H: wieder <b>Bogen</b>, dann zurück zu A."
         ],
-        "hint": "Die genauen Längen müssen noch nicht stimmen.",
+        "hint": "Die Maße musst du noch nicht treffen – erst zeichnen, im nächsten Schritt mit dem Bemaßungswerkzeug festlegen.",
         "focus": [
             0.136,
             0.091,
@@ -422,9 +429,9 @@ var STEPS = [
         "title": "Bemaßungswerkzeug",
         "img": "assets/rad_02_masse.jpg",
         "alt": "Bemaßtes Radprofil mit 20, 25, 16 und 3 mm",
-        "lead": "Das <b>Bemaßungs-Werkzeug</b> wählen.",
+        "lead": "Jetzt bemaßen: das <b>Bemaßungs-Werkzeug</b> wählen (Lineal-Symbol in der Skizzenleiste).",
         "list": [
-            "Damit werden die vier Maße festgelegt."
+            "Erst zeichnen, dann bemaßen – so wie im PDF."
         ],
         "focus": [
             0.627,
@@ -764,7 +771,7 @@ var STEPS = [
         ],
         "zoom": 2.2
     }
-];
+]
 
   var N = STEPS.length;
   var FINAL_IMG = 'assets/12_fertig.jpg';

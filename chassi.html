@@ -246,7 +246,7 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 33</span>
+    <span class="progressnum" id="progressNum">1 / 30</span>
   </div>
   <div class="top-actions"><button class="btn ghost" id="chOpen" aria-haspopup="dialog" aria-controls="chOverlay" title="Kapitelübersicht (K)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="lbl">Kapitel</span></button>
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
@@ -288,7 +288,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 33</span>
+    <span id="lbCaption">1 / 30</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -397,7 +397,7 @@ table.shortcuts td:first-child{width:52%}
         "alt": "Rechteckskizze auf der XY-Ebene",
         "lead": "Mit gedrückter Maustaste ein <b>Rechteck</b> aufziehen.",
         "list": [
-            "Größe und Lage sind noch egal – das kommt in den nächsten Schritten."
+            "Größe und Lage sind noch egal – erst zeichnen, dann bemaßen."
         ],
         "hint": "Die roten Symbole sind automatische Randbedingungen (horizontal/vertikal).",
         "focus": [
@@ -411,27 +411,6 @@ table.shortcuts td:first-child{width:52%}
             0.26
         ],
         "zoom": 1.4
-    },
-    {
-        "short": "Skizze schließen",
-        "title": "Die Skizze schließen",
-        "img": "assets/02_rechteck.jpg",
-        "alt": "Schaltfläche Skizze schließen im Panel",
-        "lead": "Oben im Panel auf <b>Skizze schließen</b> klicken.",
-        "list": [
-            "Die Skizze bleibt im Modellbaum erhalten."
-        ],
-        "focus": [
-            0.855,
-            0.148,
-            0.1,
-            0.03
-        ],
-        "lens": [
-            0.62,
-            0.4
-        ],
-        "zoom": 2.2
     },
     {
         "short": "Symmetrie wählen",
@@ -481,9 +460,9 @@ table.shortcuts td:first-child{width:52%}
         "title": "Das Bemaßungswerkzeug wählen",
         "img": "assets/04_masse.jpg",
         "alt": "Bemaßungswerkzeug in der Skizzenleiste",
-        "lead": "Das <b>Bemaßungs-Werkzeug</b> anklicken (Lineal-Symbol).",
+        "lead": "Jetzt bemaßen: das <b>Bemaßungs-Werkzeug</b> anklicken (Lineal-Symbol).",
         "list": [
-            "Damit werden die fehlenden Maße festgelegt."
+            "Erst zeichnen, dann bemaßen – so bleibt die Form kontrollierbar."
         ],
         "focus": [
             0.622,
@@ -615,21 +594,21 @@ table.shortcuts td:first-child{width:52%}
     {
         "short": "Deckfläche",
         "title": "Die Deckfläche anklicken",
-        "img": "assets/07_loch_skizze.jpg",
+        "img": "assets/06_platte.jpg",
         "alt": "Deckfläche der Platte für die neue Skizze",
         "lead": "Die <b>Oberseite</b> der Platte anklicken – sie wird grün markiert.",
         "list": [
             "Auf dieser Fläche entsteht die Loch-Skizze."
         ],
         "focus": [
-            0.42,
-            0.55,
+            0.5,
+            0.45,
             0.3,
-            0.26
+            0.3
         ],
         "lens": [
             0.72,
-            0.26
+            0.28
         ],
         "zoom": 1.5
     },
@@ -640,7 +619,7 @@ table.shortcuts td:first-child{width:52%}
         "alt": "Kreis-Werkzeug in der Skizzenleiste",
         "lead": "In der Skizzenleiste das <b>Kreis-Werkzeug</b> anklicken.",
         "list": [
-            "Es entsteht ein Kreis mit Mittelpunkt."
+            "Es entsteht genau <b>ein</b> Kreis – die anderen kommen per Muster."
         ],
         "focus": [
             0.19,
@@ -655,67 +634,48 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 2.6
     },
     {
-        "short": "Erster Kreis",
-        "title": "Den ersten Kreis setzen",
-        "img": "assets/07_loch_skizze.jpg",
-        "alt": "Erster Kreis links oben auf der Platte",
-        "lead": "Links oben einen <b>Kreis</b> aufziehen.",
+        "short": "Ein Kreis",
+        "title": "Einen Kreis links oben setzen",
+        "img": "assets/ch_kreis.jpg",
+        "alt": "Einzelner Kreis mit den Maßen 10 mm, 5 mm und R1,5 (wie im PDF)",
+        "lead": "Einen <b>Kreis</b> links oben auf die Platte setzen.",
         "list": [
-            "Der genaue Abstand wird gleich bemaßt."
+            "So wie im PDF: nur <b>ein</b> Kreis – der Rest wird später gemustert."
         ],
+        "hint": "Die Lage wird im nächsten Schritt bemaßt.",
         "focus": [
-            0.35,
-            0.305,
-            0.06,
-            0.06
+            0.33,
+            0.52,
+            0.13,
+            0.15
         ],
         "lens": [
             0.72,
             0.3
         ],
-        "zoom": 2.2
+        "zoom": 1.8
     },
     {
         "short": "Radius 1,5",
-        "title": "Radius 1,5 mm eintragen",
-        "img": "assets/07_loch_skizze.jpg",
-        "alt": "Bemaßung R1,5 mm am Kreis",
-        "lead": "Mit dem Bemaßungswerkzeug <b>R1,5 mm</b> eintragen.",
+        "title": "Radius 1,5 mm und Lage bemaßen",
+        "img": "assets/ch_kreis.jpg",
+        "alt": "Bemaßung des Kreises: 10 mm, 5 mm, R1,5",
+        "lead": "Mit dem Bemaßungswerkzeug <b>R1,5 mm</b> sowie <b>10 mm</b> und <b>5 mm</b> zur Kante eintragen.",
         "list": [
             "Das ergibt einen Lochdurchmesser von 3 mm."
         ],
+        "hint": "10 mm von oben, 5 mm von links – wie in der PDF-Zeichnung.",
         "focus": [
-            0.29,
-            0.44,
-            0.1,
-            0.1
+            0.6,
+            0.62,
+            0.33,
+            0.11
         ],
         "lens": [
-            0.72,
+            0.28,
             0.3
         ],
-        "zoom": 2.2
-    },
-    {
-        "short": "Fünf Kreise",
-        "title": "Fünf Kreise zeichnen",
-        "img": "assets/07_loch_skizze.jpg",
-        "alt": "Fünf Kreise in einer Spalte",
-        "lead": "Vier weitere Kreise darunter setzen – gleicher Abstand.",
-        "list": [
-            "Die Abstände werden später mit dem Muster vervielfacht."
-        ],
-        "focus": [
-            0.35,
-            0.45,
-            0.22,
-            0.32
-        ],
-        "lens": [
-            0.7,
-            0.25
-        ],
-        "zoom": 1.5
+        "zoom": 1.8
     },
     {
         "short": "Skizze schließen",
@@ -741,23 +701,23 @@ table.shortcuts td:first-child{width:52%}
     {
         "short": "Tasche",
         "title": "Tasche durch alles",
-        "img": "assets/08_loch.jpg",
-        "alt": "Platte mit fünf Bohrlöchern",
+        "img": "assets/ch_ein_loch.jpg",
+        "alt": "Ein einzelnes Loch in der Platte (wie im PDF)",
         "lead": "<b>Tasche</b> anklicken und <b>durch alles</b> wählen.",
         "list": [
-            "Die fünf Löcher gehen durch die ganze Platte."
+            "Jetzt ist genau <b>ein</b> Loch da – daraus entsteht das Muster."
         ],
         "focus": [
-            0.32,
-            0.383,
-            0.14,
-            0.22
-        ],
-        "lens": [
-            0.72,
+            0.55,
+            0.35,
+            0.3,
             0.3
         ],
-        "zoom": 2.0
+        "lens": [
+            0.74,
+            0.3
+        ],
+        "zoom": 1.8
     },
     {
         "short": "Loch markieren",
@@ -781,32 +741,32 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 2.4
     },
     {
-        "short": "Muster",
-        "title": "Lineares Muster wählen",
-        "img": "assets/09_muster9.jpg",
-        "alt": "Werkzeug Lineares Muster in der Symbolleiste",
-        "lead": "Das Werkzeug <b>Lineares Muster</b> anklicken.",
+        "short": "Mehrfach-Transformation",
+        "title": "Mehrfach-Transformation starten",
+        "img": "assets/ch_mtf.jpg",
+        "alt": "Dialog Mehrfach-Transformation mit dem Menü Lineares Muster hinzufügen",
+        "lead": "Das Werkzeug <b>Mehrfach-Transformation</b> anklicken und <b>Lineares Muster hinzufügen</b> wählen.",
         "list": [
-            "Alternativ: Rechtsklick auf die Tasche → Lineares Muster."
+            "So macht es auch die PDF: zwei lineare Muster in einer Transformation."
         ],
         "focus": [
-            0.08,
-            0.285,
-            0.09,
-            0.03
+            0.55,
+            0.86,
+            0.3,
+            0.06
         ],
         "lens": [
-            0.66,
-            0.34
+            0.25,
+            0.35
         ],
-        "zoom": 2.6
+        "zoom": 1.6
     },
     {
-        "short": "Länge 96",
-        "title": "Länge 96 mm eintragen",
+        "short": "1. Muster 9×",
+        "title": "Erstes lineares Muster: 9 × 96 mm",
         "img": "assets/09_muster9.jpg",
-        "alt": "Dialog Lineares Muster mit Länge 96 mm",
-        "lead": "Bei <b>Länge</b> <b>96,00 mm</b> eintragen.",
+        "alt": "Dialog Lineares Muster mit Länge 96 mm und 9 Vorkommen",
+        "lead": "<b>Länge 96,00 mm</b> und <b>Vorkommen 9</b> eintragen.",
         "list": [
             "96 : 8 = 12 mm Abstand zwischen den Löchern."
         ],
@@ -823,46 +783,26 @@ table.shortcuts td:first-child{width:52%}
         "zoom": 1.8
     },
     {
-        "short": "Vorkommen 9",
-        "title": "Vorkommen auf 9 setzen",
-        "img": "assets/09_muster9.jpg",
-        "alt": "Feld Vorkommen mit 9",
-        "lead": "Bei <b>Vorkommen</b> <b>9</b> eintragen.",
+        "short": "2. Muster 5×",
+        "title": "Zweites lineares Muster: 5 × 60 mm",
+        "img": "assets/ch_mtf.jpg",
+        "alt": "Dialog mit Element hinzufügen für die zweite Transformation",
+        "lead": "Im Dialog <b>Element hinzufügen</b> → <b>Lineares Muster</b> und <b>60 mm</b> / <b>5 Vorkommen</b> eintragen.",
         "list": [
-            "Damit entstehen 9 Löcher nebeneinander."
+            "60 : 4 = 15 mm Abstand zwischen den Reihen."
         ],
+        "hint": "Im PDF ist es dieselbe Mehrfach-Transformation.",
         "focus": [
-            0.85,
-            0.665,
-            0.13,
-            0.04
+            0.23,
+            0.245,
+            0.22,
+            0.05
         ],
         "lens": [
-            0.3,
-            0.35
+            0.6,
+            0.55
         ],
-        "zoom": 2.0
-    },
-    {
-        "short": "OK",
-        "title": "Muster bestätigen",
-        "img": "assets/09_muster9.jpg",
-        "alt": "OK-Schaltfläche im Aufgaben-Panel",
-        "lead": "Mit <b>OK</b> bestätigen.",
-        "list": [
-            "Die neun Löcher sind fertig."
-        ],
-        "focus": [
-            0.793,
-            0.141,
-            0.08,
-            0.03
-        ],
-        "lens": [
-            0.3,
-            0.62
-        ],
-        "zoom": 2.2
+        "zoom": 1.8
     },
     {
         "short": "45 Löcher",

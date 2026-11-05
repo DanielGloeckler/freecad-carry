@@ -5,7 +5,7 @@
   'use strict';
 
   var KEYMAP = {
-    'chassi.html':    { key: 'freecad-carry-chassi',    n: 33, num: 1, title: 'Chassi' },
+    'chassi.html':    { key: 'freecad-carry-chassi',    n: 30, num: 1, title: 'Chassi' },
     'rad.html':       { key: 'freecad-carry-rad',       n: 22, num: 2, title: 'Rad' },
     'lager.html':     { key: 'freecad-carry-lager',     n: 13,  num: 3, title: 'Radlager' },
     'achse.html':     { key: 'freecad-carry-achse',     n: 14,  num: 4, title: 'Achse & Schrauben' },
