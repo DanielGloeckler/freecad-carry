@@ -8,7 +8,9 @@
 **Originalseiten (PDF):** <https://danielgloeckler.github.io/freecad-carry/original.html>
 
 Eigene Screenshots aus **FreeCAD 1.1**, jeweils mit **Lupe** auf dem
-Klickpunkt. Kapitel für Kapitel; die Originalseiten aus „FreeCAD Anleitung II“
+Klickpunkt. Über den Button **Kapitel** (oder die Taste **K**) öffnet sich
+auf jeder Seite eine kompakte Übersicht mit Bild des fertigen Carry – von
+dort lässt sich direkt in jedes Kapitel wechseln. Kapitel für Kapitel; die Originalseiten aus „FreeCAD Anleitung II“
 bleiben als Leseausgabe erhalten. Die Uhr aus dem PDF ist nicht enthalten.
 
 ## Kapitel 1 – Chassi (13 Schritte)
