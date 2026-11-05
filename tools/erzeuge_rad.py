@@ -132,7 +132,7 @@ def run():
         bore.addGeometry(Part.Circle(App.Vector(0, 0, 0), App.Vector(0, 0, 1), 4.0), False)
         bore.addConstraint(Sketcher.Constraint("Radius", 0, 4.0))
         doc.recompute(); pump(400)
-        view.viewTop(); view.fitAll(); pump(500)
+        view.viewRight(); view.fitAll(); pump(500)
         shot("05_bohrung")
         Gui.activeDocument().resetEdit(); pump(600)
         bp = body.newObject("PartDesign::Pocket", "BohrungTasche")
@@ -153,7 +153,7 @@ def run():
         hole.addGeometry(Part.Circle(App.Vector(0, 15, 0), App.Vector(0, 0, 1), 2.5), False)
         hole.addConstraint(Sketcher.Constraint("Radius", 0, 2.5))
         doc.recompute(); pump(400)
-        view.viewTop(); view.fitAll(); pump(500)
+        view.viewRight(); view.fitAll(); pump(500)
         shot("06_loch")
         Gui.activeDocument().resetEdit(); pump(600)
         hp = body.newObject("PartDesign::Pocket", "LochTasche")
@@ -173,6 +173,9 @@ def run():
         view.viewIsometric(); view.fitAll(); pump(500)
         try:
             Gui.activeDocument().setEdit(pat.Name); pump(1400)
+            for cb in Gui.getMainWindow().findChildren(QtWidgets.QCheckBox):
+                if cb.isVisible() and "Vorschau anzeigen" in cb.text():
+                    cb.setChecked(False); pump(500); break
         except Exception as e:
             log("pat edit %r" % e)
         shot("07_muster")
@@ -204,7 +207,7 @@ def run():
         gsk.addGeometry(Part.Circle(App.Vector(0, 23, 0), App.Vector(0, 0, 1), 2.2), False)
         gsk.addConstraint(Sketcher.Constraint("Radius", 0, 2.2))
         doc.recompute(); pump(400)
-        view.viewTop(); view.fitAll(); pump(500)
+        view.viewFront(); view.fitAll(); pump(500)
         shot("10_gummi")
         Gui.activeDocument().resetEdit(); pump(600)
         grev = rubber_body.newObject("PartDesign::Revolution", "Gummi")
@@ -220,7 +223,14 @@ def run():
             pass
         Gui.Selection.clearSelection(); pump(400)
         view.setCameraType("Perspective"); view.viewIsometric(); view.fitAll(); pump(600)
-        shot("11_fertig")
+        try:
+            Gui.activeDocument().setEdit(grev.Name); pump(1400)
+            shot("11_gummi_rev")
+            Gui.activeDocument().resetEdit(); pump(600)
+        except Exception as e:
+            log("gummi rev %r" % e)
+        view.viewIsometric(); view.fitAll(); pump(500)
+        shot("12_fertig")
 
         # speichern
         doc.saveAs(TMP); pump(600)
@@ -231,9 +241,9 @@ def run():
                 QtWidgets.QApplication.processEvents(); pump(500)
                 pop = QtWidgets.QApplication.activePopupWidget()
                 if pop:
-                    shot("12_speichern", pop); pop.close()
+                    shot("13_speichern", pop); pop.close()
                 else:
-                    shot("12_speichern")
+                    shot("13_speichern")
                 break
         log("FERTIG")
     except Exception:

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 235">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#b03a2e"/>
+    </marker>
+  </defs>
+  <rect width="360" height="235" fill="#ffffff"/>
+
+  <!-- Profil -->
+  <polygon points="130,190 250,190 250,40 238,40 238,58 142,58 142,40 130,40"
+           fill="#e8f0f8" stroke="#1f3f5f" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Radachse (Mittellinie) -->
+  <line x1="55" y1="190" x2="315" y2="190" stroke="#666" stroke-width="1" stroke-dasharray="12 3 2 3"/>
+  <text x="58" y="184" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#555">Radachse (X)</text>
+
+  <!-- Punkte A-H -->
+  <g fill="#1f3f5f">
+    <circle cx="130" cy="190" r="2.4"/><circle cx="250" cy="190" r="2.4"/>
+    <circle cx="250" cy="40" r="2.4"/><circle cx="238" cy="40" r="2.4"/>
+    <circle cx="238" cy="58" r="2.4"/><circle cx="142" cy="58" r="2.4"/>
+    <circle cx="142" cy="40" r="2.4"/><circle cx="130" cy="40" r="2.4"/>
+  </g>
+  <g font-family="Segoe UI, sans-serif" font-size="9" fill="#1f3f5f" font-weight="600">
+    <text x="118" y="203">A</text><text x="256" y="203">B</text>
+    <text x="256" y="38">C</text><text x="230" y="33">D</text>
+    <text x="244" y="70">E</text><text x="131" y="70">F</text>
+    <text x="131" y="33">G</text><text x="114" y="38">H</text>
+  </g>
+
+  <!-- Maß 20 (Breite) -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="130" y1="192" x2="130" y2="214"/>
+    <line x1="250" y1="192" x2="250" y2="214"/>
+    <line x1="130" y1="210" x2="250" y2="210" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="182" y="199" width="16" height="11" fill="#fff"/>
+  <text x="190" y="208" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#b03a2e" font-weight="600">20</text>
+
+  <!-- Maß 16 (Nutbreite) -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="142" y1="56" x2="142" y2="84"/>
+    <line x1="238" y1="56" x2="238" y2="84"/>
+    <line x1="142" y1="78" x2="238" y2="78" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="182" y="67" width="16" height="11" fill="#fff"/>
+  <text x="190" y="76" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#b03a2e" font-weight="600">16</text>
+
+  <!-- Maß 3 (Nuttiefe) -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="240" y1="40" x2="268" y2="40"/>
+    <line x1="240" y1="58" x2="268" y2="58"/>
+    <line x1="262" y1="40" x2="262" y2="58" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="266" y="44" width="11" height="11" fill="#fff"/>
+  <text x="271" y="53" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#b03a2e" font-weight="600">3</text>
+
+  <!-- Radius R25 -->
+  <line x1="190" y1="190" x2="249" y2="41" stroke="#b03a2e" stroke-width="0.8" marker-end="url(#ar)"/>
+  <rect x="202" y="103" width="22" height="11" fill="#fff"/>
+  <text x="213" y="112" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#b03a2e" font-weight="600">R25</text>
+
+  <text x="16" y="226" font-family="Segoe UI, sans-serif" font-size="8" fill="#666">Maße in mm · halber Querschnitt, untere Kante auf der Radachse</text>
+</svg>

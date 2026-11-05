@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 230">
+  <defs>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="context-stroke"/>
+    </marker>
+    <marker id="axr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#c0392b"/>
+    </marker>
+    <marker id="axg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#2f7d32"/>
+    </marker>
+    <marker id="axb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#3b6ea5"/>
+    </marker>
+  </defs>
+  <rect width="360" height="230" fill="#ffffff"/>
+
+  <!-- XZ-Ebene -->
+  <polygon points="80,40 300,40 300,150 80,150" fill="#eaf2f9" stroke="#9fc0dc" stroke-width="1.2"/>
+  <text x="190" y="32" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#2f5f96" font-weight="600">XZ-Ebene (Seitenansicht)</text>
+
+  <!-- Rad-Silhouette -->
+  <circle cx="235" cy="92" r="36" fill="none" stroke="#2f5f96" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <circle cx="235" cy="92" r="3" fill="#2f5f96"/>
+  <text x="235" y="95" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#2f5f96">Rad</text>
+  <line x1="235" y1="92" x2="271" y2="92" stroke="#b03a2e" stroke-width="0.9" stroke-dasharray="3 2"/>
+  <text x="252" y="87" font-family="Segoe UI, sans-serif" font-size="8" fill="#b03a2e">R</text>
+
+  <!-- Achsen -->
+  <line x1="175" y1="125" x2="315" y2="125" stroke="#c0392b" stroke-width="2.2" marker-end="url(#axr)"/>
+  <text x="320" y="129" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#c0392b">X</text>
+  <line x1="175" y1="125" x2="175" y2="48" stroke="#2f7d32" stroke-width="2.2" marker-end="url(#axg)"/>
+  <text x="181" y="45" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#2f7d32">Z</text>
+  <line x1="175" y1="125" x2="95" y2="178" stroke="#3b6ea5" stroke-width="2.2" marker-end="url(#axb)"/>
+  <text x="82" y="192" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#3b6ea5">Y</text>
+  <circle cx="175" cy="125" r="3" fill="#333"/>
+  <text x="175" y="140" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8" fill="#555">Ursprung</text>
+
+  <text x="16" y="216" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#555">X = Radachse (rechts) · Z = Radius (oben) · Y = Dicke (aus dem Bildschirm)</text>
+</svg>
