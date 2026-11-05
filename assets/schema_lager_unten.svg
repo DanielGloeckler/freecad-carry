@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 250">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#b03a2e"/>
+    </marker>
+  </defs>
+  <rect width="380" height="250" fill="#ffffff"/>
+
+  <!-- Unteransicht (40 x 10) -->
+  <rect x="95" y="92" width="200" height="50" fill="#e8f0f8" stroke="#1f3f5f" stroke-width="2"/>
+
+  <!-- Sechskant-Vertiefungen -->
+  <g fill="#ffffff" stroke="#b03a2e" stroke-width="1.2">
+    <polygon points="112,98 124,98 130,109 124,120 112,120 106,109"/>
+    <polygon points="268,98 280,98 286,109 280,120 268,120 262,109"/>
+  </g>
+  <!-- Montagebohrungen -->
+  <circle cx="118" cy="109" r="8.5" fill="#ffffff" stroke="#1f3f5f" stroke-width="1.5"/>
+  <circle cx="274" cy="109" r="8.5" fill="#ffffff" stroke="#1f3f5f" stroke-width="1.5"/>
+
+  <!-- Mittelachse -->
+  <line x1="60" y1="117" x2="330" y2="117" stroke="#666" stroke-width="1" stroke-dasharray="10 3 2 3"/>
+
+  <!-- Maß 12 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="118" y1="120" x2="118" y2="150"/>
+    <line x1="274" y1="120" x2="274" y2="150"/>
+    <line x1="196" y1="120" x2="196" y2="150"/>
+    <line x1="118" y1="144" x2="196" y2="144" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="148" y="133" width="19" height="11" fill="#fff"/>
+  <text x="157.5" y="142" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">12</text>
+
+  <!-- Maß 40 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="95" y1="94" x2="95" y2="70"/>
+    <line x1="295" y1="94" x2="295" y2="70"/>
+    <line x1="95" y1="76" x2="295" y2="76" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="185" y="65" width="19" height="11" fill="#fff"/>
+  <text x="194.5" y="74" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">40</text>
+
+  <!-- Maß 10 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="297" y1="92" x2="322" y2="92"/>
+    <line x1="297" y1="142" x2="322" y2="142"/>
+    <line x1="316" y1="92" x2="316" y2="142" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="311" y="111" width="11" height="13" fill="#fff"/>
+  <text x="316" y="121" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">10</text>
+
+  <!-- Bohrung / Sechskant Labels -->
+  <line x1="118" y1="109" x2="80" y2="168" stroke="#b03a2e" stroke-width="0.8" marker-end="url(#ar)"/>
+  <rect x="30" y="170" width="96" height="11" fill="#fff"/>
+  <text x="78" y="179" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#b03a2e">2 × Ø3,5 (M3)</text>
+
+  <line x1="274" y1="109" x2="316" y2="168" stroke="#b03a2e" stroke-width="0.8" marker-end="url(#ar)"/>
+  <rect x="270" y="170" width="96" height="11" fill="#fff"/>
+  <text x="318" y="179" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#b03a2e">Sechskant M3, 12 tief</text>
+
+  <text x="16" y="216" font-family="Segoe UI, sans-serif" font-size="8" fill="#666">Unterseite · Achsbohrung Ø4,5 (Vorderseite) · Muttern von unten versenkt</text>
+</svg>

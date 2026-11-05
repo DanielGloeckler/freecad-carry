@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 170">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#b03a2e"/>
+    </marker>
+  </defs>
+  <rect width="380" height="170" fill="#ffffff"/>
+
+  <!-- Achse -->
+  <rect x="40" y="82" width="300" height="12" fill="#f3e3cf" stroke="#7a5426" stroke-width="1.6" rx="3"/>
+
+  <!-- Mittelachse -->
+  <line x1="26" y1="88" x2="356" y2="88" stroke="#666" stroke-width="1" stroke-dasharray="10 3 2 3"/>
+
+  <!-- Länge -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="40" y1="96" x2="40" y2="122"/>
+    <line x1="340" y1="96" x2="340" y2="122"/>
+    <line x1="40" y1="116" x2="340" y2="116" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="175" y="105" width="30" height="11" fill="#fff"/>
+  <text x="190" y="114" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" fill="#b03a2e" font-weight="600">104</text>
+
+  <!-- Ø4 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="352" y1="82" x2="368" y2="66"/>
+    <line x1="352" y1="94" x2="368" y2="66"/>
+  </g>
+  <rect x="314" y="56" width="24" height="11" fill="#fff"/>
+  <text x="326" y="65" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">Ø4</text>
+
+  <!-- R1 -->
+  <line x1="44" y1="80" x2="66" y2="58" stroke="#b03a2e" stroke-width="0.8" marker-end="url(#ar)"/>
+  <rect x="66" y="50" width="17" height="11" fill="#fff"/>
+  <text x="74" y="59" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">R1</text>
+
+  <!-- Querschnitt -->
+  <circle cx="330" cy="140" r="12" fill="#f3e3cf" stroke="#7a5426" stroke-width="1.6"/>
+  <line x1="312" y1="140" x2="348" y2="140" stroke="#666" stroke-width="0.8" stroke-dasharray="6 2 1 2"/>
+  <text x="330" y="160" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="7.5" fill="#555">Querschnitt</text>
+
+  <text x="16" y="34" font-family="Segoe UI, sans-serif" font-size="8" fill="#666">Maße in mm · Rundstab, Kanten R1 · PDF: 84 mm (bei 62 mm Chassi)</text>
+</svg>

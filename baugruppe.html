@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>FreeCAD Carry – Baugruppe Schritt für Schritt</title>
+<style>
+:root{
+  --bg:#121519; --panel:#1a1f24; --line:#333b45;
+  --text:#e7ebf0; --muted:#96a1ae; --accent:#5b9bd5; --accent2:#82c0f5;
+  --orange:#f0a83c; --green:#4cd07d;
+  --mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0;display:flex;flex-direction:column;overflow:hidden;color:var(--text);
+  background:radial-gradient(1100px 620px at 18% -12%,#1d2733 0%,var(--bg) 58%) fixed;
+  font:14px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;
+}
+button{font:inherit;color:inherit}
+.ico{width:1.15em;height:1.15em;vertical-align:-0.22em;flex:none}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+
+/* ---------- Kopfzeile ---------- */
+header.top{
+  display:flex;align-items:center;gap:18px;padding:9px 18px;flex:none;
+  background:rgba(18,21,25,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);z-index:40;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:.2px;white-space:nowrap}
+.brand .logo{width:28px;height:28px}
+.brand small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.progresswrap{flex:1;display:flex;align-items:center;gap:12px;max-width:520px;min-width:90px}
+.progress{flex:1;height:6px;background:#2a313a;border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#427cb8,#82c0f5);transition:width .35s ease}
+.progressnum{font:600 12px var(--mono);color:var(--muted);white-space:nowrap}
+.top-actions{display:flex;gap:8px;margin-left:auto}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#262c33;
+  padding:8px 13px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.btn:hover{background:#2f3741;border-color:#46515d}
+.btn.primary{background:linear-gradient(180deg,#3f80c0,#346da7);border-color:#4c90d1;color:#fff}
+.btn.primary:hover{background:linear-gradient(180deg,#4a8ccd,#3c7ab8)}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.35;cursor:default}
+
+/* ---------- Layout ---------- */
+.app{flex:1;display:grid;grid-template-columns:228px minmax(0,1fr) 368px;min-height:0}
+.outline{border-right:1px solid var(--line);background:rgba(23,26,31,.72);padding:16px 10px 24px;overflow:auto}
+.outline h2{font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin:2px 8px 10px}
+.steplist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.stepitem{
+  display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;
+  color:var(--muted);padding:6px 8px;border-radius:8px;cursor:pointer;transition:.13s;
+}
+.stepitem:hover{background:#232a31;color:var(--text)}
+.stepitem.current{background:#22313f;color:#fff;box-shadow:inset 2px 0 0 var(--accent)}
+.stepitem.done{color:#b9c5d2}
+.stepitem .n{
+  width:21px;height:21px;flex:none;border-radius:50%;border:1px solid #3a434e;display:grid;place-items:center;
+  font-size:10.5px;font-weight:700;color:var(--muted);background:#1c2228;
+}
+.stepitem.current .n{background:var(--accent);border-color:var(--accent);color:#0d1520}
+.stepitem.done .n{background:#1e3929;border-color:#2f5d43;color:#6bdc9a}
+.stepitem .t{font-size:12px;line-height:1.25}
+.outline .foot{font-size:11px;color:#6d7884;margin:18px 8px 0;line-height:1.55}
+.outline .foot .dotline{display:flex;align-items:center;gap:7px;margin-bottom:8px;color:#93a0ad}
+.outline .foot .dotline i{width:9px;height:9px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px rgba(240,168,60,.7)}
+
+/* ---------- Bildbühne ---------- */
+.stage{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px 22px;overflow:auto;min-width:0;gap:10px;
+}
+.stage::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(760px 420px at 50% 42%,rgba(91,155,213,.08),transparent 70%);
+}
+.shot{
+  position:relative;margin:0;width:100%;max-width:1180px;
+  border:1px solid #2f3944;border-radius:10px;overflow:hidden;cursor:zoom-in;
+  box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.03) inset;
+  background:#0d1013;
+}
+.shot img{display:block;width:100%;height:auto}
+
+/* ---------- Lupe ---------- */
+.loupe-layer{position:absolute;inset:0;pointer-events:none}
+.loupe-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.focus-ring{
+  position:absolute;border:2px solid var(--orange);border-radius:9px;
+  box-shadow:0 0 0 3px rgba(240,168,60,.18),0 0 24px 2px rgba(240,168,60,.45);
+  animation:pulse 1.9s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 3px rgba(240,168,60,.16),0 0 16px 1px rgba(240,168,60,.35)}
+  50%{box-shadow:0 0 0 5px rgba(240,168,60,.10),0 0 30px 6px rgba(240,168,60,.55)}
+}
+.lens{
+  position:absolute;border-radius:50%;background-repeat:no-repeat;
+  border:3px solid #e8edf3;
+  box-shadow:0 0 0 2px rgba(240,168,60,.95),0 18px 44px rgba(0,0,0,.6),inset 0 0 26px rgba(0,0,0,.35);
+  z-index:3;
+}
+.lens::after{
+  content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.28),rgba(255,255,255,0) 55%);
+}
+.shot .zoom{
+  position:absolute;right:10px;bottom:10px;background:rgba(12,16,20,.82);border:1px solid #43505e;
+  color:#dbe4ee;font-size:11.5px;padding:5px 9px;border-radius:6px;display:flex;gap:6px;align-items:center;
+  opacity:0;transition:.18s;backdrop-filter:blur(4px);z-index:5;
+}
+.shot:hover .zoom{opacity:1}
+
+/* ---------- Lesebereich ---------- */
+.reader{border-left:1px solid var(--line);background:linear-gradient(180deg,#1a1e23,#15181c);overflow:auto;padding:24px 24px 44px;overflow-anchor:none}
+.reader-inner{max-width:322px}
+.kicker{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);font-weight:700}
+.reader h2{font-size:24px;line-height:1.22;margin:8px 0 10px;letter-spacing:-.01em}
+.lead{color:#cdd6df;font-size:14.5px;margin:0 0 14px}
+.bullets{list-style:none;padding:0;margin:0 0 14px;display:flex;flex-direction:column;gap:8px}
+.bullets li{position:relative;padding-left:22px;color:#d7dee6;font-size:13.5px}
+.bullets li::before{content:"";position:absolute;left:4px;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.diagram{margin:0 0 14px;background:#f7f9fb;border:1px solid #dbe3ea;border-radius:10px;padding:10px}
+.diagram svg,.diagram img{display:block;width:100%;height:auto}
+.diagram text{font-family:"Segoe UI",sans-serif}
+.diagram .cap{font-size:10px;color:#5b6a78;text-align:center;margin-top:6px}
+.hint{
+  display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:#9fb0a8;
+  background:#17241d;border:1px solid #294234;border-radius:9px;padding:9px 11px;margin:0 0 14px;line-height:1.45;
+}
+.hint svg{width:16px;height:16px;flex:none;margin-top:2px;color:#6fd69a}
+.mouse{font-size:11.5px;color:#7f8b97;margin:0 0 14px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+kbd{
+  font:600 11px var(--mono);background:#232930;border:1px solid #46505b;border-bottom-width:2px;
+  border-radius:4px;padding:2px 6px;color:#e3e9ef;
+}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.advance-hint{font-size:11px;color:#6f7a86;margin-top:12px;line-height:1.45}
+h3{font-size:13px;letter-spacing:.02em;margin:22px 0 8px;color:#e9eef4}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 18px}
+.specs div{background:#20262d;border:1px solid #333c45;border-radius:10px;padding:9px 10px}
+.specs span{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.specs b{font-size:16px;font-family:var(--mono);color:#fff}
+.final-badge{
+  width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;color:#d6ffe2;
+  background:linear-gradient(180deg,#2f7d32,#245f28);box-shadow:0 12px 32px rgba(47,125,50,.35);margin-bottom:14px;
+}
+.recap{margin:0 0 6px;padding-left:18px;color:#c9d2db;font-size:13px;display:flex;flex-direction:column;gap:5px}
+table.shortcuts{width:100%;border-collapse:collapse;font-size:12px}
+table.shortcuts td{padding:5px 0;border-bottom:1px solid #262d35;color:#c5ced8}
+table.shortcuts td:first-child{width:52%}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:11.5px;border:1px solid #3a444f;background:#20262c;color:#c2ccd7;border-radius:99px;padding:4px 10px}
+
+/* ---------- Lightbox ---------- */
+.lightbox{
+  position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+  background:rgba(5,8,12,.92);backdrop-filter:blur(4px);padding:24px;
+}
+.lightbox.show{display:flex}
+.lightbox img{max-width:96vw;max-height:88vh;border-radius:6px;box-shadow:0 30px 90px rgba(0,0,0,.8)}
+.lb-close{
+  position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid #3f4a56;
+  background:rgba(20,25,31,.85);color:#dfe7ef;font-size:18px;cursor:pointer;
+}
+.lb-close:hover{background:#2c3640}
+.lb-nav{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;
+  background:rgba(18,22,27,.92);border:1px solid #36414c;border-radius:99px;padding:5px 8px;font-size:12px;color:#b9c4cf;
+}
+.lb-nav button{width:34px;height:34px;border-radius:50%;border:0;background:#2a333c;color:#e8eef5;cursor:pointer;font-size:15px}
+.lb-nav button:hover{background:#3a4652}
+.lb-nav span{min-width:70px;text-align:center}
+
+/* ---------- Responsiv ---------- */
+@media (max-width:1380px){
+  .app{grid-template-columns:208px minmax(0,1fr) 350px}
+  .reader{padding:20px 18px 40px}
+  .reader-inner{max-width:310px}
+}
+@media (max-width:1120px){
+  .app{grid-template-columns:minmax(0,1fr) 340px}
+  .outline{display:none}
+}
+@media (max-width:900px){
+  body{overflow:auto}
+  .app{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .stage{padding:12px;min-height:0}
+  .reader{border-left:0;border-top:1px solid var(--line);overflow:visible;padding:20px 18px 60px}
+  .brand small{display:none}
+  .top-actions .btn .lbl{display:none}
+  .shot .zoom{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2.2 21 7.3v9.4L12 21.8 3 16.7V7.3Z" fill="#2f5f96"/>
+      <path d="M12 2.2 21 7.3 12 12.4 3 7.3Z" fill="#79aede"/>
+      <path d="M12 12.4v9.4L3 16.7V7.3Z" fill="#24476f"/>
+    </svg>
+    <div>FreeCAD Carry<small>Kapitel 5 · Baugruppe · echte Screenshots aus FreeCAD 1.1</small></div>
+  </div>
+  <div class="progresswrap">
+    <div class="progress"><i id="bar"></i></div>
+    <span class="progressnum" id="progressNum">1 / 8</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
+    <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
+  </div>
+</header>
+
+<div class="app">
+  <nav class="outline">
+    <h2>Schritte</h2>
+    <ol class="steplist" id="steplist"></ol>
+    <p class="foot">
+      <span class="dotline"><i></i> Orange = hier klicken</span>
+      Kapitel 5 · Baugruppe.<br><a href="index.html" style="color:#82c0f5">Chassi</a> · <a href="rad.html" style="color:#82c0f5">Rad</a> · <a href="lager.html" style="color:#82c0f5">Radlager</a> · <a href="achse.html" style="color:#82c0f5">Achse</a> · <a href="baugruppe.html" style="color:#82c0f5">Baugruppe</a> · <a href="original.html" style="color:#82c0f5">Original (PDF)</a>    </p>
+  </nav>
+
+  <main class="stage" id="stage">
+    <figure class="shot" id="shot">
+      <img id="shotImg" src="assets/bg_01_leer.jpg" alt="FreeCAD mit leerem Dokument im Arbeitsbereich A2plus">
+      <div class="loupe-layer" id="loupeLayer">
+        <svg class="loupe-svg" aria-hidden="true">
+          <line id="loupeLine" stroke="#f0a83c" stroke-width="2" stroke-dasharray="5 5" opacity=".75"/>
+          <circle id="loupeDot" r="4" fill="#f0a83c"/>
+        </svg>
+        <div class="focus-ring" id="focusRing"></div>
+        <div class="lens" id="lens"></div>
+      </div>
+      <span class="zoom">⤢ vergrößern</span>
+    </figure>
+  </main>
+
+  <aside class="reader" id="reader"></aside>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Schließen">✕</button>
+  <img id="lbImg" alt="Screenshot in groß">
+  <div class="lb-nav">
+    <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
+    <span id="lbCaption">1 / 8</span>
+    <button id="lbNext" aria-label="Nächster Schritt">→</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var $  = function(sel, root){ return (root||document).querySelector(sel); };
+
+  /* =====================================================================
+     INHALTE – jeder Schritt: Bild, Lupen-Ziel [x,y,w,h] und Lupe [x,y]
+     Werte sind Anteile der Bildfläche (0…1).
+     ===================================================================== */
+  var STEPS = [
+    {
+        "short": "Vorbereitung",
+        "title": "Alle Teile in einem Ordner",
+        "img": "assets/bg_01_leer.jpg",
+        "alt": "FreeCAD mit leerem Dokument im Arbeitsbereich A2plus",
+        "lead": "Lege alle Einzelteile in den Ordner <b>Carry</b>. Neues Dokument, Arbeitsbereich <b>A2plus</b>.",
+        "list": [
+            "<b>Neue Baugruppe</b> anklicken und als <span class=\"mono\">Carry.FCStd</span> speichern."
+        ],
+        "hint": "A2plus findet die Teile über die Dateinamen im gleichen Ordner.",
+        "diagram": "<div class=\"diagram\" style=\"font-family:Cascadia Mono,Consolas,monospace;font-size:11.5px;color:#26323e\"><div style=\"font-family:Segoe UI,sans-serif;font-weight:600;margin-bottom:6px\">Ordner „Carry“</div>Chassi.FCStd<br>Radlager.FCStd<br>Rad.FCStd<br>Achse.FCStd<br>Schraube M3.FCStd<br>Mutter M3.FCStd</div>",
+        "focus": [
+            0.209,
+            0.047,
+            0.12,
+            0.035
+        ],
+        "lens": [
+            0.65,
+            0.3
+        ],
+        "zoom": 2.0
+    },
+    {
+        "short": "Chassi",
+        "title": "Chassi einfügen",
+        "img": "assets/bg_02_chassi.jpg",
+        "alt": "Rotes Chassi in der Baugruppe",
+        "lead": "Über das <b>Bauteil-Symbol</b> das <b>Chassi</b> auswählen.",
+        "list": [
+            "Das Chassi ist das erste Teil und bleibt <b>fest</b>."
+        ],
+        "focus": [
+            0.5,
+            0.46,
+            0.3,
+            0.3
+        ],
+        "lens": [
+            0.73,
+            0.26
+        ],
+        "zoom": 1.4
+    },
+    {
+        "short": "Radlager",
+        "title": "Radlager einfügen und ausrichten",
+        "img": "assets/bg_03_lager.jpg",
+        "alt": "Radlager unter dem Chassi",
+        "lead": "Radlager einfügen, in die Nähe der Bohrungen ziehen und mit <b>Kreis-Kante</b> verbinden.",
+        "list": [
+            "Im Dialog <b>Offset</b> einstellen, dann <b>Accept</b>.",
+            "Mit dem zweiten Loch gerade ausrichten."
+        ],
+        "hint": "Steht das Radlager schief, hilft die zweite Bohrung oder „Flip direction“.",
+        "focus": [
+            0.54,
+            0.7,
+            0.22,
+            0.2
+        ],
+        "lens": [
+            0.25,
+            0.3
+        ],
+        "zoom": 1.7
+    },
+    {
+        "short": "Schraube",
+        "title": "Mutter und Schraube einsetzen",
+        "img": "assets/bg_04_schraube.jpg",
+        "alt": "Schraubenkopf im Chassi",
+        "lead": "Mutter M3 und Schraube M3 einfügen und über die Kreise verbinden.",
+        "list": [
+            "Mutter sitzt in der <b>Vertiefung</b> auf der Unterseite des Radlagers."
+        ],
+        "hint": "Der Schraubenkopf verschwindet bündig in der Senkung des Chassis.",
+        "focus": [
+            0.52,
+            0.38,
+            0.16,
+            0.12
+        ],
+        "lens": [
+            0.73,
+            0.26
+        ],
+        "zoom": 1.9
+    },
+    {
+        "short": "4 Radlager",
+        "title": "Alle vier Radlager",
+        "img": "assets/bg_05_lager4.jpg",
+        "alt": "Vier Radlager mit Schrauben unter dem Chassi",
+        "lead": "Die restlichen drei Radlager mit je zwei Schrauben und Muttern einsetzen.",
+        "list": [
+            "Zwischenspeichern nicht vergessen."
+        ],
+        "focus": [
+            0.3,
+            0.62,
+            0.22,
+            0.22
+        ],
+        "lens": [
+            0.73,
+            0.26
+        ],
+        "zoom": 1.5
+    },
+    {
+        "short": "Achsen",
+        "title": "Achsen einfügen",
+        "img": "assets/bg_06_achsen.jpg",
+        "alt": "Zwei Achsen durch die Radlager",
+        "lead": "Achse einfügen und den <b>äußeren Kreis</b> der Achse mit dem äußeren Kreis im Radlager verbinden.",
+        "list": [
+            "Offset <b>−7,00 mm</b> – damit rutscht die Achse in die richtige Position."
+        ],
+        "hint": "Beim gegenüberliegenden Radlager ist der Offset −77,00 mm.",
+        "focus": [
+            0.26,
+            0.63,
+            0.18,
+            0.12
+        ],
+        "lens": [
+            0.73,
+            0.28
+        ],
+        "zoom": 1.8
+    },
+    {
+        "short": "Räder",
+        "title": "Räder aufstecken",
+        "img": "assets/bg_07_raeder.jpg",
+        "alt": "Vier grüne Räder mit schwarzen Gummiringen",
+        "lead": "Rad einfügen, äußeren Kreis der Achse mit dem inneren Kreis im Rad verbinden.",
+        "list": [
+            "Alle vier Räder einsetzen."
+        ],
+        "hint": "Zwischen Radlager und Rad bleibt 1 mm Abstand.",
+        "focus": [
+            0.35,
+            0.4,
+            0.3,
+            0.3
+        ],
+        "lens": [
+            0.73,
+            0.26
+        ],
+        "zoom": 1.4
+    },
+    {
+        "short": "Fertig",
+        "title": "Carry ist fertig",
+        "img": "assets/bg_09_fertig.jpg",
+        "alt": "Fertige Baugruppe Carry",
+        "lead": "Der Carry steht: Chassi, 4 Radlager, 8 Schrauben, 8 Muttern, 2 Achsen und 4 Räder.",
+        "list": [
+            "Änderungen an einem Teil: Datei ändern, speichern, in A2plus <b>Teile aktualisieren</b>."
+        ],
+        "hint": "Zum Fahren kommen O-Ringe 34 × 3 mm als Reifen auf die Räder.",
+        "focus": [
+            0.5,
+            0.46,
+            0.35,
+            0.35
+        ],
+        "lens": [
+            0.73,
+            0.26
+        ],
+        "zoom": 1.3
+    }
+];
+
+  var N = STEPS.length;
+  var FINAL_IMG = 'assets/bg_09_fertig.jpg';
+  var KEY = 'freecad-carry-baugruppe';
+
+  var progress = 0;
+  try {
+    var saved = parseInt(localStorage.getItem(KEY) || '0', 10);
+    if (!isNaN(saved) && saved >= 0 && saved <= N) progress = saved;
+  } catch(e) {}
+  try {
+    var params = new URLSearchParams(location.search);
+    var raw = params.get('schritt') || params.get('step') || '';
+    if (raw === 'fertig' || raw === 'ende') {
+      progress = N;
+    } else {
+      var linkStep = parseInt(raw, 10);
+      if (!isNaN(linkStep)) progress = Math.max(0, Math.min(N - 1, linkStep - 1));
+    }
+  } catch(e) {}
+
+  var reader = $('#reader');
+  var shotImg = $('#shotImg');
+  var shot = $('#shot');
+  var lens = $('#lens');
+  var ring = $('#focusRing');
+  var line = $('#loupeLine');
+  var dot = $('#loupeDot');
+  var layer = $('#loupeLayer');
+  var lightbox = $('#lightbox');
+  var lbImg = $('#lbImg');
+  var lbCaption = $('#lbCaption');
+
+  function isDone(){ return progress >= N; }
+
+  function renderOutline(){
+    $('#steplist').innerHTML = STEPS.map(function(s, i){
+      var cls = i < progress ? 'done' : (i === progress ? 'current' : '');
+      var num = i < progress ? '✓' : (i + 1);
+      return '<li><button class="stepitem '+cls+'" data-jump="'+i+'">'+
+             '<span class="n">'+num+'</span><span class="t">'+s.short+'</span></button></li>';
+    }).join('');
+    var cur = $('.stepitem.current');
+    if (cur && cur.scrollIntoView) cur.scrollIntoView({block:'nearest'});
+  }
+
+  /* ---------- Lupe positionieren ---------- */
+  function layoutLoupe(){
+    var s = isDone() ? null : STEPS[progress];
+    if (!s || !s.focus){
+      layer.style.display = 'none';
+      return;
+    }
+    var w = shotImg.clientWidth;
+    var h = shotImg.clientHeight;
+    if (!w || !h){ layer.style.display = 'none'; return; }
+    layer.style.display = 'block';
+
+    var D = Math.round(Math.min(225, Math.max(118, w * 0.205)));
+    var z = s.zoom || 2.2;
+    var fx = s.focus[0], fy = s.focus[1], fw = s.focus[2], fh = s.focus[3];
+    var lx = s.lens[0] * w, ly = s.lens[1] * h;
+
+    lens.style.width = D + 'px';
+    lens.style.height = D + 'px';
+    lens.style.left = (lx - D / 2) + 'px';
+    lens.style.top = (ly - D / 2) + 'px';
+    lens.style.backgroundImage = 'url("' + s.img + '")';
+    lens.style.backgroundSize = (w * z) + 'px ' + (h * z) + 'px';
+    lens.style.backgroundPosition = (D / 2 - fx * w * z) + 'px ' + (D / 2 - fy * h * z) + 'px';
+
+    var rw = Math.max(40, fw * w);
+    var rh = Math.max(26, fh * h);
+    ring.style.width = rw + 'px';
+    ring.style.height = rh + 'px';
+    ring.style.left = (fx * w - rw / 2) + 'px';
+    ring.style.top = (fy * h - rh / 2) + 'px';
+
+    line.setAttribute('x1', lx);
+    line.setAttribute('y1', ly);
+    line.setAttribute('x2', fx * w);
+    line.setAttribute('y2', fy * h);
+    dot.setAttribute('cx', fx * w);
+    dot.setAttribute('cy', fy * h);
+  }
+
+  function renderShot(){
+    var s = isDone() ? null : STEPS[progress];
+    var img = isDone() ? FINAL_IMG : s.img;
+    shotImg.src = img;
+    shotImg.alt = isDone() ? 'Fertige Baugruppe Carry' : s.alt;
+    if (isDone()) layer.style.display = 'none';
+    layoutLoupe();
+    if (lightbox.classList.contains('show')) updateLightbox();
+  }
+
+  function updateLightbox(){
+    lbImg.src = isDone() ? FINAL_IMG : STEPS[progress].img;
+    lbImg.alt = isDone() ? 'Fertige Baugruppe Carry' : STEPS[progress].alt;
+    lbCaption.textContent = (isDone() ? N : progress + 1) + ' / ' + N;
+  }
+
+  function renderReader(){
+    if (isDone()) {
+      reader.innerHTML = finalCard();
+      reader.scrollTop = 0;
+      requestAnimationFrame(function(){ reader.scrollTop = 0; });
+      return;
+    }
+    var s = STEPS[progress];
+    reader.innerHTML = '<div class="reader-inner">'+
+      '<div class="kicker">Schritt '+(progress+1)+' von '+N+'</div>'+
+      '<h2>'+s.title+'</h2>'+
+      '<p class="lead">'+s.lead+'</p>'+
+      (s.list && s.list.length ? '<ul class="bullets">'+s.list.map(function(b){ return '<li>'+b+'</li>'; }).join('')+'</ul>' : '')+
+      (s.diagram ? s.diagram : '')+
+      (s.hint ? '<div class="hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>'+s.hint+'</span></div>' : '')+
+      (s.mouse ? '<div class="mouse"><kbd>M1</kbd> links <kbd>M2</kbd> rechts <kbd>Esc</kbd> abbrechen</div>' : '')+
+      '<div class="actions">'+
+        '<button class="btn ghost" data-nav="prev" '+(progress === 0 ? 'disabled' : '')+'>← Zurück</button>'+
+        '<button class="btn primary" data-nav="next">Weiter →</button>'+
+      '</div>'+
+      '<p class="advance-hint">Die Lupe zeigt den Klickpunkt. Mit ← → blätterst du.</p>'+
+    '</div>';
+    reader.scrollTop = 0;
+  }
+
+  function finalCard(){
+    return '<div class="reader-inner">'+
+      '<div class="final-badge">✓</div>'+
+      '<div class="kicker">Geschafft</div>'+
+      '<h2>Carry fertig</h2>'+
+      '<p class="lead">Chassi, 4 Radlager, 8 Schrauben, 8 Muttern, 2 Achsen und 4 Räder.</p>'+
+      '<div class="specs"><div><span>Teile</span><b>13</b></div><div><span>Räder</span><b>4</b></div><div><span>Schrauben</span><b>8</b></div></div>'+
+      '<div class="specs"><div><span>Radlager</span><b>4</b></div><div><span>Achsen</span><b>2</b></div><div><span>Reifen</span><b>O-Ring</b></div></div>'+
+      '<h3>Kurz gemerkt</h3>'+
+      '<ol class="recap"><li>Teile in einen Ordner</li><li>A2plus-Baugruppe anlegen</li><li>Chassi festsetzen</li><li>Radlager, Schrauben, Muttern</li><li>Achsen (Offset −7) und Räder</li></ol>'+
+      '<h3>Weiter</h3>'+
+      '<div class="chips"><span class="chip">Kapitel 1 · Chassi</span><span class="chip">Kapitel 2 · Rad</span><span class="chip">Kapitel 3 · Radlager</span><span class="chip">Kapitel 4 · Achse</span></div>'+
+      '<div class="actions">'+
+        '<button class="btn" data-nav="reset">↺ Nochmal von vorn</button>'+
+        '<button class="btn primary" data-nav="last">Letzten Schritt ansehen</button>'+
+      '</div>'+
+    '</div>';
+  }
+
+  function render(){
+    $('#bar').style.width = (Math.min(progress, N) / N * 100) + '%';
+    $('#progressNum').textContent = (isDone() ? N : progress + 1) + ' / ' + N;
+    renderOutline();
+    renderReader();
+    renderShot();
+    try { localStorage.setItem(KEY, String(progress)); } catch(e) {}
+  }
+
+  function go(p){
+    progress = Math.max(0, Math.min(N, p));
+    render();
+  }
+
+  function openLightbox(){ updateLightbox(); lightbox.classList.add('show'); }
+  function closeLightbox(){ lightbox.classList.remove('show'); }
+
+  $('#steplist').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-jump]');
+    if (btn) go(parseInt(btn.getAttribute('data-jump'), 10));
+  });
+
+  reader.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-nav]');
+    if (!btn) return;
+    var nav = btn.getAttribute('data-nav');
+    if (nav === 'next') go(progress + 1);
+    else if (nav === 'prev') go(progress - 1);
+    else if (nav === 'last') go(N - 1);
+    else if (nav === 'reset') { progress = 0; render(); }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.target.matches && e.target.matches('input, textarea, select')) return;
+    if (e.key === 'Escape') { closeLightbox(); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(progress + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(progress - 1); }
+  });
+
+  shot.addEventListener('click', openLightbox);
+  $('#zoomBtn').addEventListener('click', openLightbox);
+  $('#lbClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+  $('#lbPrev').addEventListener('click', function(e){ e.stopPropagation(); go(progress - 1); });
+  $('#lbNext').addEventListener('click', function(e){ e.stopPropagation(); go(progress + 1); });
+
+  $('#resetBtn').addEventListener('click', function(){
+    progress = 0;
+    try { localStorage.removeItem(KEY); } catch(e) {}
+    render();
+  });
+
+  shotImg.addEventListener('load', layoutLoupe);
+  window.addEventListener('resize', layoutLoupe);
+  if (window.ResizeObserver) new ResizeObserver(layoutLoupe).observe(shotImg);
+
+  STEPS.forEach(function(s){ var im = new Image(); im.src = s.img; });
+
+  render();
+})();
+</script>
+</body>
+</html>
+

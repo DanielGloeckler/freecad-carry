@@ -216,7 +216,7 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 6</span>
+    <span class="progressnum" id="progressNum">1 / 8</span>
   </div>
   <div class="top-actions">
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
@@ -230,13 +230,12 @@ table.shortcuts td:first-child{width:52%}
     <ol class="steplist" id="steplist"></ol>
     <p class="foot">
       <span class="dotline"><i></i> Orange = hier klicken</span>
-      Kapitel 3 · Radlager · echte Screenshots.<br><a href="index.html" style="color:#82c0f5">Kapitel 1 · Chassi</a> · <a href="rad.html" style="color:#82c0f5">Kapitel 2 · Rad</a><br><a href="original.html" style="color:#82c0f5">Originalseiten (PDF)</a>
-    </p>
+      Kapitel 3 · Radlager.<br><a href="index.html" style="color:#82c0f5">Chassi</a> · <a href="rad.html" style="color:#82c0f5">Rad</a> · <a href="lager.html" style="color:#82c0f5">Radlager</a> · <a href="achse.html" style="color:#82c0f5">Achse</a> · <a href="baugruppe.html" style="color:#82c0f5">Baugruppe</a> · <a href="original.html" style="color:#82c0f5">Original (PDF)</a>    </p>
   </nav>
 
   <main class="stage" id="stage">
     <figure class="shot" id="shot">
-      <img id="shotImg" src="assets/01_neues_dokument.jpg" alt="Chassi – neues Dokument">
+      <img id="shotImg" src="assets/la2_01_profil.jpg" alt="Bogenprofil des Radlagers auf der XZ-Ebene">
       <div class="loupe-layer" id="loupeLayer">
         <svg class="loupe-svg" aria-hidden="true">
           <line id="loupeLine" stroke="#f0a83c" stroke-width="2" stroke-dasharray="5 5" opacity=".75"/>
@@ -257,7 +256,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 6</span>
+    <span id="lbCaption">1 / 8</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -272,64 +271,189 @@ table.shortcuts td:first-child{width:52%}
      INHALTE – jeder Schritt: Bild, Lupen-Ziel [x,y,w,h] und Lupe [x,y]
      Werte sind Anteile der Bildfläche (0…1).
      ===================================================================== */
-  var ACHSEN = '<div class="diagram"><img src="assets/schema_xz.svg" alt="XZ-Ebene: X Radachse, Z Radius, Y Dicke"></div>';
-var QUERSCHNITT = '<div class="diagram"><img src="assets/schema_profil.svg" alt="Halber Radquerschnitt mit den Maßen 20, 16, 3 und R25"></div>';
-var STEPS = [
+  var STEPS = [
     {
-      short:'Profil', title:'Halterprofil zeichnen',
-      img:'assets/la_01_profil.jpg',
-      alt:'Dreieckiges Halterprofil auf der XY-Ebene',
-      lead:'Neue Skizze auf der <b>XY-Ebene</b>. Zeichne ein Dreieck: <b>60 mm</b> breit, <b>50 mm</b> hoch.',
-      list:['Linien-Werkzeug: drei Linien, die sich an den Ecken treffen.'],
-      hint:'Die Spitze zeigt nach unten – dort sitzt später die Radaufnahme.',
-      focus:[0.4500, 0.5000, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "Profil",
+        "title": "Halterprofil zeichnen",
+        "img": "assets/la2_01_profil.jpg",
+        "alt": "Bogenprofil des Radlagers auf der XZ-Ebene",
+        "lead": "Neue Skizze auf der <b>XZ-Ebene</b>. Zeichne die Bogenform: <b>40 mm</b> breit, <b>25 mm</b> hoch, Seiten <b>5 mm</b> gerade.",
+        "list": [
+            "<b>Linienzug</b> starten und mit der <b>M-Taste</b> zwischen Linie und Bogen wechseln.",
+            "Von der unteren Ecke nach oben, dann mit <b>Bogen</b> über den Scheitel zur anderen Seite."
+        ],
+        "hint": "Die zwei Schultern und der obere Bogen haben je <b>R10</b>.",
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>",
+        "focus": [
+            0.52,
+            0.45,
+            0.28,
+            0.28
+        ],
+        "lens": [
+            0.7,
+            0.26
+        ],
+        "zoom": 1.5
     },
     {
-      short:'Maße', title:'Dreieck bemaßen',
-      img:'assets/la_02_masse.jpg',
-      alt:'Bemaßtes Dreieck mit 60 und 50 mm',
-      lead:'Bemaße das Dreieck: <b>60 mm</b> Breite und <b>50 mm</b> Höhe.',
-      list:['Die Skizze wird grün – vollständig bestimmt.'],
-      focus:[0.5000, 0.5000, 0.2000, 0.2000], lens:[0.7200, 0.2800], zoom:1.6
+        "short": "Aufpolstern",
+        "title": "10 mm symmetrisch aufpolstern",
+        "img": "assets/la2_03_polstern.jpg",
+        "alt": "Dialog Aufpolsterung mit Modus Symmetrisch und Tiefe 10 mm",
+        "lead": "Im Panel Aufgaben: Modus <b>Symmetrisch</b>, Tiefe <b>10,00 mm</b>.",
+        "list": [
+            "Damit liegt das Radlager <b>5 mm links und 5 mm rechts</b> der XZ-Ebene."
+        ],
+        "focus": [
+            0.91,
+            0.345,
+            0.13,
+            0.045
+        ],
+        "lens": [
+            0.32,
+            0.63
+        ],
+        "zoom": 2.2
     },
     {
-      short:'Aufpolstern', title:'6 mm aufpolstern',
-      img:'assets/la_03_aufpolstern.jpg',
-      alt:'Parameter der Aufpolsterung mit 6 mm',
-      lead:'Tiefe <b>6,00 mm</b> eintragen, dann <b>OK</b>.',
-      list:['Der Halter wird 6 mm dick.'],
-      focus:[0.9270, 0.3500, 0.1200, 0.0400], lens:[0.1800, 0.6800], zoom:2.2
+        "short": "Achsbohrung",
+        "title": "Bohrung Ø4,5 für die Achse",
+        "img": "assets/la2_05_bohrung.jpg",
+        "alt": "Kreisskizze R2,25 auf der Vorderseite",
+        "lead": "Vorderseite anklicken, <b>Neue Skizze</b>, Kreis <b>R2,25</b> auf der Mittelachse, <b>15 mm</b> über der Unterkante.",
+        "list": [
+            "Danach <b>Tasche durch alles</b>."
+        ],
+        "hint": "Etwas größer als 2 mm, damit sich die 4-mm-Achse gut dreht.",
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager.svg\" alt=\"Bogenprofil 40 x 25 mm mit Bohrung D4,5 und R10\"></div>",
+        "focus": [
+            0.53,
+            0.474,
+            0.16,
+            0.07
+        ],
+        "lens": [
+            0.3,
+            0.7
+        ],
+        "zoom": 2.0
     },
     {
-      short:'Bohrung', title:'Bohrung Ø10',
-      img:'assets/la_05_bohrungen.jpg',
-      alt:'Kreisskizze für die zentrale Bohrung',
-      lead:'Neue Skizze auf der <b>Deckfläche</b>: Kreis <b>Ø10</b>, dann <b>Tasche durch alles</b>.',
-      list:['Die Bohrung nimmt später die Achse auf.'],
-      hint:'Vereinfachte Fassung: eine Bohrung; die zwei Montagelöcher folgen.',
-      focus:[0.5000, 0.4500, 0.1500, 0.1500], lens:[0.7200, 0.2800], zoom:2.0
+        "short": "Montagelöcher",
+        "title": "Zwei Bohrungen Ø3,5",
+        "img": "assets/la2_07_montage.jpg",
+        "alt": "Unterseite mit zwei Kreisen R1,75 im Abstand von 12 mm",
+        "lead": "Skizze auf der <b>Unterseite</b>: zwei Kreise <b>R1,75</b>, je <b>12 mm</b> links und rechts der Mitte.",
+        "list": [
+            "Skizze schließen, <b>Tasche durch alles</b>."
+        ],
+        "hint": "Durch diese Löcher kommen später die M3-Schrauben ins Chassi.",
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>",
+        "focus": [
+            0.26,
+            0.52,
+            0.14,
+            0.12
+        ],
+        "lens": [
+            0.7,
+            0.28
+        ],
+        "zoom": 1.8
     },
     {
-      short:'Fertig', title:'Halter fertig',
-      img:'assets/la_07_farbe.jpg',
-      alt:'Fertiger dreieckiger Radlager-Halter',
-      lead:'Der <b>Radlager-Halter</b> ist fertig: 60 × 50 × 6 mm mit Bohrung Ø10.',
-      list:['Farbe grau – bereit für die Baugruppe.'],
-      focus:[0.4500, 0.5000, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+        "short": "Muttern",
+        "title": "Muttern von unten versenken",
+        "img": "assets/la2_09_muttern.jpg",
+        "alt": "Sechskant-Skizzen auf der Unterseite",
+        "lead": "Auf der Unterseite je ein <b>Sechskant</b> um die Bohrung – <b>12 mm</b> tiefe Tasche.",
+        "list": [
+            "So dreht sich die M3-Mutter beim Festschrauben nicht mit."
+        ],
+        "hint": "Ein gedrucktes Loch wird etwas kleiner – die Vertiefung schafft Platz.",
+        "diagram": "<div class=\"diagram\"><img src=\"assets/schema_lager_unten.svg\" alt=\"Unterseite mit zwei Montagebohrungen und Mutternvertiefungen\"></div>",
+        "focus": [
+            0.51,
+            0.52,
+            0.14,
+            0.12
+        ],
+        "lens": [
+            0.28,
+            0.3
+        ],
+        "zoom": 1.8
     },
     {
-      short:'Speichern', title:'Radlager speichern',
-      img:'assets/la_08_speichern.jpg',
-      alt:'Datei-Menü mit Speichern',
-      lead:'Als <span class="mono">Radlager.FCStd</span> speichern.',
-      list:['Gleicher Ordner „Carry“ wie Chassi und Rad.'],
-      focus:[0.0370, 0.1840, 0.0700, 0.0240], lens:[0.6200, 0.4800], zoom:2.2
+        "short": "Fertig",
+        "title": "Radlager fertig",
+        "img": "assets/la2_10_fertig.jpg",
+        "alt": "Fertiges Radlager in Bogenform",
+        "lead": "Das <b>Radlager</b> ist fertig: 40 × 25 × 10 mm mit Achsbohrung Ø4,5.",
+        "list": [
+            "Farbe grau – bereit für die Baugruppe."
+        ],
+        "focus": [
+            0.47,
+            0.47,
+            0.3,
+            0.3
+        ],
+        "lens": [
+            0.72,
+            0.26
+        ],
+        "zoom": 1.4
+    },
+    {
+        "short": "Unten",
+        "title": "Unterseite prüfen",
+        "img": "assets/la2_13_unten.jpg",
+        "alt": "Unteransicht mit Mutternvertiefungen und Bohrungen",
+        "lead": "Von unten siehst du die zwei <b>Sechskant-Vertiefungen</b> mit den Bohrungen.",
+        "list": [
+            "Die Achsbohrung sitzt auf der Vorderseite."
+        ],
+        "focus": [
+            0.56,
+            0.52,
+            0.15,
+            0.13
+        ],
+        "lens": [
+            0.28,
+            0.3
+        ],
+        "zoom": 1.8
+    },
+    {
+        "short": "Speichern",
+        "title": "Radlager speichern",
+        "img": "assets/la2_12_speichern.jpg",
+        "alt": "Datei-Menü mit Speichern",
+        "lead": "Als <span class=\"mono\">Radlager.FCStd</span> speichern.",
+        "list": [
+            "Gleicher Ordner „Carry“ wie Chassi und Rad."
+        ],
+        "focus": [
+            0.037,
+            0.184,
+            0.07,
+            0.024
+        ],
+        "lens": [
+            0.62,
+            0.48
+        ],
+        "zoom": 2.2
     }
-  ];
+];
 
   var N = STEPS.length;
-  var FINAL_IMG = 'assets/la_07_farbe.jpg';
-  var KEY = 'freecad-grundkurs-v3';
+  var FINAL_IMG = 'assets/la2_10_fertig.jpg';
+  var KEY = 'freecad-carry-lager';
 
   var progress = 0;
   try {
@@ -416,7 +540,7 @@ var STEPS = [
     var s = isDone() ? null : STEPS[progress];
     var img = isDone() ? FINAL_IMG : s.img;
     shotImg.src = img;
-    shotImg.alt = isDone() ? 'Fertiger Quader 50 x 40 x 10 mm' : s.alt;
+    shotImg.alt = isDone() ? 'Fertiges Radlager in Bogenform' : s.alt;
     if (isDone()) layer.style.display = 'none';
     layoutLoupe();
     if (lightbox.classList.contains('show')) updateLightbox();
@@ -424,7 +548,7 @@ var STEPS = [
 
   function updateLightbox(){
     lbImg.src = isDone() ? FINAL_IMG : STEPS[progress].img;
-    lbImg.alt = isDone() ? 'Fertiger Quader' : STEPS[progress].alt;
+    lbImg.alt = isDone() ? 'Fertiges Radlager in Bogenform' : STEPS[progress].alt;
     lbCaption.textContent = (isDone() ? N : progress + 1) + ' / ' + N;
   }
 
@@ -458,31 +582,13 @@ var STEPS = [
       '<div class="final-badge">✓</div>'+
       '<div class="kicker">Geschafft</div>'+
       '<h2>Radlager fertig</h2>'+
-      '<p class="lead">Dreieckiger Halter 60 × 50 × 6 mm mit Bohrung Ø10 (vereinfachte Fassung).</p>'+
-      '<div class="specs">'+
-        '<div><span>Breite</span><b>60 mm</b></div>'+
-        '<div><span>Höhe</span><b>50 mm</b></div>'+
-        '<div><span>Bohrung</span><b>Ø10</b></div>'+
-      '</div>'+
+      '<p class="lead">Bogenförmiger Halter 40 × 25 × 10 mm mit Achsbohrung Ø4,5 und zwei Montagelöchern.</p>'+
+      '<div class="specs"><div><span>Breite</span><b>40 mm</b></div><div><span>Höhe</span><b>25 mm</b></div><div><span>Dicke</span><b>10 mm</b></div></div>'+
+      '<div class="specs"><div><span>Achsbohrung</span><b>Ø4,5</b></div><div><span>Montage</span><b>2 × Ø3,5</b></div><div><span>Muttern</span><b>M3</b></div></div>'+
       '<h3>Kurz gemerkt</h3>'+
-      '<ol class="recap">'+
-        '<li>Dreieck 60 × 50 zeichnen</li>'+
-        '<li>6 mm aufpolstern</li>'+
-        '<li>Bohrung Ø10</li>'+
-        '<li>Farbe und Speichern</li>'+
-        
-        
-        '<li>Speichern (.FCStd)</li>'+
-      '</ol>'+
-      '<h3>Tastenkürzel</h3>'+
-      '<table class="shortcuts">'+
-        '<tr><td>Neues Dokument</td><td><kbd>Strg + N</kbd></td></tr>'+
-        '<tr><td>Speichern</td><td><kbd>Strg + S</kbd></td></tr>'+
-        '<tr><td>Befehl abbrechen</td><td><kbd>Esc</kbd></td></tr>'+
-        '<tr><td>Zoomen</td><td><kbd>Mausrad</kbd></td></tr>'+
-      '</table>'+
-      '<h3>Weiter üben</h3>'+
-      '<div class="chips"><span class="chip">Kapitel 1 · Chassi</span><span class="chip">Kapitel 2 · Rad</span><span class="chip">Achse</span><span class="chip">Baugruppe</span></div>'+
+      '<ol class="recap"><li>Bogenprofil auf XZ zeichnen</li><li>Symmetrisch 10 mm aufpolstern</li><li>Bohrung Ø4,5 bei 15 mm</li><li>2 × Ø3,5 bei 12 mm</li><li>Sechskant 12 mm tief</li></ol>'+
+      '<h3>Weiter</h3>'+
+      '<div class="chips"><span class="chip">Kapitel 1 · Chassi</span><span class="chip">Kapitel 2 · Rad</span><span class="chip">Kapitel 4 · Achse</span><span class="chip">Kapitel 5 · Baugruppe</span></div>'+
       '<div class="actions">'+
         '<button class="btn" data-nav="reset">↺ Nochmal von vorn</button>'+
         '<button class="btn primary" data-nav="last">Letzten Schritt ansehen</button>'+

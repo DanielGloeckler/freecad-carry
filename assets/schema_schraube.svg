@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#b03a2e"/>
+    </marker>
+    <pattern id="thread" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#8d99a5" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="380" height="260" fill="#ffffff"/>
+
+  <!-- Schraube (Senkkopf ISO 7046) -->
+  <g>
+    <!-- Kopf -->
+    <path d="M150,60 L166,88 L246,88 L262,60 Z" fill="#e3e9ef" stroke="#3c4a58" stroke-width="1.8" stroke-linejoin="round"/>
+    <!-- Innensechskant -->
+    <path d="M196,64 L212,64 L218,74 L212,84 L196,84 L190,74 Z" fill="#ffffff" stroke="#3c4a58" stroke-width="1.3"/>
+    <!-- Schaft mit Gewinde -->
+    <rect x="196" y="88" width="20" height="118" fill="#eef2f6" stroke="#3c4a58" stroke-width="1.6"/>
+    <rect x="196" y="88" width="20" height="118" fill="url(#thread)" opacity=".55"/>
+  </g>
+
+  <!-- Mittelachse -->
+  <line x1="206" y1="46" x2="206" y2="222" stroke="#666" stroke-width="1" stroke-dasharray="10 3 2 3"/>
+
+  <!-- Kopf-Ø 5,6 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="150" y1="62" x2="120" y2="62"/>
+    <line x1="262" y1="62" x2="292" y2="62"/>
+    <line x1="126" y1="62" x2="286" y2="62" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="192" y="51" width="30" height="11" fill="#fff"/>
+  <text x="207" y="60" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">Ø5,6</text>
+
+  <!-- Länge 20 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="216" y1="88" x2="262" y2="88"/>
+    <line x1="216" y1="206" x2="262" y2="206"/>
+    <line x1="256" y1="88" x2="256" y2="206" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="250" y="142" width="16" height="12" fill="#fff"/>
+  <text x="258" y="152" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">20</text>
+
+  <!-- Ø3 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="196" y1="190" x2="158" y2="190"/>
+    <line x1="216" y1="190" x2="158" y2="190"/>
+    <line x1="164" y1="184" x2="164" y2="196" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="120" y="184" width="22" height="11" fill="#fff"/>
+  <text x="131" y="193" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">Ø3</text>
+
+  <!-- Kopfdicke 1,65 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="240" y1="60" x2="276" y2="60"/>
+    <line x1="240" y1="88" x2="276" y2="88"/>
+    <line x1="270" y1="60" x2="270" y2="88" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="264" y="70" width="24" height="11" fill="#fff"/>
+  <text x="276" y="79" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#b03a2e" font-weight="600">1,65</text>
+
+  <!-- 90° -->
+  <path d="M152,72 A16,16 0 0 0 168,88" fill="none" stroke="#b03a2e" stroke-width="0.8"/>
+  <text x="138" y="88" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#b03a2e" font-weight="600">90°</text>
+
+  <text x="16" y="238" font-family="Segoe UI, sans-serif" font-size="8" fill="#666">Maße in mm · Senkkopfschraube ISO 7046 · M3 × 20 · Gewinde</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 230">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#b03a2e"/>
+    </marker>
+  </defs>
+  <rect width="380" height="230" fill="#ffffff"/>
+
+  <!-- Sechskant (Draufsicht) -->
+  <polygon points="190,52 231,76 231,124 190,148 149,124 149,76"
+           fill="#e3e9ef" stroke="#3c4a58" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- Bohrung -->
+  <circle cx="190" cy="100" r="18" fill="#ffffff" stroke="#3c4a58" stroke-width="1.6"/>
+  <circle cx="190" cy="100" r="12" fill="none" stroke="#8d99a5" stroke-width="1" stroke-dasharray="4 2"/>
+
+  <!-- Schlüsselweite 5,5 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="149" y1="76" x2="118" y2="76"/>
+    <line x1="231" y1="76" x2="262" y2="76"/>
+    <line x1="124" y1="76" x2="256" y2="76" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <rect x="176" y="65" width="28" height="11" fill="#fff"/>
+  <text x="190" y="74" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">5,5</text>
+
+  <!-- Höhe 1,8 -->
+  <g stroke="#b03a2e" stroke-width="0.8" fill="none">
+    <line x1="231" y1="100" x2="266" y2="100"/>
+    <line x1="262" y1="52" x2="262" y2="148"/>
+    <line x1="259" y1="124" x2="259" y2="148" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <text x="290" y="140" font-family="Segoe UI, sans-serif" font-size="9" fill="#b03a2e" font-weight="600">1,8</text>
+
+  <!-- Ø3 -->
+  <line x1="190" y1="100" x2="150" y2="176" stroke="#b03a2e" stroke-width="0.8" marker-end="url(#ar)"/>
+  <rect x="104" y="178" width="56" height="11" fill="#fff"/>
+  <text x="132" y="187" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" fill="#b03a2e">Gewinde M3</text>
+
+  <text x="16" y="208" font-family="Segoe UI, sans-serif" font-size="8" fill="#666">Maße in mm · Sechskantmutter ISO 4035 · M3 · Schlüsselweite 5,5</text>
+</svg>
