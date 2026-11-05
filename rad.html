@@ -276,16 +276,16 @@ table.shortcuts td:first-child{width:52%}
 var QUERSCHNITT = '<div class="diagram"><img src="assets/schema_profil.svg" alt="Halber Radquerschnitt mit den Maßen 20, 16, 3 und R25"></div>';
 var STEPS = [
     {
-      short:'XZ-Ebene', title:'Die XZ-Ebene verstehen',
-      img:'assets/rad_01_profil.jpg',
-      alt:'Skizze auf der XZ-Ebene mit Radprofil',
-      lead:'FreeCAD hat drei Ebenen: <b>XY</b> (von oben), <b>XZ</b> (von der Seite) und <b>YZ</b> (von rechts). Für das Rad nehmen wir <b>XZ</b>.',
-      list:['<b>X</b> zeigt nach rechts – daraus wird die <b>Radachse</b>.',
-            '<b>Z</b> zeigt nach oben – das ist der <b>Radius</b>.',
-            '<b>Y</b> zeigt aus dem Bildschirm – das wird die <b>Dicke</b> des Rads.'],
-      hint:'In der XZ-Skizze siehst du deshalb den halben Radquerschnitt von der Seite.',
+      short:'XZ-Ebene', title:'Die XZ-Ebene wählen',
+      img:'assets/rad_00_ebene.jpg',
+      alt:'Dialog Befestigung auswählen mit markierter XZ-Ebene',
+      lead:'Neue Skizze anklicken. Im Dialog <b>Befestigung auswählen</b> die <b>XZ-Ebene</b> markieren und mit <b>OK</b> bestätigen.',
+      list:['<b>XY</b> = Draufsicht (von oben).',
+            '<b>XZ</b> = Seitenansicht (von vorn) – hier liegt die Radachse waagerecht.',
+            '<b>YZ</b> = Ansicht von rechts.'],
+      hint:'Im Bild ist die XZ-Ebene bereits markiert (blau).',
       diagram: ACHSEN,
-      focus:[0.4500, 0.4500, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+      focus:[0.8700, 0.2760, 0.1800, 0.0300], lens:[0.4500, 0.4500], zoom:2.2
     },
     {
       short:'Form zeichnen', title:'Die Form zeichnen',
