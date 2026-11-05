@@ -199,6 +199,10 @@ def run():
         Gui.runCommand("PartDesign_Body"); pump(1200)
         rubber_body = [o for o in doc.Objects if o.TypeId == "PartDesign::Body"][-1]
         rubber_body.Label = "Gummiring"
+        try:
+            body.ViewObject.Visibility = False
+        except Exception:
+            pass
         gsk = rubber_body.newObject("Sketcher::SketchObject", "GummiProfil")
         gsk.Label = "Gummiprofil"
         gsk.AttachmentSupport = [(xz, "")]; gsk.MapMode = "FlatFace"

@@ -216,7 +216,7 @@ table.shortcuts td:first-child{width:52%}
   </div>
   <div class="progresswrap">
     <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 13</span>
+    <span class="progressnum" id="progressNum">1 / 14</span>
   </div>
   <div class="top-actions">
     <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
@@ -257,7 +257,7 @@ table.shortcuts td:first-child{width:52%}
   <img id="lbImg" alt="Screenshot in groß">
   <div class="lb-nav">
     <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 13</span>
+    <span id="lbCaption">1 / 14</span>
     <button id="lbNext" aria-label="Nächster Schritt">→</button>
   </div>
 </div>
@@ -280,62 +280,71 @@ var STEPS = [
       img:'assets/rad_00_ebene.jpg',
       alt:'Dialog Befestigung auswählen mit markierter XZ-Ebene',
       lead:'Neue Skizze anklicken. Im Dialog <b>Befestigung auswählen</b> die <b>XZ-Ebene</b> markieren und mit <b>OK</b> bestätigen.',
-      list:['<b>XY</b> = Draufsicht (von oben).',
-            '<b>XZ</b> = Seitenansicht (von vorn) – hier liegt die Radachse waagerecht.',
+      list:['<b>XY</b> = Draufsicht, <b>XZ</b> = Seitenansicht – hier liegt die Radachse waagerecht.',
             '<b>YZ</b> = Ansicht von rechts.'],
       hint:'Im Bild ist die XZ-Ebene bereits markiert (blau).',
       diagram: ACHSEN,
-      focus:[0.8700, 0.2760, 0.1800, 0.0300], lens:[0.4500, 0.4500], zoom:2.2
+      focus:[0.8700, 0.2760, 0.1600, 0.0400], lens:[0.4200, 0.4200], zoom:3.0
     },
     {
       short:'Form zeichnen', title:'Die Form zeichnen',
       img:'assets/rad_01_profil.jpg',
       alt:'Radprofil als geschlossener Linienzug',
-      lead:'Zeichne die Kontur <b>A → B → C → D → E → F → G → H</b> und schließe bei A.',
-      list:['A → B: <b>20 mm</b> waagerecht auf der Achse.',
-            'B → C: <b>25 mm</b> senkrecht nach oben (Außenradius).',
-            'C → D → E: <b>2 mm</b> nach links, <b>3 mm</b> nach unten (Nut).',
-            'E → F: <b>16 mm</b> nach links; F → G: 3 mm nach oben; G → H: 2 mm nach links; H → A: 25 mm nach unten.'],
-      hint:'Nimm das Linien-Werkzeug. Die genauen Längen musst du noch nicht treffen – das kommt im nächsten Schritt.',
+      lead:'Wähle das <b>Linienzug-Werkzeug</b> (Symbol oben in der Skizzenleiste).',
+      list:['Zeichne die Kontur <b>A → B → C → D → E → F → G → H</b> und schließe bei A.',
+            'A → B: 20 mm auf der Achse. B → C: 25 mm nach oben.',
+            'C → D → E: 2 mm nach links, 3 mm nach unten. E → F: 16 mm nach links.',
+            'F → G: 3 mm nach oben. G → H: 2 mm nach links. H → A: 25 mm nach unten.'],
+      hint:'Die genauen Längen musst du noch nicht treffen – das kommt im nächsten Schritt.',
       diagram: QUERSCHNITT,
-      focus:[0.4500, 0.4500, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+      focus:[0.1070, 0.0750, 0.0300, 0.0450], lens:[0.3500, 0.3000], zoom:3.0
     },
     {
       short:'Maße', title:'Profil bemaßen',
       img:'assets/rad_02_masse.jpg',
       alt:'Bemaßtes Radprofil mit 20, 25, 16 und 3 mm',
-      lead:'Jetzt die vier Maße eintragen:',
-      list:['<b>20 mm</b> – Breite des Rads (A–B).',
-            '<b>25 mm</b> – Außenradius (B–C).',
-            '<b>16 mm</b> – Breite der Nut (E–F).',
-            '<b>3 mm</b> – Tiefe der Nut (D–E).'],
+      lead:'Jetzt das <b>Bemaßungs-Werkzeug</b> wählen und die vier Maße eintragen:',
+      list:['<b>20 mm</b> – Breite (A–B). <b>25 mm</b> – Außenradius (B–C).',
+            '<b>16 mm</b> – Nutbreite (E–F). <b>3 mm</b> – Nuttiefe (D–E).'],
       hint:'Die Skizze wird grün – vollständig bestimmt.',
       diagram: QUERSCHNITT,
-      focus:[0.5000, 0.4000, 0.1800, 0.1000], lens:[0.7200, 0.2800], zoom:1.8
+      focus:[0.3790, 0.0750, 0.0320, 0.0450], lens:[0.6500, 0.2800], zoom:3.0
     },
     {
       short:'Rotieren', title:'Rotationskörper erzeugen',
       img:'assets/03_revolution.jpg',
-      alt:'Parameter der Rotation um die horizontale Skizzenachse',
-      lead:'<b>Rotieren</b> um die <b>horizontale Skizzenachse</b>, 360°.',
-      list:['Aus dem Profil entsteht der runde Radkörper.'],
-      focus:[0.8500, 0.3500, 0.1200, 0.0600], lens:[0.3000, 0.3500], zoom:1.8
+      alt:'Parameter der Rotation mit Winkel 360 Grad',
+      lead:'<b>Rotieren</b> um die <b>horizontale Skizzenachse</b>.',
+      list:['Im Feld <b>Winkel</b> steht <b>360,00°</b> – so entsteht der volle Radkörper.'],
+      hint:'Achse: „Horizontale Skizzenachse“, dann mit OK bestätigen.',
+      focus:[0.8600, 0.3600, 0.1200, 0.0400], lens:[0.3000, 0.3500], zoom:2.2
     },
     {
-      short:'Radkörper', title:'Radkörper fertig',
+      short:'Innenseite', title:'Innenseite anklicken',
       img:'assets/04_rad.jpg',
-      alt:'Runder Radkörper mit Nut für den Gummiring',
-      lead:'Der <b>Radkörper</b> ist fertig – mit Nut für den Reifen.',
-      list:['Jetzt kommen die Löcher.'],
-      focus:[0.4500, 0.5000, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
+      alt:'Radkörper – die Innenseite für die Lochskizze',
+      lead:'Klick die <b>Innenseite des Rads</b> an – auf dieser Fläche entsteht die Loch-Skizze.',
+      list:['Die Fläche wird grün markiert.'],
+      hint:'Danach im Panel Aufgaben auf „Neue Skizze“.',
+      focus:[0.4500, 0.4500, 0.2500, 0.2500], lens:[0.7200, 0.2500], zoom:1.6
     },
     {
-      short:'Loch', title:'Loch skizzieren',
+      short:'Loch', title:'Kreis zeichnen',
       img:'assets/06_loch.jpg',
       alt:'Kreisskizze auf der Radinnenseite',
-      lead:'Neue Skizze auf der <b>Innenseite</b> des Rads: Kreis <b>Ø5</b> bei Radius 15 mm.',
+      lead:'Wähle das <b>Kreis-Werkzeug</b> (Symbol oben) und setze den Kreis <b>Ø5</b> bei 15 mm vom Zentrum.',
       list:['Der Kreis wird später zum Muster vervielfacht.'],
-      focus:[0.4800, 0.4500, 0.1500, 0.1500], lens:[0.7200, 0.2800], zoom:2.0
+      hint:'Kreis anklicken, Radius 2,5 mm eintragen, Skizze schließen, Tasche „durch alles“.',
+      focus:[0.1520, 0.0750, 0.0300, 0.0450], lens:[0.4000, 0.3000], zoom:3.0
+    },
+    {
+      short:'Muster finden', title:'Polares Muster finden',
+      img:'assets/07_muster.jpg',
+      alt:'Part-Design-Symbolleiste mit Polar-Muster',
+      lead:'Markiere im Modellbaum die <b>Loch-Tasche</b>. In der Symbolleiste findest du <b>Polares Muster</b> (Kreis mit Pfeil).',
+      list:['Alternativ: Rechtsklick auf die Tasche → <b>Polares Muster</b>.'],
+      hint:'Das Symbol sitzt bei den Transformations-Werkzeugen.',
+      focus:[0.5110, 0.0750, 0.0300, 0.0450], lens:[0.6500, 0.2800], zoom:3.0
     },
     {
       short:'Muster', title:'Polares Muster 6 ×',
@@ -343,7 +352,7 @@ var STEPS = [
       alt:'Dialog Polares Muster mit 6 Vorkommen',
       lead:'<b>Polares Muster</b> um die Radachse: <b>6 Vorkommen</b>, 300°.',
       list:['Die Löcher verteilen sich gleichmäßig auf dem Rad.'],
-      focus:[0.8500, 0.5500, 0.1300, 0.1000], lens:[0.3000, 0.3500], zoom:1.8
+      focus:[0.8500, 0.5800, 0.1300, 0.1000], lens:[0.3000, 0.3500], zoom:1.8
     },
     {
       short:'6 Löcher', title:'Sechs Löcher',
@@ -357,8 +366,8 @@ var STEPS = [
       short:'Grün', title:'Rad grün einfärben',
       img:'assets/09_gruen.jpg',
       alt:'Grüner Radkörper',
-      lead:'Farbe <b>grün</b>.',
-      list:['Der Radkörper ist fertig.'],
+      lead:'M2 auf <b>Rad</b> im Modellbaum → <b>Darstellung</b> → <b>Flächenfarbe</b> → grün.',
+      list:['Der ganze Radkörper wird grün.'],
       focus:[0.4500, 0.5000, 0.3000, 0.3000], lens:[0.7200, 0.2500], zoom:1.4
     },
     {
@@ -370,7 +379,7 @@ var STEPS = [
             'In diesem Körper: <b>Neue Skizze</b> auf der <b>XZ-Ebene</b> (wie beim Radprofil).',
             '<b>Kreis</b> mit Mittelpunkt auf der <b>X-Achse</b>: Radius <b>2,2 mm</b>, Mittelpunkt <b>23 mm</b> von der Radachse (z = 23).'],
       hint:'Die Skizze ist der Querschnitt des Rings – er sitzt später in der Nut des Rads.',
-      focus:[0.5000, 0.3300, 0.1400, 0.1200], lens:[0.7200, 0.2500], zoom:2.0
+      focus:[0.3190, 0.2480, 0.1000, 0.1000], lens:[0.7200, 0.3000], zoom:2.2
     },
     {
       short:'Gummiring rotieren', title:'Gummiring rotieren',
