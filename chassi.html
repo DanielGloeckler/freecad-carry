@@ -134,6 +134,10 @@
   .low-goal figure{margin:0}
   .low-goal img{width:100%;border-radius:9px;border:1px solid #cbd5e0;box-shadow:0 8px 22px rgba(24,40,60,.12)}
   .low-goal figcaption{font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center}
+  .deep-note{display:none;margin-top:14px;border-left:3px solid #9cc3e6;background:#f8fbfe;padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px;color:#33465a;line-height:1.6}
+  body[data-help="viel"] .deep-note{display:block}
+  .deep-note::before{content:"Gut zu wissen";display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#4a86c8;margin-bottom:4px}
+  .deep-note p{margin:4px 0}
   .status{display:none;margin:16px 0 0;padding-top:12px;border-top:1px dashed #d9e1ea}
   body[data-help="viel"] .status{display:block}
   .status-label{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#2f8b57;background:#eef8f1;border:1px solid #cfe8d8;border-radius:999px;padding:3px 8px}
@@ -153,6 +157,7 @@
   .deep-body img{width:100%;border-radius:7px;border:1px solid #cbd5e0;margin-top:8px}
   .tool-callout{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
   .tool-callout img{width:46px;height:46px;object-fit:contain;flex:none}
+  .visual .tool-callout img{width:48px!important;height:48px!important;margin:0!important;border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;cursor:default!important}
   .tool-callout div{font-size:13.5px;line-height:1.45}
 
   /* ---------- Sichtbarkeit nach Hilfestufe ---------- */
@@ -308,7 +313,7 @@
     <div class="low-summary">
       <h3>Das ist zu tun</h3>
       <ul>
-        <li>Neues Dokument anlegen und den Arbeitsbereich <b>Part Design</b> wählen.</li>
+        <li>Neues Dokument anlegen, Arbeitsbereich <b>Part Design</b> wählen und einen <b>neuen Körper</b> anlegen.</li>
         <li>Auf der <b>XY-Ebene</b> eine neue Skizze beginnen und ein <b>Rechteck</b> zeichnen.</li>
         <li>Das Rechteck mit <b>Symmetrie</b> zum Ursprung festlegen und mit <b>116 mm × 70 mm</b> bemaßen.</li>
       </ul>
@@ -338,6 +343,26 @@
     <div class="row" data-level="2">
       <div class="text">
         <span class="pill">Schritt 2</span>
+        <p class="lead">Lege einen <b>neuen Körper</b> an: <img class="ui" src="assets/chassi/icons/PartDesign_Body.png" alt="Neuer Körper"> <b>Neuer Körper</b>.</p>
+        <ul class="steps">
+          <li>Im Aufgabenfenster auf <b>Neuer Körper</b> klicken.</li>
+          <li>Den Körper <b>Chassi</b> nennen.</li>
+          <li>Der Körper ist der Container für alle Teile.</li>
+        </ul>
+        <div class="tip">Ohne Körper kannst du keine Skizze im Part-Design-Arbeitsbereich anlegen.</div>
+      </div>
+      <figure class="visual">
+        <div class="tool-callout" style="margin:0">
+          <img src="assets/chassi/icons/PartDesign_Body.png" alt="Werkzeug Neuer Körper">
+          <div><b>Neuer Körper</b><br>Im Aufgabenfenster auf „Neuer Körper“ klicken und den Körper <b>Chassi</b> nennen.</div>
+        </div>
+        <figcaption>Der Körper ist der Container für die Skizze.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 3</span>
         <p class="lead">Klicke auf <img class="ui" src="assets/chassi/icons/PartDesign_CompSketches.png" alt="Neue Skizze"> <b>Neue Skizze</b> und wähle die <b>XY-Ebene</b>.</p>
         <ul class="steps">
           <li>Die XY-Ebene ist die Draufsicht von oben – dort liegt die Platte flach.</li>
@@ -353,7 +378,7 @@
 
     <div class="row" data-level="2">
       <div class="text">
-        <span class="pill">Schritt 3</span>
+        <span class="pill">Schritt 4</span>
         <p class="lead">Wähle das <img class="ui" src="assets/chassi/icons/Sketcher_CompCreateRectangles.png" alt="Rechteck"> <b>Rechteck-Werkzeug</b> und ziehe ein Rechteck auf.</p>
         <ul class="steps">
           <li>Beginne oben links und ziehe bis unten rechts.</li>
@@ -369,7 +394,7 @@
 
     <div class="row" data-level="2">
       <div class="text">
-        <span class="pill">Schritt 4</span>
+        <span class="pill">Schritt 5</span>
         <p class="lead">Klicke zwei <b>gegenüberliegende Ecken</b> und danach den <b>Ursprung</b> an. Dann auf <img class="ui" src="assets/chassi/icons/Sketcher_ConstrainSymmetric.png" alt="Symmetrie"> <b>Symmetrie</b>.</p>
         <ul class="steps">
           <li>Reihenfolge: erst die beiden Ecken, zuletzt der Ursprung.</li>
@@ -385,7 +410,7 @@
 
     <div class="row" data-level="2">
       <div class="text">
-        <span class="pill">Schritt 5</span>
+        <span class="pill">Schritt 6</span>
         <p class="lead">Bemaße die Skizze mit <img class="ui" src="assets/chassi/icons/Sketcher_CompDimensionTools.png" alt="Bemaßung">: <b>116 mm</b> Breite und <b>70 mm</b> Höhe.</p>
         <ul class="steps">
           <li>Die untere Kante anklicken und <b>116 mm</b> eintragen, mit <span class="kbd">Enter</span> bestätigen.</li>
@@ -953,7 +978,6 @@
   <div class="caption" id="lbCaption"></div>
 </div>
 
-<script src="assets/chassi/deep.js"></script>
 <script>
 (function(){
   'use strict';
@@ -964,7 +988,7 @@
   var texts = {
     wenig: '<b>Wenig:</b> Du bekommst das Ziel und die wichtigsten Arbeitsschritte. Die Details erarbeitest du selbst.',
     mittel: '<b>Mittel:</b> Die wichtigsten Schritte mit Bildern – wie in der PDF-Anleitung.',
-    viel: '<b>Viel:</b> Jeder einzelne Klick, ein Statusbild und „Mehr erklären“ zum Aufklappen. Ideal, wenn du noch unsicher bist.'
+    viel: '<b>Viel:</b> Jeder einzelne Klick mit Ausschnitt, Symbol und zusätzlichen Erklärungen. Ideal, wenn du noch unsicher bist.'
   };
 
   function setHelp(level, save){
@@ -1045,6 +1069,7 @@
 </script>
 </body>
 </html>
+
 
 
 

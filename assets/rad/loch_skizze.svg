@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Lochskizze: Kreis R2,5 bei 10 mm vom Mittelpunkt">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d33a3a"/>
+    </marker>
+  </defs>
+  <rect width="400" height="400" fill="#ffffff"/>
+  <!-- Radfläche -->
+  <circle cx="200" cy="200" r="140" fill="#eef3f8" stroke="#17202b" stroke-width="3"/>
+  <!-- Achsen -->
+  <line x1="200" y1="40" x2="200" y2="360" stroke="#2f8b57" stroke-width="2" stroke-dasharray="10 6"/>
+  <line x1="40" y1="200" x2="360" y2="200" stroke="#d33a3a" stroke-width="2" stroke-dasharray="10 6"/>
+  <!-- zentrale Bohrung -->
+  <circle cx="200" cy="200" r="32" fill="#ffffff" stroke="#17202b" stroke-width="3"/>
+  <!-- Loch R2,5 bei 10 mm -->
+  <circle cx="200" cy="120" r="20" fill="#ffffff" stroke="#d33a3a" stroke-width="3"/>
+  <!-- Maß 10 mm -->
+  <line x1="200" y1="200" x2="200" y2="120" stroke="#d33a3a" stroke-width="1.8" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="210" y="165" fill="#d33a3a" font-family="Segoe UI,Arial" font-size="15" font-weight="700">10 mm</text>
+  <!-- Radius R2,5 -->
+  <line x1="218" y1="108" x2="260" y2="80" stroke="#d33a3a" stroke-width="1.4"/>
+  <text x="262" y="76" fill="#d33a3a" font-family="Segoe UI,Arial" font-size="15" font-weight="700">R2,5</text>
+  <!-- Beschriftung -->
+  <text x="20" y="28" fill="#5f6b7a" font-family="Segoe UI,Arial" font-size="13">Innenseite des Rads</text>
+  <text x="212" y="382" fill="#5f6b7a" font-family="Segoe UI,Arial" font-size="12">Kreis auf der YZ-Ebene</text>
+</svg>

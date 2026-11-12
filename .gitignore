@@ -4,3 +4,5 @@ __pycache__/
 *.FCBak
 
 assets/chassi/shots.log
+
+assets/rad/shots.log

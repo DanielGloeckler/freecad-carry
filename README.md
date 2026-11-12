@@ -37,11 +37,16 @@ Die Screenshots wurden mit **FreeCAD 1.1** (dunkles Theme) neu erzeugt:
 `tools/chassi_guide_shots.py`. Das Skript baut das Modell, öffnet die Dialoge
 und speichert die Ausschnitte unter `assets/chassi/`.
 
-## Kapitel 2 – Rad (22 Schritte)
+## Kapitel 2 – Rad (PDF-Stil, 3 Hilfestufen)
 
-Profil auf XZ → bemaßen (20/25/16/3) → **360° rotieren** → Radkörper →
-Loch Ø5 → **polares Muster 6 ×** → 6 Löcher → grün → **Gummiring** als
-zweiter Körper → fertig → speichern.
+Profil auf XZ mit **Nut R1,75** und den Maßen **5 / 17,5 / 2 / 1 mm** →
+**360° rotieren** → Radkörper → **Achsbohrung Ø8** → **Loch Ø5 bei 10 mm** →
+**polares Muster 360° / 6 Vorkommen** → grün → **Gummiring R1,75 bei
+18,5 mm** als zweiter Körper → fertig → speichern.
+
+Die Seite bietet denselben Umschalter **Wenig / Mittel / Viel** wie Kapitel 1.
+Die Screenshots wurden mit **FreeCAD 1.1** (dunkles Theme) erzeugt:
+`tools/rad_guide_shots.py`.
 
 ## Kapitel 3 – Radlager (13 Schritte)
 
