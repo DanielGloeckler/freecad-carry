@@ -1,1231 +1,1010 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<title>FreeCAD Carry – Chassi Schritt für Schritt</title>
+<meta name="color-scheme" content="light">
+<title>Chassi – FreeCAD Schritt für Schritt</title>
 <style>
-:root{
-  --bg:#121519; --panel:#1a1f24; --line:#333b45;
-  --text:#e7ebf0; --muted:#96a1ae; --accent:#5b9bd5; --accent2:#82c0f5;
-  --orange:#f0a83c; --green:#4cd07d;
-  --mono:"Cascadia Mono",Consolas,"SF Mono",monospace;
-}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-html,body{height:100%}
-body{
-  margin:0;display:flex;flex-direction:column;overflow:hidden;color:var(--text);
-  background:radial-gradient(1100px 620px at 18% -12%,#1d2733 0%,var(--bg) 58%) fixed;
-  font:14px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;
-}
-button{font:inherit;color:inherit}
-.ico{width:1.15em;height:1.15em;vertical-align:-0.22em;flex:none}
-.muted{color:var(--muted)}
-.mono{font-family:var(--mono)}
+  :root{
+    --ink:#17202b; --muted:#5f6b7a; --blue:#2f6fb0; --blue2:#6aa6dd;
+    --line:#dbe2ea; --soft:#f4f7fa; --soft2:#eef4fa; --red:#d33a3a;
+    --shadow:0 18px 45px rgba(26,46,70,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:#fff;color:var(--ink);
+    font:16px/1.65 "Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%}
+  a{color:var(--blue)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
 
-/* ---------- Kopfzeile ---------- */
-header.top{
-  display:flex;align-items:center;gap:18px;padding:9px 18px;flex:none;
-  background:rgba(18,21,25,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);z-index:40;
-}
-.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:.2px;white-space:nowrap}
-.brand .logo{width:28px;height:28px}
-.brand small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.04em}
-.progresswrap{flex:1;display:flex;align-items:center;gap:12px;max-width:520px;min-width:90px}
-.progress{flex:1;height:6px;background:#2a313a;border-radius:99px;overflow:hidden}
-.progress i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#427cb8,#82c0f5);transition:width .35s ease}
-.progressnum{font:600 12px var(--mono);color:var(--muted);white-space:nowrap}
-.top-actions{display:flex;gap:8px;margin-left:auto}
+  /* ---------- Kopfzeile ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(10px);
+  }
+  .topbar-inner{display:flex;align-items:center;gap:18px;min-height:58px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+  .brand .mark{
+    width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(145deg,#3f80c0,#2c639c);color:#fff;font-size:13px;font-weight:800;
+  }
+  .brand small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.05em}
+  .topnav{display:flex;gap:16px;align-items:center;margin-left:auto;font-size:13.5px}
+  .topnav a{color:var(--muted);text-decoration:none;font-weight:600}
+  .topnav a:hover{color:var(--blue)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+    background:#fff;padding:8px 13px;border-radius:9px;font:inherit;font-size:13px;
+    font-weight:600;cursor:pointer;white-space:nowrap;color:var(--ink);
+  }
+  .btn:hover{border-color:#b9c8d8;background:#f8fbfe}
+  .btn.primary{background:linear-gradient(180deg,#3f80c0,#2f6ea8);border-color:#3f80c0;color:#fff}
+  .btn.primary:hover{background:linear-gradient(180deg,#4a8ccd,#3579b7)}
 
-.btn{
-  display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#262c33;
-  padding:8px 13px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;transition:.15s;white-space:nowrap;
-}
-.btn:hover{background:#2f3741;border-color:#46515d}
-.btn.primary{background:linear-gradient(180deg,#3f80c0,#346da7);border-color:#4c90d1;color:#fff}
-.btn.primary:hover{background:linear-gradient(180deg,#4a8ccd,#3c7ab8)}
-.btn.ghost{background:transparent}
-.btn:disabled{opacity:.35;cursor:default}
+  /* ---------- Hero ---------- */
+  .hero{display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center;padding:42px 0 16px}
+  .kicker{color:#7ba7d6;font-size:19px;font-weight:400;letter-spacing:.03em;margin:0}
+  h1{font-size:60px;line-height:1.02;font-weight:300;color:#4a86c8;margin:6px 0 20px;letter-spacing:-.01em}
+  .subtitle{margin:-8px 0 22px;color:var(--muted);font-size:17px}
+  .goalbox{background:linear-gradient(180deg,#f8fbfe,#f2f7fc);border:1px solid var(--line);border-radius:14px;padding:20px 24px;max-width:590px}
+  .goalbox h2{font-size:16px;margin:0 0 8px;letter-spacing:.01em}
+  .goalbox ul{margin:0;padding-left:22px}
+  .goalbox li{margin:4px 0}
+  .hero-img{margin:0;position:relative}
+  .hero-img img{width:100%;border-radius:16px;box-shadow:var(--shadow);border:1px solid #cfd8e2}
+  .hero-img figcaption{margin-top:10px;text-align:center;font-size:12.5px;color:var(--muted)}
+  .badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .badge{font-size:12px;font-weight:600;color:#36516b;background:#eef4fa;border:1px solid #d7e4f0;border-radius:999px;padding:4px 10px}
 
-/* ---------- Layout ---------- */
-.app{flex:1;display:grid;grid-template-columns:228px minmax(0,1fr) 368px;min-height:0}
-.outline{border-right:1px solid var(--line);background:rgba(23,26,31,.72);padding:16px 10px 24px;overflow:auto}
-.outline h2{font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin:2px 8px 10px}
-.steplist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
-.stepitem{
-  display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;
-  color:var(--muted);padding:6px 8px;border-radius:8px;cursor:pointer;transition:.13s;
-}
-.stepitem:hover{background:#232a31;color:var(--text)}
-.stepitem.current{background:#22313f;color:#fff;box-shadow:inset 2px 0 0 var(--accent)}
-.stepitem.done{color:#b9c5d2}
-.stepitem .n{
-  width:21px;height:21px;flex:none;border-radius:50%;border:1px solid #3a434e;display:grid;place-items:center;
-  font-size:10.5px;font-weight:700;color:var(--muted);background:#1c2228;
-}
-.stepitem.current .n{background:var(--accent);border-color:var(--accent);color:#0d1520}
-.stepitem.done .n{background:#1e3929;border-color:#2f5d43;color:#6bdc9a}
-.stepitem .t{font-size:12px;line-height:1.25}
-.outline .foot{font-size:11px;color:#6d7884;margin:18px 8px 0;line-height:1.55}
-.outline .foot .dotline{display:flex;align-items:center;gap:7px;margin-bottom:8px;color:#93a0ad}
-.outline .foot .dotline i{width:9px;height:9px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px rgba(240,168,60,.7)}
+  /* ---------- Hilfe-Umschalter ---------- */
+  .helpbar{
+    position:sticky;top:58px;z-index:40;background:#fff;
+    border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:22px 0 10px;
+    box-shadow:0 6px 20px rgba(30,50,70,.06);display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  .helpbar .label{font-size:12px;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--muted)}
+  .seg{display:inline-flex;background:#e9eef4;border-radius:11px;padding:3px;gap:2px}
+  .seg button{
+    border:0;background:transparent;padding:8px 16px;border-radius:8px;
+    font:inherit;font-size:13.5px;font-weight:700;color:#54657a;cursor:pointer;transition:.15s;
+  }
+  .seg button:hover{color:var(--blue)}
+  .seg button[aria-pressed="true"]{background:#fff;color:var(--blue);box-shadow:0 1px 4px rgba(20,40,60,.16)}
+  .help-desc{font-size:14px;color:var(--muted);margin:0;flex:1;min-width:240px}
+  .help-desc b{color:var(--ink)}
 
-/* ---------- Bildbühne ---------- */
-.stage{
-  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:20px 22px;overflow:auto;min-width:0;gap:10px;
-}
-.stage::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(760px 420px at 50% 42%,rgba(91,155,213,.08),transparent 70%);
-}
-.shot{
-  position:relative;margin:0;width:100%;max-width:1180px;
-  border:1px solid #2f3944;border-radius:10px;overflow:hidden;cursor:zoom-in;
-  box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.03) inset;
-  background:#0d1013;
-}
-.shot img{display:block;width:100%;height:auto}
+  /* ---------- Inhalt ---------- */
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+  .toc a{
+    font-size:12.5px;font-weight:600;color:#465a70;text-decoration:none;
+    border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#fff;
+  }
+  .toc a:hover{border-color:#a9c4de;color:var(--blue);background:#f7fbfe}
+  .toc-progress{margin-left:auto;font-size:12.5px;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:6px;padding:5px 0}
+  .toc-progress b{color:var(--blue)}
+  .done-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap;margin-left:14px;user-select:none}
+  .done-toggle input{width:16px;height:16px;accent-color:var(--blue);cursor:pointer}
+  .done-toggle input:checked + span{color:var(--blue);font-weight:600}
+  .section{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:26px 0;background:#fff;scroll-margin-top:175px}
+  .section-head{
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    padding:18px 24px;background:linear-gradient(180deg,#fbfcfe,#f5f9fc);border-bottom:1px solid var(--line);
+  }
+  .section-head .num{font-size:19px;font-weight:800;color:var(--blue);letter-spacing:.02em}
+  .section-head h2{font-size:23px;margin:0;font-weight:650;letter-spacing:-.01em}
+  .section-head .goal{color:var(--muted);font-size:13.5px;margin-left:auto}
+  .section:has(.done-toggle input:checked) .section-head{background:linear-gradient(180deg,#f4fbf6,#eef8f1)}
+  .section:has(.done-toggle input:checked) .section-head .num{color:#2f8b57}
+  .row{display:grid;grid-template-columns:1.05fr .95fr;border-top:1px solid #eef2f6}
+  .row:first-of-type{border-top:0}
+  .row .text{padding:22px 26px 24px;min-width:0}
+  .row .visual{border-left:1px solid #eef2f6;padding:18px;background:#fbfcfe;display:flex;flex-direction:column;justify-content:center;min-width:0}
+  .row .visual img{
+    width:100%;height:auto;border-radius:8px;border:1px solid #cbd5e0;
+    background:#1b1e26;box-shadow:0 10px 26px rgba(24,40,60,.13);cursor:zoom-in;
+  }
+  .row .visual figcaption{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.45;text-align:center}
+  .lead{margin:0 0 9px;font-size:16.5px}
+  .steps{margin:6px 0 0;padding-left:22px}
+  .steps li{margin:5px 0}
+  .steps li::marker{color:var(--blue2)}
+  .ui{width:1.35em;height:1.35em;vertical-align:-.3em;margin:0 2px}
+  .kbd{font:600 12px/1.4 "Cascadia Mono",Consolas,monospace;background:#eef2f7;border:1px solid #d5dde7;border-bottom-width:2px;border-radius:5px;padding:1px 5px;white-space:nowrap}
+  .mono{font-family:"Cascadia Mono",Consolas,monospace;font-size:.94em}
+  .tip{
+    margin-top:15px;border-left:3px solid var(--blue2);background:#f2f7fc;
+    padding:10px 14px;border-radius:0 8px 8px 0;font-size:14.5px;color:#33465a;
+  }
+  .tip b{color:var(--blue)}
+  .note{margin-top:12px;font-size:14px;color:var(--muted)}
+  .pill{
+    display:inline-block;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;
+    font-weight:800;color:var(--blue);background:#eaf3fb;border-radius:999px;padding:3px 9px;margin-bottom:9px;
+  }
+  .low-summary{padding:22px 26px;background:linear-gradient(180deg,#f8fbfe,#f2f8fd)}
+  .low-summary h3{margin:0 0 8px;font-size:16px;color:#2d5f91}
+  .low-summary ul{margin:0;padding-left:22px}
+  .low-summary li{margin:5px 0}
+  .low-goal{padding:0 18px 20px;background:#f2f8fd}
+  .low-goal figure{margin:0}
+  .low-goal img{width:100%;border-radius:9px;border:1px solid #cbd5e0;box-shadow:0 8px 22px rgba(24,40,60,.12)}
+  .low-goal figcaption{font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center}
 
-/* ---------- Lupe ---------- */
-.loupe-layer{position:absolute;inset:0;pointer-events:none}
-.loupe-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.focus-ring{
-  position:absolute;border:2px solid var(--orange);border-radius:9px;
-  box-shadow:0 0 0 3px rgba(240,168,60,.18),0 0 24px 2px rgba(240,168,60,.45);
-  animation:pulse 1.9s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%,100%{box-shadow:0 0 0 3px rgba(240,168,60,.16),0 0 16px 1px rgba(240,168,60,.35)}
-  50%{box-shadow:0 0 0 5px rgba(240,168,60,.10),0 0 30px 6px rgba(240,168,60,.55)}
-}
-.lens{
-  position:absolute;border-radius:50%;background-repeat:no-repeat;
-  border:3px solid #e8edf3;
-  box-shadow:0 0 0 2px rgba(240,168,60,.95),0 18px 44px rgba(0,0,0,.6),inset 0 0 26px rgba(0,0,0,.35);
-  z-index:3;
-}
-.lens::after{
-  content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.28),rgba(255,255,255,0) 55%);
-}
-.shot .zoom{
-  position:absolute;right:10px;bottom:10px;background:rgba(12,16,20,.82);border:1px solid #43505e;
-  color:#dbe4ee;font-size:11.5px;padding:5px 9px;border-radius:6px;display:flex;gap:6px;align-items:center;
-  opacity:0;transition:.18s;backdrop-filter:blur(4px);z-index:5;
-}
-.shot:hover .zoom{opacity:1}
+  /* ---------- Sichtbarkeit nach Hilfestufe ---------- */
+  body[data-help="wenig"] .row[data-level="2"],
+  body[data-help="wenig"] .row[data-level="3"]{display:none}
+  body[data-help="mittel"] .row[data-level="3"]{display:none}
+  body[data-help="mittel"] .low-summary,
+  body[data-help="mittel"] .low-goal,
+  body[data-help="viel"] .low-summary,
+  body[data-help="viel"] .low-goal{display:none}
 
-/* ---------- Lesebereich ---------- */
-.reader{border-left:1px solid var(--line);background:linear-gradient(180deg,#1a1e23,#15181c);overflow:auto;padding:24px 24px 44px;overflow-anchor:none}
-.reader-inner{max-width:322px}
-.kicker{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);font-weight:700}
-.reader h2{font-size:24px;line-height:1.22;margin:8px 0 10px;letter-spacing:-.01em}
-.lead{color:#cdd6df;font-size:14.5px;margin:0 0 14px}
-.bullets{list-style:none;padding:0;margin:0 0 14px;display:flex;flex-direction:column;gap:8px}
-.bullets li{position:relative;padding-left:22px;color:#d7dee6;font-size:13.5px}
-.bullets li::before{content:"";position:absolute;left:4px;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.hint{
-  display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:#9fb0a8;
-  background:#17241d;border:1px solid #294234;border-radius:9px;padding:9px 11px;margin:0 0 14px;line-height:1.45;
-}
-.hint svg{width:16px;height:16px;flex:none;margin-top:2px;color:#6fd69a}
-.mouse{font-size:11.5px;color:#7f8b97;margin:0 0 14px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-kbd{
-  font:600 11px var(--mono);background:#232930;border:1px solid #46505b;border-bottom-width:2px;
-  border-radius:4px;padding:2px 6px;color:#e3e9ef;
-}
-.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
-.advance-hint{font-size:11px;color:#6f7a86;margin-top:12px;line-height:1.45}
-h3{font-size:13px;letter-spacing:.02em;margin:22px 0 8px;color:#e9eef4}
-.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 18px}
-.specs div{background:#20262d;border:1px solid #333c45;border-radius:10px;padding:9px 10px}
-.specs span{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.specs b{font-size:16px;font-family:var(--mono);color:#fff}
-.final-badge{
-  width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;color:#d6ffe2;
-  background:linear-gradient(180deg,#2f7d32,#245f28);box-shadow:0 12px 32px rgba(47,125,50,.35);margin-bottom:14px;
-}
-.recap{margin:0 0 6px;padding-left:18px;color:#c9d2db;font-size:13px;display:flex;flex-direction:column;gap:5px}
-table.shortcuts{width:100%;border-collapse:collapse;font-size:12px}
-table.shortcuts td{padding:5px 0;border-bottom:1px solid #262d35;color:#c5ced8}
-table.shortcuts td:first-child{width:52%}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chip{font-size:11.5px;border:1px solid #3a444f;background:#20262c;color:#c2ccd7;border-radius:99px;padding:4px 10px}
+  /* ---------- Abschluss ---------- */
+  .finish{
+    display:grid;grid-template-columns:1fr .9fr;gap:30px;align-items:center;
+    border:1px solid #cfe0ef;background:linear-gradient(135deg,#f3f9ff,#eaf4fd);
+    border-radius:16px;padding:26px 30px;margin:34px 0 18px;
+  }
+  .finish h2{margin:0 0 8px;font-size:24px;color:#2b5f92}
+  .finish p{margin:0 0 8px;color:#3c5268}
+  .finish img{width:100%;border-radius:10px;border:1px solid #c8d8e7;box-shadow:0 12px 30px rgba(26,50,80,.16)}
+  .checklist{list-style:none;margin:10px 0 0;padding:0;font-size:14.5px}
+  .checklist li{margin:5px 0;padding-left:24px;position:relative}
+  .checklist li::before{content:"✓";position:absolute;left:0;color:#2f8b57;font-weight:800}
 
-/* ---------- Lightbox ---------- */
-.lightbox{
-  position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
-  background:rgba(5,8,12,.92);backdrop-filter:blur(4px);padding:24px;
-}
-.lightbox.show{display:flex}
-.lightbox img{max-width:96vw;max-height:88vh;border-radius:6px;box-shadow:0 30px 90px rgba(0,0,0,.8)}
-.lb-close{
-  position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid #3f4a56;
-  background:rgba(20,25,31,.85);color:#dfe7ef;font-size:18px;cursor:pointer;
-}
-.lb-close:hover{background:#2c3640}
-.lb-nav{
-  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;
-  background:rgba(18,22,27,.92);border:1px solid #36414c;border-radius:99px;padding:5px 8px;font-size:12px;color:#b9c4cf;
-}
-.lb-nav button{width:34px;height:34px;border-radius:50%;border:0;background:#2a333c;color:#e8eef5;cursor:pointer;font-size:15px}
-.lb-nav button:hover{background:#3a4652}
-.lb-nav span{min-width:70px;text-align:center}
+  footer{border-top:1px solid var(--line);margin-top:36px;padding:22px 0 40px;color:var(--muted);font-size:13px}
+  footer p{margin:5px 0}
 
-/* ---------- Responsiv ---------- */
-@media (max-width:1380px){
-  .app{grid-template-columns:208px minmax(0,1fr) 350px}
-  .reader{padding:20px 18px 40px}
-  .reader-inner{max-width:310px}
-}
-@media (max-width:1120px){
-  .app{grid-template-columns:minmax(0,1fr) 340px}
-  .outline{display:none}
-}
-@media (max-width:900px){
-  body{overflow:auto}
-  .app{grid-template-columns:1fr;grid-template-rows:auto auto}
-  .stage{padding:12px;min-height:0}
-  .reader{border-left:0;border-top:1px solid var(--line);overflow:visible;padding:20px 18px 60px}
-  .brand small{display:none}
-  .top-actions .btn .lbl{display:none}
-  .shot .zoom{opacity:1}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-}
+  /* ---------- Lightbox ---------- */
+  .lightbox{position:fixed;inset:0;z-index:100;background:rgba(8,12,18,.92);display:none;place-items:center;padding:24px}
+  .lightbox.open{display:grid}
+  .lightbox img{max-width:96vw;max-height:88vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6);border:1px solid #3a4654}
+  .lightbox .close{
+    position:absolute;top:16px;right:20px;background:rgba(255,255,255,.12);color:#fff;
+    border:1px solid rgba(255,255,255,.25);border-radius:9px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer;
+  }
+  .lightbox .caption{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#dbe4ee;font-size:13px;padding:0 20px}
 
-/* ---------- Kapitel-Overlay ---------- */
-.ch-overlay{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(6,9,13,.82);backdrop-filter:blur(6px)}
-.ch-overlay.open{display:flex}
-.ch-panel{position:relative;width:min(880px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#171b21;border:1px solid #333c46;border-radius:16px;box-shadow:0 40px 120px rgba(0,0,0,.7)}
-.ch-hero{position:relative;height:300px;overflow:hidden;background:#1f1f1f;border-radius:16px 16px 0 0}
-.ch-hero img{display:block;width:100%;height:100%;object-fit:contain}
-.ch-hero .ch-cap{position:absolute;left:20px;bottom:16px;font-size:13px;color:#eef3f8;text-shadow:0 2px 10px rgba(0,0,0,.8)}
-.ch-hero .ch-cap b{font-size:17px;letter-spacing:.2px}
-.ch-hero .ch-cap span{display:block;font-size:11.5px;color:#b9c6d3}
-.ch-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid #46515d;background:rgba(16,20,25,.8);color:#e7edf4;font-size:16px;cursor:pointer;z-index:2}
-.ch-x:hover{background:#2a333d}
-.ch-body{padding:18px 22px 20px}
-.ch-body h2{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#8fa0b1;margin:0 0 12px}
-.ch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.ch-card{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid #333c46;border-radius:11px;background:#20262d;color:#e7ebf0;text-decoration:none;transition:.15s}
-.ch-card:hover{background:#28313a;border-color:#46525f;transform:translateY(-1px)}
-.ch-card .ch-num{width:27px;height:27px;flex:none;border-radius:50%;display:grid;place-items:center;background:#2b3540;border:1px solid #3d4a57;font:700 12px var(--mono);color:#c8d4e0}
-.ch-card .ch-t{display:block;font-size:13.5px;font-weight:600;line-height:1.25}
-.ch-card .ch-s{display:block;font-size:11px;color:#93a1af;margin-top:2px}
-.ch-card.current{border-color:#5b9bd5;background:#22313f;box-shadow:0 0 0 1px rgba(91,155,213,.35) inset}
-.ch-card.current .ch-num{background:#5b9bd5;border-color:#5b9bd5;color:#0d1520}
-.ch-card.current .ch-s{color:#a9c7e4}
-.ch-note{margin:14px 0 0;font-size:11.5px;color:#7f8d9b}
-.ch-note a{color:#82c0f5;text-decoration:none}
-.ch-note a:hover{text-decoration:underline}
-@media (max-width:640px){
-  .ch-overlay{padding:0}
-  .ch-panel{width:100%;height:100%;max-height:100vh;border-radius:0;border:0}
-  .ch-hero{height:220px;border-radius:0}
-  .ch-grid{grid-template-columns:1fr}
-  .ch-body{padding:15px 16px 24px}
-}
+  /* ---------- Mobil ---------- */
+  @media (max-width:900px){
+    .wrap{padding:0 16px}
+    .hero{grid-template-columns:1fr;gap:22px;padding-top:26px}
+    h1{font-size:44px}
+    .hero-img{max-width:620px}
+    .helpbar{top:56px;padding:12px 14px;gap:10px}
+    .help-desc{min-width:100%;font-size:13.5px}
+    .section-head .goal{margin-left:0;flex-basis:100%}
+    .row{grid-template-columns:1fr}
+    .row .visual{border-left:0;border-top:1px solid #eef2f6;padding:14px}
+    .row .text{padding:18px 18px 20px}
+    .finish{grid-template-columns:1fr}
+    .topnav a:not(.btn){display:none}
+    .seg button{padding:8px 12px;font-size:13px}
+  }
+
+  @media print{
+    @page{size:A4;margin:14mm}
+    body{font-size:10.5pt;background:#fff}
+    .topbar,.helpbar,.toc,.lightbox,.done-toggle,footer .no-print{display:none!important}
+    .wrap{max-width:none;padding:0}
+    .hero{grid-template-columns:1fr 1fr;gap:18px;padding:0 0 10px}
+    h1{font-size:38pt}
+    .hero-img img{box-shadow:none}
+    .section{break-inside:auto;margin:12px 0;border-color:#bbb;border-radius:8px}
+    .row{break-inside:avoid;grid-template-columns:1fr 1fr}
+    .row .visual img{box-shadow:none}
+    .low-goal img,.finish img{box-shadow:none}
+    .tip{background:#f4f4f4}
+    a{color:inherit;text-decoration:none}
+  }
 </style>
-<link rel="stylesheet" href="assets/kurs.css">
 </head>
-<body>
+<body data-help="mittel">
 
-<header class="top">
-  <div class="brand">
-    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2.2 21 7.3v9.4L12 21.8 3 16.7V7.3Z" fill="#2f5f96"/>
-      <path d="M12 2.2 21 7.3 12 12.4 3 7.3Z" fill="#79aede"/>
-      <path d="M12 12.4v9.4L3 16.7V7.3Z" fill="#24476f"/>
-    </svg>
-    <div>FreeCAD Carry<small>Kapitel 1 · Chassi · echte Screenshots aus FreeCAD 1.1</small></div>
-  </div>
-  <div class="progresswrap">
-    <div class="progress"><i id="bar"></i></div>
-    <span class="progressnum" id="progressNum">1 / 30</span>
-  </div>
-  <div class="top-actions"><button class="btn ghost" id="chOpen" aria-haspopup="dialog" aria-controls="chOverlay" title="Kapitelübersicht (K)"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span class="lbl">Kapitel</span></button>
-    <button class="btn ghost" id="zoomBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lbl">Bild groß</span></button>
-    <button class="btn ghost" id="resetBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 1 2.4 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 5.5V12h6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Neu starten</span></button>
+<!-- ================= Kopfzeile ================= -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+      <span class="mark">FC</span>
+      <span>FreeCAD Carry<small>Kapitel 1 · Chassi</small></span>
+    </a>
+    <nav class="topnav" aria-label="Seitennavigation">
+      <a href="index.html">Kursübersicht</a>
+      <a href="rad.html">Rad</a>
+      <a href="lager.html">Lager</a>
+      <a href="baugruppe.html">Baugruppe</a>
+      <button class="btn" type="button" onclick="window.print()">Drucken</button>
+    </nav>
   </div>
 </header>
-<div class="kbar" id="kbar"><div class="kbar-in"><a class="kbar-back" href="index.html">← Kursübersicht</a><span class="kbar-crumb">Kapitel 1 · Chassi</span><div class="kbar-track" aria-hidden="true"><i id="kbarFill"></i></div><span class="kbar-num" id="kbarNum">0 von 33 erledigt</span></div></div>
 
-<div class="app">
-  <nav class="outline">
-    <h2>Schritte</h2>
-    <ol class="steplist" id="steplist"></ol>
-    <p class="foot">
-      <span class="dotline"><i></i> Orange = hier klicken</span>
-      <a href="index.html" style="color:#82c0f5">Kurs</a> · <a href="chassi.html" style="color:#82c0f5">Chassi</a> · <a href="rad.html" style="color:#82c0f5">Rad</a> · <a href="lager.html" style="color:#82c0f5">Radlager</a> · <a href="achse.html" style="color:#82c0f5">Achse</a> · <a href="baugruppe.html" style="color:#82c0f5">Baugruppe</a> · <a href="original.html" style="color:#82c0f5">Original (PDF)</a>
-    </p>
+<main class="wrap">
+
+  <!-- ================= Hero ================= -->
+  <section class="hero">
+    <div>
+      <p class="kicker">Kapitel 1</p>
+      <h1>Chassi</h1>
+      <p class="subtitle">Die Grundplatte für dein Carry – von der Skizze bis zum fertigen Bauteil.</p>
+
+      <div class="goalbox">
+        <h2>Darum geht's:</h2>
+        <ul>
+          <li>Muster erzeugen mit dem <b>Mehrfach-Transformationstool</b></li>
+          <li>45 Löcher mit <b>9 × 96 mm</b> und <b>5 × 60 mm</b> verteilen</li>
+          <li>Senkungen für die Schrauben und die richtige Farbe</li>
+        </ul>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge">116 × 70 × 5 mm</span>
+        <span class="badge">45 Löcher</span>
+        <span class="badge">FreeCAD 1.1</span>
+        <span class="badge">ca. 45–60 Min.</span>
+      </div>
+    </div>
+    <figure class="hero-img">
+      <img src="assets/chassi/26_rot.png" alt="Fertiges rotes Chassi mit 45 gesenkten Löchern" data-zoom>
+      <figcaption>So sieht dein Chassi am Ende aus.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= Hilfestufe ================= -->
+  <div class="helpbar" id="hilfe">
+    <span class="label">Hilfe</span>
+    <div class="seg" role="group" aria-label="Hilfestufe wählen">
+      <button type="button" data-level="wenig" aria-pressed="false">Wenig</button>
+      <button type="button" data-level="mittel" aria-pressed="true">Mittel</button>
+      <button type="button" data-level="viel" aria-pressed="false">Viel</button>
+    </div>
+    <p class="help-desc" id="help-desc"><b>Mittel:</b> Die wichtigsten Schritte mit Bildern – wie in der PDF-Anleitung.</p>
+  </div>
+
+  <nav class="toc" aria-label="Abschnitte">
+    <a href="#skizze">1. Skizze</a>
+    <a href="#aufpolstern">2. Aufpolstern</a>
+    <a href="#loch">3. Loch</a>
+    <a href="#muster">4. Lochmuster</a>
+    <a href="#senkungen">5. Senkungen</a>
+    <a href="#farbe">6. Farbe &amp; Speichern</a>
+    <span class="toc-progress" id="tocProgress"><b>0</b> / 6 Abschnitte erledigt</span>
   </nav>
 
-  <main class="stage" id="stage">
-    <figure class="shot" id="shot">
-      <img id="shotImg" src="assets/01_neues_dokument.jpg" alt="Chassi – neues Dokument">
-      <div class="loupe-layer" id="loupeLayer">
-        <svg class="loupe-svg" aria-hidden="true">
-          <line id="loupeLine" stroke="#f0a83c" stroke-width="2" stroke-dasharray="5 5" opacity=".75"/>
-          <circle id="loupeDot" r="4" fill="#f0a83c"/>
-        </svg>
-        <div class="focus-ring" id="focusRing"></div>
-        <div class="lens" id="lens"></div>
+  <!-- ================= 1. Skizze ================= -->
+  <section class="section" id="skizze">
+    <div class="section-head">
+      <span class="num">1.)</span>
+      <h2>Skizze erzeugen</h2>
+      <span class="goal">Ziel: ein Rechteck 116 × 70 mm, mittig zum Ursprung</span>
+      <label class="done-toggle"><input type="checkbox" data-done="skizze"> <span>erledigt</span></label>
+    </div>
+
+    <div class="low-summary">
+      <h3>Das ist zu tun</h3>
+      <ul>
+        <li>Neues Dokument anlegen und den Arbeitsbereich <b>Part Design</b> wählen.</li>
+        <li>Auf der <b>XY-Ebene</b> eine neue Skizze beginnen und ein <b>Rechteck</b> zeichnen.</li>
+        <li>Das Rechteck mit <b>Symmetrie</b> zum Ursprung festlegen und mit <b>116 mm × 70 mm</b> bemaßen.</li>
+      </ul>
+    </div>
+    <div class="low-goal">
+      <figure>
+        <img src="assets/chassi/08_masse.png" alt="Fertig bemaßte Skizze 116 × 70 mm" data-zoom>
+        <figcaption>So muss deine Skizze am Ende aussehen: grün und vollständig bestimmt.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 1</span>
+        <p class="lead">Starte FreeCAD und lege mit <img class="ui" src="assets/chassi/icons/Std_New.png" alt="Neues Dokument"> ein <b>neues Dokument</b> an.</p>
+        <ul class="steps">
+          <li>Oben in der Leiste den Arbeitsbereich <b>Part Design</b> auswählen.</li>
+          <li>Das Dokument heißt am besten gleich <span class="mono">Chassi</span>.</li>
+        </ul>
       </div>
-      <span class="zoom">⤢ vergrößern</span>
+      <figure class="visual">
+        <img src="assets/chassi/02_arbeitsbereich.png" alt="Arbeitsbereich Part Design in der Werkzeugleiste" data-zoom>
+        <figcaption>Der Arbeitsbereich <b>Part Design</b> ist ausgewählt.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 2</span>
+        <p class="lead">Klicke auf <img class="ui" src="assets/chassi/icons/PartDesign_CompSketches.png" alt="Neue Skizze"> <b>Neue Skizze</b> und wähle die <b>XY-Ebene</b>.</p>
+        <ul class="steps">
+          <li>Die XY-Ebene ist die Draufsicht von oben – dort liegt die Platte flach.</li>
+          <li>Mit <b>OK</b> bestätigen.</li>
+        </ul>
+        <div class="tip"><b>Tipp:</b> Ohne Körper fragt FreeCAD, ob ein neuer Körper angelegt werden soll. Antworte mit <b>OK</b>.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/04_neue_skizze.png" alt="Dialog Befestigung auswählen mit markierter XY-Ebene" data-zoom>
+        <figcaption>Die <b>XY-Ebene (Basis-Ebene)</b> markieren.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 3</span>
+        <p class="lead">Wähle das <img class="ui" src="assets/chassi/icons/Sketcher_CompCreateRectangles.png" alt="Rechteck"> <b>Rechteck-Werkzeug</b> und ziehe ein Rechteck auf.</p>
+        <ul class="steps">
+          <li>Beginne oben links und ziehe bis unten rechts.</li>
+          <li>Größe und Lage sind noch egal – das kommt gleich.</li>
+        </ul>
+        <div class="tip">Die kleinen roten Symbole sind automatische Randbedingungen (horizontal/vertikal).</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/06_rechteck.png" alt="Rechteck auf der XY-Ebene" data-zoom>
+        <figcaption>Ein einfaches Rechteck – noch ohne genaue Maße.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 4</span>
+        <p class="lead">Klicke zwei <b>gegenüberliegende Ecken</b> und danach den <b>Ursprung</b> an. Dann auf <img class="ui" src="assets/chassi/icons/Sketcher_ConstrainSymmetric.png" alt="Symmetrie"> <b>Symmetrie</b>.</p>
+        <ul class="steps">
+          <li>Reihenfolge: erst die beiden Ecken, zuletzt der Ursprung.</li>
+          <li>Das Rechteck sitzt danach mittig – die Größe ist noch frei.</li>
+        </ul>
+        <div class="tip"><b>Wichtig:</b> Der Ursprung ist der Punkt mit den roten Achsen in der Mitte.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/07_symmetrie.png" alt="Zwei Ecken und der Ursprung sind markiert" data-zoom>
+        <figcaption>Die Reihenfolge 1 → 2 → 3 ist entscheidend.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 5</span>
+        <p class="lead">Bemaße die Skizze mit <img class="ui" src="assets/chassi/icons/Sketcher_CompDimensionTools.png" alt="Bemaßung">: <b>116 mm</b> Breite und <b>70 mm</b> Höhe.</p>
+        <ul class="steps">
+          <li>Die untere Kante anklicken und <b>116 mm</b> eintragen, mit <span class="kbd">Enter</span> bestätigen.</li>
+          <li>Die seitliche Kante anklicken und <b>70 mm</b> eintragen.</li>
+          <li>Alles wird grün: Die Skizze ist vollständig bestimmt.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/08_masse.png" alt="Bemaßte Skizze mit 116 mm und 70 mm" data-zoom>
+        <figcaption>116 mm × 70 mm – grün bedeutet: alles ist festgelegt.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="3">
+      <div class="text">
+        <span class="pill">Profi-Tipp</span>
+        <p class="lead">Kontrolliere vor dem Schließen die <b>Randbedingungen</b> im linken Bereich des Aufgabenfensters.</p>
+        <ul class="steps">
+          <li>Es dürfen keine blauen Linien mehr übrig sein.</li>
+          <li>Falls doch: Mit dem Bemaßungswerkzeug fehlende Maße ergänzen.</li>
+          <li>Mit <img class="ui" src="assets/chassi/icons/Sketcher_LeaveSketch.png" alt="Skizze schließen"> <b>Skizze schließen</b> beendest du den Skizzenmodus.</li>
+        </ul>
+        <div class="tip">Wenn du dich vertippt hast: <span class="kbd">Strg</span> + <span class="kbd">Z</span> macht den letzten Schritt rückgängig.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/09_skizze_schliessen.png" alt="Schaltfläche Skizze schließen" data-zoom>
+        <figcaption>Mit <b>Schließen</b> wird die Skizze beendet.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 2. Aufpolstern ================= -->
+  <section class="section" id="aufpolstern">
+    <div class="section-head">
+      <span class="num">2.)</span>
+      <h2>Skizze aufpolstern</h2>
+      <span class="goal">Ziel: eine Platte mit 5 mm Dicke</span>
+      <label class="done-toggle"><input type="checkbox" data-done="aufpolstern"> <span>erledigt</span></label>
+    </div>
+
+    <div class="low-summary">
+      <h3>Das ist zu tun</h3>
+      <ul>
+        <li>Die Skizze schließen und das Werkzeug <b>Aufpolsterung</b> wählen.</li>
+        <li>Als Tiefe <b>5,00 mm</b> eintragen und mit <b>OK</b> bestätigen.</li>
+        <li>Die Platte ist danach ein fester Körper.</li>
+      </ul>
+    </div>
+    <div class="low-goal">
+      <figure>
+        <img src="assets/chassi/11_platte.png" alt="Fertige Grundplatte 116 × 70 × 5 mm" data-zoom>
+        <figcaption>Die fertige Grundplatte: 116 × 70 × 5 mm.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 1</span>
+        <p class="lead">Schließe die Skizze und klicke auf <img class="ui" src="assets/chassi/icons/PartDesign_Pad.png" alt="Aufpolsterung"> <b>Aufpolsterung</b>.</p>
+        <ul class="steps">
+          <li>Im Aufgabenfenster bei <b>Tiefe</b> den Wert <b>5,00 mm</b> eintragen.</li>
+          <li>Die Vorschau erscheint grün.</li>
+          <li>Mit <b>OK</b> bestätigen.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/10_aufpolstern.png" alt="Dialog Aufpolsterung mit Tiefe 5 mm" data-zoom>
+        <figcaption>Tiefe <b>5,00 mm</b> – nicht 10 mm!</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Ergebnis</span>
+        <p class="lead">Die <b>Grundplatte</b> ist fertig: <b>116 × 70 × 5 mm</b>.</p>
+        <ul class="steps">
+          <li>Im Modellbaum steht jetzt der Körper <b>Chassi</b> mit dem Pad <b>Platte</b>.</li>
+          <li>Jetzt kommen die Löcher.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/11_platte.png" alt="Fertige Grundplatte in der 3D-Ansicht" data-zoom>
+        <figcaption>Die Platte kann jetzt weiterbearbeitet werden.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="3">
+      <div class="text">
+        <span class="pill">Profi-Tipp</span>
+        <p class="lead">Die Platte ist bewusst nur <b>5 mm</b> dick. So bleiben die Senkungen später flach und die Schraubenköpfe verschwinden sauber.</p>
+        <ul class="steps">
+          <li>Wenn die Vorschau rot ist: Die Skizze ist nicht geschlossen.</li>
+          <li>Mit <b>Ansicht → Fit All</b> holst du die Platte wieder ins Bild.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/11_platte.png" alt="Grundplatte in der 3D-Ansicht" data-zoom>
+        <figcaption>Mit der Maus drehen: linke Taste + Ziehen.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 3. Loch ================= -->
+  <section class="section" id="loch">
+    <div class="section-head">
+      <span class="num">3.)</span>
+      <h2>Loch erzeugen</h2>
+      <span class="goal">Ziel: ein Kreis R 1,5 mm, 10 mm von links und 5 mm von oben</span>
+      <label class="done-toggle"><input type="checkbox" data-done="loch"> <span>erledigt</span></label>
+    </div>
+
+    <div class="low-summary">
+      <h3>Das ist zu tun</h3>
+      <ul>
+        <li>Auf der <b>Oberseite</b> eine neue Skizze anlegen.</li>
+        <li>Einen <b>Kreis</b> mit Radius <b>1,5 mm</b> zeichnen und bemaßen: <b>10 mm</b> von links, <b>5 mm</b> von oben.</li>
+        <li>Die Skizze schließen und eine <b>Tasche „durch alles“</b> erzeugen.</li>
+      </ul>
+    </div>
+    <div class="low-goal">
+      <figure>
+        <img src="assets/chassi/16_ein_loch.png" alt="Platte mit genau einem Loch" data-zoom>
+        <figcaption>Erst ein einziges Loch – daraus wird später das Muster.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 1</span>
+        <p class="lead">Klicke die <b>Oberseite</b> der Platte an. Sie wird grün markiert.</p>
+        <ul class="steps">
+          <li>Mit <img class="ui" src="assets/chassi/icons/PartDesign_CompSketches.png" alt="Neue Skizze"> <b>Neue Skizze</b> auf dieser Fläche beginnen.</li>
+          <li>Die Fläche ist die Bezugsebene für das Loch.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/12_flaeche.png" alt="Oberseite der Platte ist grün markiert" data-zoom>
+        <figcaption>Die <b>Oberseite</b> anklicken.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 2</span>
+        <p class="lead">Wähle das <img class="ui" src="assets/chassi/icons/Sketcher_CompCreateConic.png" alt="Kreis"> <b>Kreis-Werkzeug</b> und setze einen Kreis in die linke obere Ecke.</p>
+        <ul class="steps">
+          <li>Mit <img class="ui" src="assets/chassi/icons/Sketcher_CompDimensionTools.png" alt="Bemaßung"> den <b>Radius 1,5 mm</b> eintragen.</li>
+          <li>Lage: <b>10 mm</b> von der linken Kante und <b>5 mm</b> von der oberen Kante.</li>
+          <li>Die Skizze wird grün – alles ist bestimmt.</li>
+        </ul>
+        <div class="tip"><b>Tipp:</b> Es entsteht genau <b>ein</b> Kreis. Die anderen 44 kommen gleich per Muster.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/13_kreis.png" alt="Kreis mit Radius 1,5 mm und den Maßen 10 mm und 5 mm" data-zoom>
+        <figcaption>R 1,5 mm, 10 mm von links, 5 mm von oben.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 3</span>
+        <p class="lead">Skizze schließen und <img class="ui" src="assets/chassi/icons/PartDesign_Pocket.png" alt="Tasche"> <b>Tasche</b> wählen.</p>
+        <ul class="steps">
+          <li>Als Typ <b>Durch alles</b> einstellen.</li>
+          <li>Mit <b>OK</b> bestätigen – das Loch geht komplett durch die Platte.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/15_tasche.png" alt="Dialog Vertiefung mit Typ Durch alles" data-zoom>
+        <figcaption>Typ <b>Durch alles</b> auswählen.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Ergebnis</span>
+        <p class="lead">Genau <b>ein Loch</b> ist jetzt sichtbar.</p>
+        <ul class="steps">
+          <li>Im Modellbaum heißt die Tasche <b>Loch</b>.</li>
+          <li>Dieses eine Loch ist der Ausgangspunkt für das Muster.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/16_ein_loch.png" alt="Platte mit einem Loch in der Ecke" data-zoom>
+        <figcaption>Ein Loch – mehr brauchst du für das Muster nicht.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="3">
+      <div class="text">
+        <span class="pill">Profi-Tipp</span>
+        <p class="lead">Die Lage des Kreises kannst du auch über <b>Externe Geometrie</b> <img class="ui" src="assets/chassi/icons/Sketcher_CompExternal.png" alt="Externe Geometrie"> an die Plattenkante binden.</p>
+        <ul class="steps">
+          <li>Kante der Platte anklicken und als Bezugskante übernehmen.</li>
+          <li>Danach die 10 mm und 5 mm von dieser Kante aus bemaßen.</li>
+          <li>So bleibt das Loch auch dann an der Ecke, wenn sich die Platte ändert.</li>
+        </ul>
+        <div class="tip"><b>Merke:</b> Erst zeichnen, dann bemaßen – so bleibt die Form kontrollierbar.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/14_kreis_schliessen.png" alt="Aufgabenfenster mit den Randbedingungen des Kreises" data-zoom>
+        <figcaption>Die Randbedingungen zeigen 10 mm, 5 mm und R 1,5 mm.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 4. Lochmuster ================= -->
+  <section class="section" id="muster">
+    <div class="section-head">
+      <span class="num">4.)</span>
+      <h2>Lochmuster erzeugen</h2>
+      <span class="goal">Ziel: 9 × 5 = 45 Löcher mit zwei linearen Mustern</span>
+      <label class="done-toggle"><input type="checkbox" data-done="muster"> <span>erledigt</span></label>
+    </div>
+
+    <div class="low-summary">
+      <h3>Das ist zu tun</h3>
+      <ul>
+        <li>Die <b>Tasche (Loch)</b> im Modellbaum markieren.</li>
+        <li>Die <b>Mehrfach-Transformation</b> öffnen und <b>zwei lineare Muster</b> hinzufügen.</li>
+        <li>Erstes Muster: <b>9 Vorkommen, 96 mm</b>. Zweites Muster: <b>5 Vorkommen, 60 mm</b>.</li>
+      </ul>
+    </div>
+    <div class="low-goal">
+      <figure>
+        <img src="assets/chassi/22_45loecher.png" alt="Platte mit 45 Löchern" data-zoom>
+        <figcaption>Das Raster ist fertig: 9 × 5 = 45 Löcher.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 1</span>
+        <p class="lead">Markiere im Modellbaum die <b>Tasche</b> (das Loch).</p>
+        <ul class="steps">
+          <li>Sie wird blau hinterlegt.</li>
+          <li>Jetzt kann die Mehrfach-Transformation darauf zugreifen.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/17_pocket_wahl.png" alt="Modellbaum mit markierter Tasche Loch" data-zoom>
+        <figcaption>Die <b>Tasche</b> im Modellbaum markieren.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 2</span>
+        <p class="lead">Klicke auf <img class="ui" src="assets/chassi/icons/PartDesign_MultiTransform.png" alt="Mehrfach-Transformation"> <b>Mehrfach-Transformation</b>.</p>
+        <ul class="steps">
+          <li>Im Dialog <b>Formelemente transformieren</b> wählen.</li>
+          <li>Die Tasche <b>Loch</b> steht bereits in der Liste.</li>
+          <li>Mit <b>Formelement hinzufügen</b> kommen die Muster dazu.</li>
+        </ul>
+        <div class="tip">So macht es auch die PDF: <b>zwei lineare Muster</b> in einer einzigen Mehrfach-Transformation.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/18_mtf.png" alt="Dialog Mehrfach-Transformation mit zwei linearen Mustern" data-zoom>
+        <figcaption>Beide Muster stehen später unter <b>Transformationen</b>.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 3</span>
+        <p class="lead">Wähle <b>Formelement hinzufügen</b> und dann <b>Lineares Muster hinzufügen</b>.</p>
+        <ul class="steps">
+          <li>Der Eintrag ist im Menü gelb markiert.</li>
+          <li>Das erste lineare Muster erscheint in der Liste.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/pattern_menu.png" alt="Menü mit Lineares Muster hinzufügen" data-zoom>
+        <figcaption><b>Lineares Muster hinzufügen</b> auswählen.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 4</span>
+        <p class="lead">Erstes Muster: Richtung <b>Horizontale Skizzenachse</b>, Länge <b>96,00 mm</b>, Vorkommen <b>9</b>.</p>
+        <ul class="steps">
+          <li>Der Abstand zwischen den Lochmittelpunkten beträgt <b>96 mm : 8 = 12 mm</b>.</li>
+          <li>Mit <b>OK</b> bestätigen.</li>
+        </ul>
+        <div class="tip"><b>Rechnung:</b> 9 Löcher haben 8 Zwischenräume – deshalb durch 8 teilen.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/pattern1.png" alt="Lineares Muster mit 96 mm Länge und 9 Vorkommen" data-zoom>
+        <figcaption>96 mm Länge, 9 Vorkommen.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 5</span>
+        <p class="lead">Zweites Muster: Richtung <b>Vertikale Skizzenachse</b>, Länge <b>60,00 mm</b>, Vorkommen <b>5</b>.</p>
+        <ul class="steps">
+          <li>Der Abstand zwischen den Reihen beträgt <b>60 mm : 4 = 15 mm</b>.</li>
+          <li>Mit <b>OK</b> bestätigen.</li>
+        </ul>
+        <div class="tip">Beide Muster stecken in derselben Mehrfach-Transformation.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/pattern2.png" alt="Zweites lineares Muster mit 60 mm und 5 Vorkommen" data-zoom>
+        <figcaption>60 mm Länge, 5 Vorkommen.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Ergebnis</span>
+        <p class="lead">Das Raster ist fertig: <b>9 × 5 = 45 Löcher</b>.</p>
+        <ul class="steps">
+          <li>Die Löcher sitzen gleichmäßig auf der Platte.</li>
+          <li>Jetzt fehlen nur noch die Senkungen.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/22_45loecher.png" alt="Platte mit 45 Löchern in einem Raster" data-zoom>
+        <figcaption>45 Löcher – das Muster ist fertig.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="3">
+      <div class="text">
+        <span class="pill">Profi-Tipp</span>
+        <p class="lead">Falls ein Muster in die falsche Richtung läuft: Die Richtung lässt sich im Dialog umkehren.</p>
+        <ul class="steps">
+          <li>Beim ersten Muster: <b>Horizontale Skizzenachse</b>.</li>
+          <li>Beim zweiten Muster: <b>Vertikale Skizzenachse</b> und <b>Umgekehrte Richtung</b>.</li>
+          <li>Die Vorschau zeigt sofort, ob das Raster passt.</li>
+        </ul>
+        <div class="tip"><b>Merke:</b> 96 mm und 60 mm sind die Abstände vom ersten bis zum letzten Loch – nicht die Plattenbreite.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/22_45loecher.png" alt="Vorschau des fertigen Lochrasters" data-zoom>
+        <figcaption>9 Spalten und 5 Reihen ergeben 45 Löcher.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 5. Senkungen ================= -->
+  <section class="section" id="senkungen">
+    <div class="section-head">
+      <span class="num">5.)</span>
+      <h2>Senkungen</h2>
+      <span class="goal">Ziel: alle 45 Löcher mit 1,5 mm ansenken</span>
+      <label class="done-toggle"><input type="checkbox" data-done="senkungen"> <span>erledigt</span></label>
+    </div>
+
+    <div class="low-summary">
+      <h3>Das ist zu tun</h3>
+      <ul>
+        <li>In den <b>Drahtgittermodus</b> wechseln und alle Kreise auswählen.</li>
+        <li>Mit <img class="ui" src="assets/chassi/icons/PartDesign_Chamfer.png" alt="Fase"> <b>Fase</b> eine Kantenbrechung von <b>1,5 mm</b> erzeugen.</li>
+        <li>Zurück in die Normalansicht wechseln.</li>
+      </ul>
+    </div>
+    <div class="low-goal">
+      <figure>
+        <img src="assets/chassi/25_senkung_fertig.png" alt="Chassi mit 45 gesenkten Löchern" data-zoom>
+        <figcaption>Alle Löcher sind angesenkt – die Schraubenköpfe passen später hinein.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 1</span>
+        <p class="lead">Wechsle in den <b>Drahtgittermodus</b> und wähle alle <b>Kreise</b> auf der Oberseite aus.</p>
+        <ul class="steps">
+          <li>Die ausgewählten Kanten werden grün markiert.</li>
+          <li>Es sind alle 45 Löcher.</li>
+        </ul>
+        <div class="tip"><b>Tipp:</b> Mit <span class="kbd">Strg</span> + Klick kannst du mehrere Kanten gleichzeitig auswählen.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/23_senkung_auswahl.png" alt="Drahtgittermodus mit allen ausgewählten Lochkreisen" data-zoom>
+        <figcaption>Alle 45 Kreise sind ausgewählt.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 2</span>
+        <p class="lead">Klicke auf <img class="ui" src="assets/chassi/icons/PartDesign_Chamfer.png" alt="Fase"> <b>Fase</b> und trage <b>1,50 mm</b> ein.</p>
+        <ul class="steps">
+          <li>Typ <b>Gleicher Abstand</b> stehen lassen.</li>
+          <li>Mit <b>OK</b> bestätigen.</li>
+          <li>Danach wieder in die <b>Normalansicht</b> wechseln.</li>
+        </ul>
+        <div class="tip">Durch die Fase verschwinden die Schraubenköpfe später komplett in der Platte.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/24_senkung.png" alt="Dialog Fase mit Abstand 1,5 mm" data-zoom>
+        <figcaption>Abstand <b>1,50 mm</b> – alle Kanten sind bereits ausgewählt.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Ergebnis</span>
+        <p class="lead">Alle 45 Löcher sind jetzt angesenkt.</p>
+        <ul class="steps">
+          <li>Die Platte sieht aus wie in der PDF.</li>
+          <li>Jetzt fehlt nur noch die Farbe.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/25_senkung_fertig.png" alt="Fertige Senkungen an allen Löchern" data-zoom>
+        <figcaption>Die Senkungen sind deutlich sichtbar.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="3">
+      <div class="text">
+        <span class="pill">Profi-Tipp</span>
+        <p class="lead">Wenn eine Kante fehlt, kannst du sie im Dialog über <b>Auswählen</b> nachträglich hinzufügen.</p>
+        <ul class="steps">
+          <li>Die Liste zeigt alle ausgewählten Kanten (Edge58, Edge59, …).</li>
+          <li>Mit <b>Entfernen</b> nimmst du eine Kante wieder heraus.</li>
+          <li>Die Vorschau zeigt die Fase sofort.</li>
+        </ul>
+        <div class="tip"><b>Merke:</b> 1,5 mm ist der Abstand der Fase – nicht der Lochdurchmesser.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/25_senkung_fertig.png" alt="Senkungen in der 3D-Ansicht" data-zoom>
+        <figcaption>Fertig – alle Löcher sind gleichmäßig angesenkt.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 6. Farbe & Speichern ================= -->
+  <section class="section" id="farbe">
+    <div class="section-head">
+      <span class="num">6.)</span>
+      <h2>Farbe wählen &amp; speichern</h2>
+      <span class="goal">Ziel: rotes Chassi als Chassi.FCStd im Ordner Carry</span>
+      <label class="done-toggle"><input type="checkbox" data-done="farbe"> <span>erledigt</span></label>
+    </div>
+
+    <div class="low-summary">
+      <h3>Das ist zu tun</h3>
+      <ul>
+        <li>Mit <b>M2</b> (Rechtsklick) auf <b>Body</b> → <b>Darstellung</b> → <b>Flächenfarbe</b> auf <b>rot</b> stellen.</li>
+        <li>Ein Verzeichnis <b>Carry</b> anlegen und das Chassi als <span class="mono">Chassi.FCStd</span> speichern.</li>
+      </ul>
+    </div>
+    <div class="low-goal">
+      <figure>
+        <img src="assets/chassi/26_rot.png" alt="Rotes Chassi mit 45 gesenkten Löchern" data-zoom>
+        <figcaption>Dein fertiges Chassi in Rot.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 1</span>
+        <p class="lead">Rechtsklick (<b>M2</b>) auf <b>Body</b> in der Baumansicht → <b>Darstellung</b>.</p>
+        <ul class="steps">
+          <li>Im Dialog die <b>Flächenfarbe</b> auf <b>rot</b> setzen.</li>
+          <li>Mit <b>OK</b> bestätigen.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/26_rot.png" alt="Rotes Chassi nach dem Ändern der Flächenfarbe" data-zoom>
+        <figcaption>Der Körper ist jetzt rot eingefärbt.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 2</span>
+        <p class="lead">Lege ein Verzeichnis <b>Carry</b> an und speichere dort das Chassi unter <span class="mono">Chassi.FCStd</span>.</p>
+        <ul class="steps">
+          <li>Über <b>Datei → Speichern unter</b> den Ordner <b>Carry</b> wählen.</li>
+          <li>Dateiname: <span class="mono">Chassi.FCStd</span>.</li>
+          <li>Dort kommen später alle Teile des Carry zusammen.</li>
+        </ul>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/27_speichern.png" alt="Datei-Menü mit Speichern unter" data-zoom>
+        <figcaption>Über <b>Datei → Speichern unter</b> im Ordner <b>Carry</b> speichern.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="3">
+      <div class="text">
+        <span class="pill">Profi-Tipp</span>
+        <p class="lead">Speichere am besten nach jedem größeren Schritt mit <span class="kbd">Strg</span> + <span class="kbd">S</span>.</p>
+        <ul class="steps">
+          <li>Der Dateiname muss <span class="mono">Chassi.FCStd</span> heißen.</li>
+          <li>Der Ordner heißt <b>Carry</b> – dort liegen später Rad, Lager, Achse und Baugruppe.</li>
+          <li>Die Farbe wird mit der Datei gespeichert.</li>
+        </ul>
+        <div class="tip"><b>Merke:</b> Ohne gespeicherte Datei kann die Baugruppe später nicht zusammengesetzt werden.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/26_rot.png" alt="Fertiges Chassi als Kontrolle" data-zoom>
+        <figcaption>Kontrolle: 45 Löcher, alle gesenkt, Körper rot.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= Abschluss ================= -->
+  <section class="finish">
+    <div>
+      <h2>Fertig! 🎉</h2>
+      <p>Dein Chassi ist rot, hat 45 gesenkte Löcher und ist gespeichert. Jetzt kann es mit dem Rad weitergehen.</p>
+      <ul class="checklist">
+        <li>116 × 70 × 5 mm</li>
+        <li>9 × 5 = 45 Löcher</li>
+        <li>Senkungen 1,5 mm</li>
+        <li>Farbe rot</li>
+        <li>Gespeichert als <span class="mono">Chassi.FCStd</span> im Ordner <b>Carry</b></li>
+      </ul>
+    </div>
+    <figure style="margin:0">
+      <img src="assets/chassi/26_rot.png" alt="Fertiges Chassi" data-zoom>
     </figure>
-  </main>
+  </section>
 
-  <aside class="reader" id="reader"></aside>
-</div>
+  <p style="text-align:right;margin:6px 0 0">
+    <a class="btn primary" href="rad.html">Weiter zu Kapitel 2: Rad →</a>
+  </p>
 
-<div class="lightbox" id="lightbox">
-  <button class="lb-close" id="lbClose" aria-label="Schließen">✕</button>
-  <img id="lbImg" alt="Screenshot in groß">
-  <div class="lb-nav">
-    <button id="lbPrev" aria-label="Vorheriger Schritt">←</button>
-    <span id="lbCaption">1 / 30</span>
-    <button id="lbNext" aria-label="Nächster Schritt">→</button>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>FreeCAD Carry · Kapitel 1 – Chassi</b> · Umsetzung für den NWT-Unterricht mit FreeCAD 1.1.</p>
+    <p>Idee und Originalanleitung: Jürgen Gräber, „FreeCAD Anleitung II – Fortgeschrittene Konstruktionen und Baugruppen“. Text und neue Screenshots sind eine eigene Umsetzung für den Unterricht.</p>
+    <p class="no-print"><a href="index.html">← Zurück zur Kursübersicht</a> · <a href="original.html">Originalseiten (PDF)</a></p>
   </div>
+</footer>
+
+<!-- ================= Lightbox ================= -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="close" type="button" id="lbClose" aria-label="Schließen">✕ Schließen</button>
+  <img id="lbImg" alt="">
+  <div class="caption" id="lbCaption"></div>
 </div>
 
 <script>
 (function(){
   'use strict';
 
-  var $  = function(sel, root){ return (root||document).querySelector(sel); };
+  var body = document.body;
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.seg button'));
+  var desc = document.getElementById('help-desc');
+  var texts = {
+    wenig: '<b>Wenig:</b> Du bekommst das Ziel und die wichtigsten Arbeitsschritte. Die Details erarbeitest du selbst.',
+    mittel: '<b>Mittel:</b> Die wichtigsten Schritte mit Bildern – wie in der PDF-Anleitung.',
+    viel: '<b>Viel:</b> Jeder einzelne Klick wird erklärt, mit Ausschnitt und Symbol. Ideal, wenn du noch unsicher bist.'
+  };
 
-  /* =====================================================================
-     INHALTE – jeder Schritt: Bild, Lupen-Ziel [x,y,w,h] und Lupe [x,y]
-     Werte sind Anteile der Bildfläche (0…1).
-     ===================================================================== */
-  var STEPS = [
-    {
-        "short": "Neues Dokument",
-        "title": "FreeCAD starten und Dokument anlegen",
-        "img": "assets/01_neues_dokument.jpg",
-        "alt": "Leeres FreeCAD-Dokument mit Part-Design-Arbeitsbereich",
-        "lead": "Starte <b>FreeCAD</b> und lege mit <kbd>Strg + N</kbd> ein neues Dokument an.",
-        "list": [
-            "Oben in der Leiste den Arbeitsbereich <b>Part Design</b> wählen."
-        ],
-        "focus": [
-            0.24,
-            0.046,
-            0.11,
-            0.03
-        ],
-        "lens": [
-            0.45,
-            0.45
-        ],
-        "zoom": 2.4
-    },
-    {
-        "short": "Körper anlegen",
-        "title": "Einen Körper anlegen",
-        "img": "assets/01_neues_dokument.jpg",
-        "alt": "Panel Aufgaben mit dem Befehl Neuer Körper",
-        "lead": "Im Panel <b>Aufgaben</b> auf <b>Neuer Körper</b> klicken.",
-        "list": [
-            "Der Körper „Chassi“ ist der Container für alle Teile."
-        ],
-        "hint": "Ohne Körper kann keine Skizze erstellt werden.",
-        "focus": [
-            0.79,
-            0.2,
-            0.08,
-            0.03
-        ],
-        "lens": [
-            0.45,
-            0.45
-        ],
-        "zoom": 2.4
-    },
-    {
-        "short": "Skizze",
-        "title": "Neue Skizze auf der XY-Ebene",
-        "img": "assets/chassi_00_ebene.jpg",
-        "alt": "Dialog Befestigung auswählen mit markierter XY-Ebene",
-        "lead": "<b>Neue Skizze</b> anklicken. Im Dialog die <b>XY-Ebene</b> markieren und mit <b>OK</b> bestätigen.",
-        "list": [
-            "XY = Draufsicht von oben – hier liegt die Platte flach."
-        ],
-        "hint": "Die Ebene ist im Bild blau markiert.",
-        "focus": [
-            0.855,
-            0.401,
-            0.1,
-            0.026
-        ],
-        "lens": [
-            0.4,
-            0.55
-        ],
-        "zoom": 2.0
-    },
-    {
-        "short": "Rechteck-Werkzeug",
-        "title": "Das Rechteck-Werkzeug wählen",
-        "img": "assets/02_rechteck.jpg",
-        "alt": "Skizzenleiste mit dem Rechteck-Werkzeug",
-        "lead": "In der Skizzenleiste das <b>Rechteck-Werkzeug</b> anklicken.",
-        "list": [
-            "Das Symbol zeigt ein Rechteck mit zwei roten Eckpunkten."
-        ],
-        "focus": [
-            0.223,
-            0.095,
-            0.026,
-            0.036
-        ],
-        "lens": [
-            0.62,
-            0.32
-        ],
-        "zoom": 2.6
-    },
-    {
-        "short": "Rechteck zeichnen",
-        "title": "Ein Rechteck aufziehen",
-        "img": "assets/02_rechteck.jpg",
-        "alt": "Rechteckskizze auf der XY-Ebene",
-        "lead": "Mit gedrückter Maustaste ein <b>Rechteck</b> aufziehen.",
-        "list": [
-            "Größe und Lage sind noch egal – erst zeichnen, dann bemaßen."
-        ],
-        "hint": "Die roten Symbole sind automatische Randbedingungen (horizontal/vertikal).",
-        "focus": [
-            0.42,
-            0.5,
-            0.36,
-            0.4
-        ],
-        "lens": [
-            0.72,
-            0.26
-        ],
-        "zoom": 1.4
-    },
-    {
-        "short": "Symmetrie wählen",
-        "title": "Ecken und Ursprung markieren",
-        "img": "assets/03_symmetrie.jpg",
-        "alt": "Rechteck mit markierten Ecken und Ursprung",
-        "lead": "Zwei <b>gegenüberliegende Ecken</b> anklicken und zuletzt den <b>Ursprung</b>.",
-        "list": [
-            "Die Reihenfolge ist wichtig: erst die Ecken, dann der Ursprung."
-        ],
-        "hint": "Der Ursprung ist der Punkt mit den roten Achsen.",
-        "focus": [
-            0.597,
-            0.275,
-            0.05,
-            0.07
-        ],
-        "lens": [
-            0.3,
-            0.3
-        ],
-        "zoom": 2.6
-    },
-    {
-        "short": "Symmetrie",
-        "title": "Symmetrie anwenden",
-        "img": "assets/03_symmetrie.jpg",
-        "alt": "Randbedingung Symmetrie in der Skizzenleiste",
-        "lead": "Auf das Symbol <b>Symmetrie</b> klicken.",
-        "list": [
-            "Das Rechteck sitzt jetzt mittig – nur die Größe ist noch frei."
-        ],
-        "focus": [
-            0.565,
-            0.1,
-            0.026,
-            0.036
-        ],
-        "lens": [
-            0.3,
-            0.55
-        ],
-        "zoom": 2.6
-    },
-    {
-        "short": "Bemaßung",
-        "title": "Das Bemaßungswerkzeug wählen",
-        "img": "assets/04_masse.jpg",
-        "alt": "Bemaßungswerkzeug in der Skizzenleiste",
-        "lead": "Jetzt bemaßen: das <b>Bemaßungs-Werkzeug</b> anklicken (Lineal-Symbol).",
-        "list": [
-            "Erst zeichnen, dann bemaßen – so bleibt die Form kontrollierbar."
-        ],
-        "focus": [
-            0.622,
-            0.1,
-            0.026,
-            0.036
-        ],
-        "lens": [
-            0.32,
-            0.55
-        ],
-        "zoom": 2.6
-    },
-    {
-        "short": "116 mm",
-        "title": "Breite 116 mm eintragen",
-        "img": "assets/04_masse.jpg",
-        "alt": "Waagerechtes Maß 116 mm",
-        "lead": "Die untere Kante anklicken und <b>116 mm</b> eintragen.",
-        "list": [
-            "Mit <kbd>Enter</kbd> bestätigen."
-        ],
-        "focus": [
-            0.445,
-            0.352,
-            0.1,
-            0.028
-        ],
-        "lens": [
-            0.72,
-            0.3
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "82 mm",
-        "title": "Höhe 82 mm eintragen",
-        "img": "assets/04_masse.jpg",
-        "alt": "Senkrechtes Maß 82 mm",
-        "lead": "Die seitliche Kante anklicken und <b>82 mm</b> eintragen.",
-        "list": [
-            "Jetzt ist die Skizze vollständig bestimmt – die Linien werden grün."
-        ],
-        "focus": [
-            0.61,
-            0.55,
-            0.04,
-            0.16
-        ],
-        "lens": [
-            0.3,
-            0.3
-        ],
-        "zoom": 2.0
-    },
-    {
-        "short": "Skizze schließen",
-        "title": "Skizze schließen",
-        "img": "assets/04_masse.jpg",
-        "alt": "Schaltfläche Skizze schließen",
-        "lead": "Auf <b>Skizze schließen</b> klicken.",
-        "list": [
-            "Die fertige Skizze liegt jetzt im Modellbaum."
-        ],
-        "focus": [
-            0.855,
-            0.148,
-            0.1,
-            0.03
-        ],
-        "lens": [
-            0.62,
-            0.4
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "Aufpolstern",
-        "title": "5 mm aufpolstern",
-        "img": "assets/05_aufpolstern.jpg",
-        "alt": "Dialog Aufpolsterung mit Tiefe 5 mm",
-        "lead": "Im Panel Aufgaben bei <b>Tiefe</b> den Wert <b>5,00 mm</b> eintragen.",
-        "list": [
-            "Die Grundplatte entsteht als Vorschau (grün)."
-        ],
-        "focus": [
-            0.927,
-            0.35,
-            0.12,
-            0.04
-        ],
-        "lens": [
-            0.3,
-            0.62
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "OK",
-        "title": "Aufpolsterung bestätigen",
-        "img": "assets/05_aufpolstern.jpg",
-        "alt": "OK-Schaltfläche im Aufgaben-Panel",
-        "lead": "Mit <b>OK</b> bestätigen.",
-        "list": [
-            "Die Platte ist jetzt ein fester Körper."
-        ],
-        "focus": [
-            0.793,
-            0.141,
-            0.08,
-            0.03
-        ],
-        "lens": [
-            0.3,
-            0.62
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "Grundplatte",
-        "title": "Die Grundplatte ist fertig",
-        "img": "assets/06_platte.jpg",
-        "alt": "Fertige Grundplatte 116 x 82 x 5 mm",
-        "lead": "Die <b>Grundplatte</b> ist fertig: <b>116 × 82 × 5 mm</b>.",
-        "list": [
-            "Jetzt kommen die Löcher."
-        ]
-    },
-    {
-        "short": "Deckfläche",
-        "title": "Die Deckfläche anklicken",
-        "img": "assets/06_platte.jpg",
-        "alt": "Deckfläche der Platte für die neue Skizze",
-        "lead": "Die <b>Oberseite</b> der Platte anklicken – sie wird grün markiert.",
-        "list": [
-            "Auf dieser Fläche entsteht die Loch-Skizze."
-        ],
-        "focus": [
-            0.5,
-            0.45,
-            0.3,
-            0.3
-        ],
-        "lens": [
-            0.72,
-            0.28
-        ],
-        "zoom": 1.5
-    },
-    {
-        "short": "Kreis-Werkzeug",
-        "title": "Das Kreis-Werkzeug wählen",
-        "img": "assets/07_loch_skizze.jpg",
-        "alt": "Kreis-Werkzeug in der Skizzenleiste",
-        "lead": "In der Skizzenleiste das <b>Kreis-Werkzeug</b> anklicken.",
-        "list": [
-            "Es entsteht genau <b>ein</b> Kreis – die anderen kommen per Muster."
-        ],
-        "focus": [
-            0.19,
-            0.095,
-            0.026,
-            0.036
-        ],
-        "lens": [
-            0.62,
-            0.32
-        ],
-        "zoom": 2.6
-    },
-    {
-        "short": "Kreis setzen",
-        "title": "Einen Kreis setzen",
-        "img": "assets/ch_kreis.jpg",
-        "alt": "Kreis auf der Platte mit Bemaßung (FreeCAD)",
-        "lead": "Einen <b>Kreis</b> an der Ecke der Platte aufziehen.",
-        "list": [
-            "Es wird genau <b>ein</b> Kreis gezeichnet – der Rest kommt per Muster.",
-            "Die genaue Lage wird im nächsten Schritt bemaßt."
-        ],
-        "hint": "Im Bild liegt der Kreis an der rechten unteren Ecke.",
-        "focus": [
-            0.717,
-            0.616,
-            0.05,
-            0.05
-        ],
-        "lens": [
-            0.3,
-            0.55
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "Radius 1,5",
-        "title": "Radius 1,5 mm und Lage bemaßen",
-        "img": "assets/ch_kreis.jpg",
-        "alt": "Bemaßung des Kreises: R1,5 sowie 48 und 30 mm",
-        "lead": "Mit dem Bemaßungswerkzeug <b>R1,5 mm</b> eintragen.",
-        "list": [
-            "Danach <b>48 mm</b> und <b>30 mm</b> zur Mitte bemaßen.",
-            "Das ergibt einen Lochdurchmesser von 3 mm."
-        ],
-        "hint": "48 mm von der Mitte = 10 mm vom Rand (58 − 48).",
-        "focus": [
-            0.74,
-            0.62,
-            0.1,
-            0.04
-        ],
-        "lens": [
-            0.3,
-            0.55
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "Skizze schließen",
-        "title": "Skizze schließen",
-        "img": "assets/07_loch_skizze.jpg",
-        "alt": "Schaltfläche Skizze schließen",
-        "lead": "Auf <b>Skizze schließen</b> klicken.",
-        "list": [
-            "Jetzt kann die Tasche erzeugt werden."
-        ],
-        "focus": [
-            0.855,
-            0.148,
-            0.1,
-            0.03
-        ],
-        "lens": [
-            0.62,
-            0.4
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "Tasche",
-        "title": "Tasche durch alles",
-        "img": "assets/ch_ein_loch.jpg",
-        "alt": "Genau ein Loch in der Platte (FreeCAD)",
-        "lead": "<b>Tasche</b> anklicken und <b>durch alles</b> wählen.",
-        "list": [
-            "Jetzt ist genau <b>ein</b> Loch da – daraus entsteht das Muster."
-        ],
-        "focus": [
-            0.653,
-            0.752,
-            0.06,
-            0.04
-        ],
-        "lens": [
-            0.3,
-            0.4
-        ],
-        "zoom": 2.4
-    },
-    {
-        "short": "Loch markieren",
-        "title": "Das Loch im Modellbaum markieren",
-        "img": "assets/09_muster9.jpg",
-        "alt": "Modellbaum mit markierter Tasche",
-        "lead": "Im Modellbaum die <b>Tasche</b> (Loch) anklicken.",
-        "list": [
-            "Sie wird blau hinterlegt."
-        ],
-        "focus": [
-            0.08,
-            0.285,
-            0.09,
-            0.03
-        ],
-        "lens": [
-            0.66,
-            0.34
-        ],
-        "zoom": 2.4
-    },
-    {
-        "short": "Mehrfach-Transformation",
-        "title": "Mehrfach-Transformation starten",
-        "img": "assets/09_muster9.jpg",
-        "alt": "Dialog der Mehrfach-Transformation mit Formelement hinzufügen",
-        "lead": "Das Werkzeug <b>Mehrfach-Transformation</b> anklicken. Im Dialog <b>Formelemente transformieren</b> wählen.",
-        "list": [
-            "Mit <b>Formelement hinzufügen</b> kommt das erste lineare Muster dazu."
-        ],
-        "focus": [
-            0.823,
-            0.314,
-            0.09,
-            0.028
-        ],
-        "lens": [
-            0.32,
-            0.56
-        ],
-        "zoom": 2.0,
-        "hint": "So macht es auch die PDF: zwei lineare Muster in einer Transformation."
-    },
-    {
-        "short": "1. Muster 9×",
-        "title": "Erstes lineares Muster: 9 × 96 mm",
-        "img": "assets/09_muster9.jpg",
-        "alt": "Dialog Lineares Muster mit Länge 96 mm und 9 Vorkommen",
-        "lead": "<b>Länge 96,00 mm</b> und <b>Vorkommen 9</b> eintragen.",
-        "list": [
-            "96 : 8 = 12 mm Abstand zwischen den Löchern."
-        ],
-        "focus": [
-            0.85,
-            0.58,
-            0.13,
-            0.1
-        ],
-        "lens": [
-            0.3,
-            0.35
-        ],
-        "zoom": 1.8
-    },
-    {
-        "short": "2. Muster 5×",
-        "title": "Zweites lineares Muster: 5 × 60 mm",
-        "img": "assets/09_muster9.jpg",
-        "alt": "Dialog mit Formelement hinzufügen für das zweite Muster",
-        "lead": "Noch einmal <b>Formelement hinzufügen</b> → <b>Lineares Muster</b> und <b>60 mm</b> / <b>5 Vorkommen</b> eintragen.",
-        "list": [
-            "60 : 4 = 15 mm Abstand zwischen den Reihen."
-        ],
-        "hint": "Beide Muster stecken in derselben Mehrfach-Transformation.",
-        "focus": [
-            0.823,
-            0.314,
-            0.09,
-            0.028
-        ],
-        "lens": [
-            0.32,
-            0.56
-        ],
-        "zoom": 2.0
-    },
-    {
-        "short": "45 Löcher",
-        "title": "45 Löcher im Raster",
-        "img": "assets/10_muster45.jpg",
-        "alt": "Grundplatte mit 45 Löchern",
-        "lead": "Das Raster ist fertig: <b>9 × 5 = 45 Löcher</b>.",
-        "list": [
-            "Jetzt fehlen nur noch die Senkungen."
-        ]
-    },
-    {
-        "short": "Fase",
-        "title": "Senkungen 0,75 mm",
-        "img": "assets/11_senkungen.jpg",
-        "alt": "Dialog Fase mit 0,75 mm",
-        "lead": "<b>Fase</b> an allen Löchern: <b>0,75 mm</b> eintragen.",
-        "list": [
-            "So verschwinden die Schraubenköpfe später in der Platte."
-        ],
-        "focus": [
-            0.85,
-            0.61,
-            0.13,
-            0.04
-        ],
-        "lens": [
-            0.3,
-            0.35
-        ],
-        "zoom": 1.8
-    },
-    {
-        "short": "Alle Kanten",
-        "title": "Alle Kanten verwenden",
-        "img": "assets/11_senkungen.jpg",
-        "alt": "Kontrollkästchen Alle Kanten verwenden",
-        "lead": "Die Option <b>Alle Kanten verwenden</b> anhaken.",
-        "list": [
-            "Damit werden alle 45 Löcher auf einmal angesenkt."
-        ],
-        "focus": [
-            0.78,
-            0.66,
-            0.14,
-            0.03
-        ],
-        "lens": [
-            0.3,
-            0.35
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "OK",
-        "title": "Fase bestätigen",
-        "img": "assets/11_senkungen.jpg",
-        "alt": "OK-Schaltfläche im Aufgaben-Panel",
-        "lead": "Mit <b>OK</b> bestätigen.",
-        "list": [
-            "Alle Löcher sind jetzt gesenkt."
-        ],
-        "focus": [
-            0.793,
-            0.141,
-            0.08,
-            0.03
-        ],
-        "lens": [
-            0.3,
-            0.62
-        ],
-        "zoom": 2.2
-    },
-    {
-        "short": "Rot",
-        "title": "Chassi rot einfärben",
-        "img": "assets/12_rot.jpg",
-        "alt": "Rotes Chassi mit 45 gesenkten Löchern",
-        "lead": "M2 auf den Körper → <b>Darstellung</b> → <b>Flächenfarbe</b> → <b>rot</b>.",
-        "list": [
-            "45 Löcher, alle gesenkt – das Chassi ist fertig."
-        ],
-        "focus": [
-            0.47,
-            0.45,
-            0.3,
-            0.3
-        ],
-        "lens": [
-            0.72,
-            0.25
-        ],
-        "zoom": 1.4
-    },
-    {
-        "short": "Speichern",
-        "title": "Chassi speichern",
-        "img": "assets/13_speichern.jpg",
-        "alt": "Datei-Menü mit Speichern",
-        "lead": "Über <b>Datei → Speichern unter</b> als <span class=\"mono\">Chassi.FCStd</span> speichern.",
-        "list": [
-            "Im Verzeichnis „Carry“ – dort kommen später alle Teile zusammen."
-        ],
-        "focus": [
-            0.037,
-            0.184,
-            0.07,
-            0.024
-        ],
-        "lens": [
-            0.62,
-            0.48
-        ],
-        "zoom": 2.2
+  function setHelp(level, save){
+    if(!texts[level]) level = 'mittel';
+    body.setAttribute('data-help', level);
+    buttons.forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-level') === level ? 'true' : 'false');
+    });
+    desc.innerHTML = texts[level];
+    if(save !== false){
+      try{ localStorage.setItem('chassi-help', level); }catch(e){}
     }
-]
-
-  var N = STEPS.length;
-  var FINAL_IMG = 'assets/12_rot.jpg';
-  var KEY = 'freecad-carry-chassi';
-
-  var progress = 0;
-  try {
-    var saved = parseInt(localStorage.getItem(KEY) || '0', 10);
-    if (!isNaN(saved) && saved >= 0 && saved <= N) progress = saved;
-  } catch(e) {}
-  try {
-    var params = new URLSearchParams(location.search);
-    var raw = params.get('schritt') || params.get('step') || '';
-    if (raw === 'fertig' || raw === 'ende') {
-      progress = N;
-    } else {
-      var linkStep = parseInt(raw, 10);
-      if (!isNaN(linkStep)) progress = Math.max(0, Math.min(N - 1, linkStep - 1));
-    }
-  } catch(e) {}
-
-  var reader = $('#reader');
-  var shotImg = $('#shotImg');
-  var shot = $('#shot');
-  var lens = $('#lens');
-  var ring = $('#focusRing');
-  var line = $('#loupeLine');
-  var dot = $('#loupeDot');
-  var layer = $('#loupeLayer');
-  var lightbox = $('#lightbox');
-  var lbImg = $('#lbImg');
-  var lbCaption = $('#lbCaption');
-
-  function isDone(){ return progress >= N; }
-
-  function renderOutline(){
-    $('#steplist').innerHTML = STEPS.map(function(s, i){
-      var cls = i < progress ? 'done' : (i === progress ? 'current' : '');
-      var num = i < progress ? '✓' : (i + 1);
-      return '<li><button class="stepitem '+cls+'" data-jump="'+i+'">'+
-             '<span class="n">'+num+'</span><span class="t">'+s.short+'</span></button></li>';
-    }).join('');
-    var cur = $('.stepitem.current');
-    if (cur && cur.scrollIntoView) cur.scrollIntoView({block:'nearest'});
   }
 
-  /* ---------- Lupe positionieren ---------- */
-  function layoutLoupe(){
-    var s = isDone() ? null : STEPS[progress];
-    if (!s || !s.focus){
-      layer.style.display = 'none';
-      return;
-    }
-    var w = shotImg.clientWidth;
-    var h = shotImg.clientHeight;
-    if (!w || !h){ layer.style.display = 'none'; return; }
-    layer.style.display = 'block';
-
-    var D = Math.round(Math.min(225, Math.max(118, w * 0.205)));
-    var z = s.zoom || 2.2;
-    var fx = s.focus[0], fy = s.focus[1], fw = s.focus[2], fh = s.focus[3];
-    var lx = s.lens[0] * w, ly = s.lens[1] * h;
-
-    lens.style.width = D + 'px';
-    lens.style.height = D + 'px';
-    lens.style.left = (lx - D / 2) + 'px';
-    lens.style.top = (ly - D / 2) + 'px';
-    lens.style.backgroundImage = 'url("' + s.img + '")';
-    lens.style.backgroundSize = (w * z) + 'px ' + (h * z) + 'px';
-    lens.style.backgroundPosition = (D / 2 - fx * w * z) + 'px ' + (D / 2 - fy * h * z) + 'px';
-
-    var rw = Math.max(40, fw * w);
-    var rh = Math.max(26, fh * h);
-    ring.style.width = rw + 'px';
-    ring.style.height = rh + 'px';
-    ring.style.left = (fx * w - rw / 2) + 'px';
-    ring.style.top = (fy * h - rh / 2) + 'px';
-
-    line.setAttribute('x1', lx);
-    line.setAttribute('y1', ly);
-    line.setAttribute('x2', fx * w);
-    line.setAttribute('y2', fy * h);
-    dot.setAttribute('cx', fx * w);
-    dot.setAttribute('cy', fy * h);
-  }
-
-  function renderShot(){
-    var s = isDone() ? null : STEPS[progress];
-    var img = isDone() ? FINAL_IMG : s.img;
-    shotImg.src = img;
-    shotImg.alt = isDone() ? 'Fertiger Quader 50 x 40 x 10 mm' : s.alt;
-    if (isDone()) layer.style.display = 'none';
-    layoutLoupe();
-    if (lightbox.classList.contains('show')) updateLightbox();
-  }
-
-  function updateLightbox(){
-    lbImg.src = isDone() ? FINAL_IMG : STEPS[progress].img;
-    lbImg.alt = isDone() ? 'Fertiger Quader' : STEPS[progress].alt;
-    lbCaption.textContent = (isDone() ? N : progress + 1) + ' / ' + N;
-  }
-
-  function renderReader(){
-    if (isDone()) {
-      reader.innerHTML = finalCard();
-      reader.scrollTop = 0;
-      requestAnimationFrame(function(){ reader.scrollTop = 0; });
-      return;
-    }
-    var s = STEPS[progress];
-    reader.innerHTML = '<div class="reader-inner">'+
-      '<div class="kicker">Schritt '+(progress+1)+' von '+N+'</div>'+
-      '<h2>'+s.title+'</h2>'+
-      '<p class="lead">'+s.lead+'</p>'+
-      (s.list && s.list.length ? '<ul class="bullets">'+s.list.map(function(b){ return '<li>'+b+'</li>'; }).join('')+'</ul>' : '')+
-      (s.hint ? '<div class="hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>'+s.hint+'</span></div>' : '')+
-      (s.mouse ? '<div class="mouse"><kbd>M1</kbd> links <kbd>M2</kbd> rechts <kbd>Esc</kbd> abbrechen</div>' : '')+
-      '<div class="actions">'+
-        '<button class="btn ghost" data-nav="prev" '+(progress === 0 ? 'disabled' : '')+'>← Zurück</button>'+
-        '<button class="btn primary" data-nav="next">Weiter →</button>'+
-      '</div>'+
-      '<p class="advance-hint">'+(s.focus ? 'Die Lupe zeigt den Klickpunkt. ' : '')+'Mit ← → blätterst du.</p>'+
-    '</div>';
-    reader.scrollTop = 0;
-  }
-
-  function finalCard(){
-    return '<div class="reader-inner">'+
-      '<div class="final-badge">✓</div>'+
-      '<div class="kicker">Geschafft</div>'+
-      '<h2>Chassi fertig</h2>'+
-      '<p class="lead">Grundplatte 116 × 82 × 5 mm mit 45 Löchern und Senkungen.</p>'+
-      '<div class="specs">'+
-        '<div><span>Platte</span><b>116×82</b></div>'+
-        '<div><span>Löcher</span><b>45</b></div>'+
-        '<div><span>Dicke</span><b>5 mm</b></div>'+
-      '</div>'+
-      '<h3>Kurz gemerkt</h3>'+
-      '<ol class="recap">'+
-        '<li>Körper anlegen</li>'+
-        '<li>Rechteck 116 × 82 zeichnen</li>'+
-        '<li>Symmetrie und Maße</li>'+
-        '<li>5 mm aufpolstern</li>'+
-        '<li>Lochraster 9 × 5</li>'+
-        '<li>Senkungen und Farbe</li>'+
-        '<li>Speichern (.FCStd)</li>'+
-      '</ol>'+
-      '<h3>Tastenkürzel</h3>'+
-      '<table class="shortcuts">'+
-        '<tr><td>Neues Dokument</td><td><kbd>Strg + N</kbd></td></tr>'+
-        '<tr><td>Speichern</td><td><kbd>Strg + S</kbd></td></tr>'+
-        '<tr><td>Befehl abbrechen</td><td><kbd>Esc</kbd></td></tr>'+
-        '<tr><td>Zoomen</td><td><kbd>Mausrad</kbd></td></tr>'+
-      '</table>'+
-      '<h3>Weiter üben</h3>'+
-      '<div class="chips"><span class="chip">Kapitel 2 · Rad</span><span class="chip">Radlager</span><span class="chip">Achse</span><span class="chip">Baugruppe</span></div>'+
-      '<div class="actions">'+
-        '<button class="btn" data-nav="reset">↺ Nochmal von vorn</button>'+
-        '<button class="btn primary" data-nav="last">Letzten Schritt ansehen</button>'+
-      '</div>'+
-    '</div>';
-  }
-
-  function render(){
-    $('#bar').style.width = (Math.min(progress, N) / N * 100) + '%';
-    $('#progressNum').textContent = (isDone() ? N : progress + 1) + ' / ' + N;
-    renderOutline();
-    renderReader();
-    renderShot();
-    try { localStorage.setItem(KEY, String(progress)); } catch(e) {}
-  }
-
-  function go(p){
-    progress = Math.max(0, Math.min(N, p));
-    render();
-  }
-
-  function openLightbox(){ updateLightbox(); lightbox.classList.add('show'); }
-  function closeLightbox(){ lightbox.classList.remove('show'); }
-
-  $('#steplist').addEventListener('click', function(e){
-    var btn = e.target.closest('[data-jump]');
-    if (btn) go(parseInt(btn.getAttribute('data-jump'), 10));
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ setHelp(b.getAttribute('data-level')); });
   });
 
-  reader.addEventListener('click', function(e){
-    var btn = e.target.closest('[data-nav]');
-    if (!btn) return;
-    var nav = btn.getAttribute('data-nav');
-    if (nav === 'next') go(progress + 1);
-    else if (nav === 'prev') go(progress - 1);
-    else if (nav === 'last') go(N - 1);
-    else if (nav === 'reset') { progress = 0; render(); }
-  });
+  var saved = null;
+  try{ saved = localStorage.getItem('chassi-help'); }catch(e){}
+  setHelp(saved || 'mittel', false);
 
-  document.addEventListener('keydown', function(e){
-    if (e.target.matches && e.target.matches('input, textarea, select')) return;
-    if (e.key === 'Escape') { closeLightbox(); return; }
-    if (e.key === 'ArrowRight') { e.preventDefault(); go(progress + 1); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); go(progress - 1); }
-  });
+  /* Abschnitts-Fortschritt */
+  var DONE_KEY = 'freecad-carry-chassi';
+  var DONE_LIST = 'freecad-carry-chassi-sections';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('[data-done]'));
+  var tocProg = document.getElementById('tocProgress');
 
-  shot.addEventListener('click', openLightbox);
-  $('#zoomBtn').addEventListener('click', openLightbox);
-  $('#lbClose').addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
-  $('#lbPrev').addEventListener('click', function(e){ e.stopPropagation(); go(progress - 1); });
-  $('#lbNext').addEventListener('click', function(e){ e.stopPropagation(); go(progress + 1); });
-
-  $('#resetBtn').addEventListener('click', function(){
-    progress = 0;
-    try { localStorage.removeItem(KEY); } catch(e) {}
-    render();
-  });
-
-  shotImg.addEventListener('load', layoutLoupe);
-  window.addEventListener('resize', layoutLoupe);
-  if (window.ResizeObserver) new ResizeObserver(layoutLoupe).observe(shotImg);
-
-  STEPS.forEach(function(s){ var im = new Image(); im.src = s.img; });
-
-  render();
-})();
-</script>
-
-<div class="ch-overlay" id="chOverlay" role="dialog" aria-modal="true" aria-label="Kapitelübersicht">
-  <div class="ch-panel">
-    <button class="ch-x" id="chClose" aria-label="Schließen">✕</button>
-    <div class="ch-hero">
-      <img src="assets/carry_hero.jpg" alt="Fertiger Carry mit vier Rädern">
-      <div class="ch-cap"><b>Carry</b> · Transportfahrzeug<span>Alle Kapitel auf einen Blick</span></div>
-    </div>
-    <div class="ch-body">
-      <a class="ch-course" href="index.html">← Zur Kursübersicht</a>
-      <h2>Kapitel wählen</h2>
-      <div class="ch-grid">
-        <a class="ch-card" href="chassi.html"><span class="ch-num">1</span><span><span class="ch-t">Chassi</span><span class="ch-s">33 Schritte · Platte mit 45 Löchern</span></span></a>
-        <a class="ch-card" href="rad.html"><span class="ch-num">2</span><span><span class="ch-t">Rad</span><span class="ch-s">22 Schritte · Radkörper und Gummiring</span></span></a>
-        <a class="ch-card" href="lager.html"><span class="ch-num">3</span><span><span class="ch-t">Radlager</span><span class="ch-s">13 Schritte · Bogenform mit Bohrungen</span></span></a>
-        <a class="ch-card" href="achse.html"><span class="ch-num">4</span><span><span class="ch-t">Achse &amp; Schrauben</span><span class="ch-s">14 Schritte · M3×20 und Mutter</span></span></a>
-        <a class="ch-card" href="baugruppe.html"><span class="ch-num">5</span><span><span class="ch-t">Baugruppe</span><span class="ch-s">10 Schritte · Carry zusammenbauen</span></span></a>
-        <a class="ch-card" href="original.html"><span class="ch-num">PDF</span><span><span class="ch-t">Originalseiten</span><span class="ch-s">24 Seiten als Leseausgabe</span></span></a>
-      </div>
-      <p class="ch-note">Tipp: Mit <kbd>K</kbd> öffnest du diese Übersicht jederzeit.</p>
-    </div>
-  </div>
-</div>
-
-<script>
-(function(){
-  var ov = document.getElementById('chOverlay');
-  var opener = document.getElementById('chOpen');
-  var closer = document.getElementById('chClose');
-  if (!ov || !opener) return;
-  var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  if (!here) here = 'index.html';
-  var cards = ov.querySelectorAll('.ch-card');
-  for (var i = 0; i < cards.length; i++) {
-    var href = (cards[i].getAttribute('href') || '').toLowerCase();
-    if (href === here) {
-      cards[i].classList.add('current');
-      cards[i].setAttribute('aria-current', 'page');
+  function saveDone(save){
+    var checked = boxes.filter(function(b){ return b.checked; }).map(function(b){ return b.getAttribute('data-done'); });
+    var n = checked.length;
+    if(tocProg) tocProg.innerHTML = '<b>' + n + '</b> / ' + boxes.length + ' Abschnitte erledigt';
+    if(save !== false){
+      try{
+        localStorage.setItem(DONE_KEY, String(n));
+        localStorage.setItem(DONE_LIST, JSON.stringify(checked));
+      }catch(e){}
     }
   }
-  function show(){
-    ov.classList.add('open');
+
+  boxes.forEach(function(b){ b.addEventListener('change', function(){ saveDone(true); }); });
+  try{
+    var doneList = JSON.parse(localStorage.getItem(DONE_LIST) || '[]');
+    boxes.forEach(function(b){ b.checked = doneList.indexOf(b.getAttribute('data-done')) >= 0; });
+  }catch(e){}
+  saveDone(false);
+
+  /* Lightbox */
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCaption');
+  var lbClose = document.getElementById('lbClose');
+
+  function openLb(img){
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    var fig = img.closest('figure');
+    var cap = fig ? fig.querySelector('figcaption') : null;
+    lbCap.textContent = cap ? cap.textContent : (img.alt || '');
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
-    closer.focus();
   }
-  function hide(){
-    ov.classList.remove('open');
+  function closeLb(){
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
-    opener.focus();
   }
-  opener.addEventListener('click', show);
-  closer.addEventListener('click', hide);
-  ov.addEventListener('click', function(e){ if (e.target === ov) hide(); });
-  document.addEventListener('keydown', function(e){
-    if (!ov.classList.contains('open')) return;
-    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); hide(); }
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.stopPropagation(); }
-  }, true);
-  document.addEventListener('keydown', function(e){
-    if (e.key !== 'k' && e.key !== 'K') return;
-    if (/^(INPUT|TEXTAREA|SELECT)$/.test((e.target && e.target.tagName) || '')) return;
-    e.preventDefault();
-    if (ov.classList.contains('open')) hide(); else show();
+
+  Array.prototype.forEach.call(document.querySelectorAll('img[data-zoom]'), function(img){
+    img.addEventListener('click', function(){ openLb(img); });
+    img.style.cursor = 'zoom-in';
   });
-  try {
-    var q = new URLSearchParams(location.search);
-    if (q.has('kapitel') || location.hash === '#kapitel') show();
-  } catch(e) {}
-  ov.addEventListener('keydown', function(e){
-    if (e.key !== 'Tab') return;
-    var f = ov.querySelectorAll('button, a[href]');
-    if (!f.length) return;
-    var first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  });
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLb(); });
 })();
 </script>
-<script src="assets/kurs.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 

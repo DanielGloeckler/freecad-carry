@@ -8,22 +8,32 @@
 **Baugruppe:** <https://danielgloeckler.github.io/freecad-carry/baugruppe.html>  
 **Originalseiten (PDF):** <https://danielgloeckler.github.io/freecad-carry/original.html>
 
-Aufbau wie eine Lernplattform: **Kursstartseite** mit Fortschritt, fünf
-**Kapitel** als Abschnitte mit 89 Einzelschritten und pro Kapitel eine **Kursleiste** mit Rücksprung
-zur Übersicht. Der Fortschritt wird im Browser gespeichert.
+Aufbau wie eine Lernplattform: **Kursstartseite** mit Fortschritt und fünf
+**Kapitel** als Abschnitte. Die Kapitel 2–5 bleiben Schritt-für-Schritt-Trainer
+mit einer **Lupe** auf dem Klickpunkt. **Kapitel 1 (Chassi)** ist jetzt eine
+PDF-artige Anleitung mit **drei Hilfestufen**.
 
-Eigene Screenshots aus **FreeCAD 1.1**, jeweils mit **Lupe** auf dem
-Klickpunkt. Über den Button **Kapitel** (oder die Taste **K**) öffnet sich
-auf jeder Seite eine kompakte Übersicht mit Bild des fertigen Carry – von
-dort lässt sich direkt in jedes Kapitel wechseln. Kapitel für Kapitel; die Originalseiten aus „FreeCAD Anleitung II“
-bleiben als Leseausgabe erhalten. Die Uhr aus dem PDF ist nicht enthalten.
+Über den Button **Kapitel** (oder die Taste **K**) öffnet sich auf jeder Seite
+eine kompakte Übersicht mit Bild des fertigen Carry – von dort lässt sich
+direkt in jedes Kapitel wechseln. Die Originalseiten aus „FreeCAD Anleitung II“
+bleiben als Leseausgabe erhalten.
 
-## Kapitel 1 – Chassi (30 Schritte)
+## Kapitel 1 – Chassi (PDF-Stil, 3 Hilfestufen)
 
-Neues Chassi → Skizze/Rechteck → Symmetrie → **116 × 82 mm** → 5 mm
-aufpolstern → Platte → **ein** Kreis + Bemaßung → Tasche → **Mehrfach-
-Transformation mit zwei linearen Mustern** (9 × 96 mm und 5 × 60 mm) →
-45 Löcher → Senkungen 0,75 mm → rot → speichern.
+Neues Chassi → Skizze/Rechteck → Symmetrie → **116 × 70 mm** → 5 mm
+aufpolstern → Platte → **ein** Kreis R1,5 (10 mm von links, 5 mm von oben) →
+Tasche „durch alles“ → **Mehrfach-Transformation mit zwei linearen Mustern**
+(9 × 96 mm und 5 × 60 mm) → 45 Löcher → Senkungen 1,5 mm → rot → speichern.
+
+Die Seite bietet oben einen Umschalter **Wenig / Mittel / Viel**:
+
+- **Wenig:** Ziel und Kurzfassung, ohne Einzelklicks.
+- **Mittel:** die wichtigsten Schritte mit Bildern (wie die PDF).
+- **Viel:** jeder einzelne Klick mit Ausschnitt und Inline-Symbol.
+
+Die Screenshots wurden mit **FreeCAD 1.1** (dunkles Theme) neu erzeugt:
+`tools/chassi_guide_shots.py`. Das Skript baut das Modell, öffnet die Dialoge
+und speichert die Ausschnitte unter `assets/chassi/`.
 
 ## Kapitel 2 – Rad (22 Schritte)
 
@@ -50,9 +60,10 @@ Alle Teile in einen Ordner → **A2plus** → Chassi einfügen (fest) → Radlag
 über Kreis-Kanten ausrichten → Muttern und Schrauben → alle vier Radlager →
 Achsen (Offset −7 mm) → Räder (1 mm Abstand) → fertig.
 
-Hinweise zur Baugruppe: Das Chassi ist 82 mm breit, deshalb sind die Achsen
-104 mm lang und die Räder sitzen 1 mm neben der Platte. Die Schrauben
-verschwinden in den Senkungen des Chassis, die Muttern in den
+Hinweise zur Baugruppe: Die Kapitel 2–5 beziehen sich noch auf die frühere
+Chassi-Variante mit 82 mm Breite (Achsen 104 mm). Für die neue Variante
+**116 × 70 mm** müssen Achslänge und Radabstand später angepasst werden.
+Die Schrauben verschwinden in den Senkungen des Chassis, die Muttern in den
 Sechskant-Vertiefungen des Radlagers.
 
 ## Quelle

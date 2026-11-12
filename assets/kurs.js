@@ -1,11 +1,11 @@
-/* =========================================================================
+﻿/* =========================================================================
    Lernplattform-Logik: Kursleiste auf Kapitelseiten + Kursübersicht
    ========================================================================= */
 (function () {
   'use strict';
 
   var KEYMAP = {
-    'chassi.html':    { key: 'freecad-carry-chassi',    n: 30, num: 1, title: 'Chassi' },
+    'chassi.html':    { key: 'freecad-carry-chassi',    n: 6,  num: 1, title: 'Chassi' },
     'rad.html':       { key: 'freecad-carry-rad',       n: 22, num: 2, title: 'Rad' },
     'lager.html':     { key: 'freecad-carry-lager',     n: 13,  num: 3, title: 'Radlager' },
     'achse.html':     { key: 'freecad-carry-achse',     n: 14,  num: 4, title: 'Achse & Schrauben' },
@@ -74,7 +74,7 @@
         if (open) { open.textContent = 'Wiederholen'; open.href = f; }
       } else if (saved > 0) {
         if (badge) { badge.textContent = 'In Arbeit'; badge.className = 'kc-badge prog'; }
-        if (open) { open.textContent = 'Fortsetzen'; open.href = f + '?schritt=' + Math.min(saved + 1, n); }
+        if (open) { open.textContent = 'Fortsetzen'; open.href = (f === 'chassi.html') ? f : (f + '?schritt=' + Math.min(saved + 1, n)); }
       } else {
         if (badge) { badge.textContent = 'Nicht begonnen'; badge.className = 'kc-badge new'; }
         if (open) { open.textContent = 'Starten'; open.href = f; }
@@ -122,10 +122,10 @@
       continueBtn.href = 'chassi.html';
     } else if (target) {
       continueBtn.textContent = 'Weiterlernen';
-      continueBtn.href = target.file + (target.step > 1 ? '?schritt=' + target.step : '');
+      continueBtn.href = (target.file === 'chassi.html') ? 'chassi.html' : (target.file + (target.step > 1 ? '?schritt=' + target.step : ''));
     } else if (firstOpen) {
       continueBtn.textContent = firstOpen.saved > 0 ? 'Weiterlernen' : 'Kurs starten';
-      continueBtn.href = firstOpen.file + (firstOpen.step > 1 ? '?schritt=' + firstOpen.step : '');
+      continueBtn.href = (firstOpen.file === 'chassi.html') ? 'chassi.html' : (firstOpen.file + (firstOpen.step > 1 ? '?schritt=' + firstOpen.step : ''));
     } else {
       continueBtn.textContent = 'Kurs starten';
       continueBtn.href = 'chassi.html';
@@ -143,3 +143,5 @@
     });
   }
 })();
+
+
