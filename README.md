@@ -30,8 +30,8 @@ Die Seite bietet oben einen Umschalter **Wenig / Mittel / Viel**:
 
 - **Wenig:** Ziel und Kurzfassung, ohne Einzelklicks.
 - **Mittel:** die wichtigsten Schritte mit Bildern (wie die PDF).
-- **Viel:** jeder einzelne Klick mit Ausschnitt, Inline-Symbol, **Statusbild**
-  („So sollte es aussehen“) und aufklappbaren **„Mehr erklären“**-Hinweisen.
+- **Viel:** jeder einzelne Klick mit Ausschnitt, Inline-Symbol und zusätzlichen
+  Hinweisen wie dem **M-Tasten-Tipp** beim Linienzug.
 
 Die Screenshots wurden mit **FreeCAD 1.1** (dunkles Theme) neu erzeugt:
 `tools/chassi_guide_shots.py`. Das Skript baut das Modell, öffnet die Dialoge
