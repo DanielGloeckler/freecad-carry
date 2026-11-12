@@ -1,4 +1,4 @@
-# FreeCAD Carry – Lernplattform (Kurs)
+﻿# FreeCAD Carry – Lernplattform (Kurs)
 
 **Kursübersicht:** <https://danielgloeckler.github.io/freecad-carry/>  
 **Kapitel 1 – Chassi:** <https://danielgloeckler.github.io/freecad-carry/chassi.html>  
@@ -23,13 +23,15 @@ bleiben als Leseausgabe erhalten.
 Neues Chassi → Skizze/Rechteck → Symmetrie → **116 × 70 mm** → 5 mm
 aufpolstern → Platte → **ein** Kreis R1,5 (10 mm von links, 5 mm von oben) →
 Tasche „durch alles“ → **Mehrfach-Transformation mit zwei linearen Mustern**
-(9 × 96 mm und 5 × 60 mm) → 45 Löcher → Senkungen 1,5 mm → rot → speichern.
+(9 × 96 mm und 5 × 60 mm) → 45 Löcher → **8 Schraubenlöcher** senken
+(1,5 mm) → rot → speichern.
 
 Die Seite bietet oben einen Umschalter **Wenig / Mittel / Viel**:
 
 - **Wenig:** Ziel und Kurzfassung, ohne Einzelklicks.
 - **Mittel:** die wichtigsten Schritte mit Bildern (wie die PDF).
-- **Viel:** jeder einzelne Klick mit Ausschnitt und Inline-Symbol.
+- **Viel:** jeder einzelne Klick mit Ausschnitt, Inline-Symbol, **Statusbild**
+  („So sollte es aussehen“) und aufklappbaren **„Mehr erklären“**-Hinweisen.
 
 Die Screenshots wurden mit **FreeCAD 1.1** (dunkles Theme) neu erzeugt:
 `tools/chassi_guide_shots.py`. Das Skript baut das Modell, öffnet die Dialoge
@@ -73,3 +75,4 @@ Konstruktionen und Baugruppen“** von **Jürgen Gräber** (2020). Die
 Originalseiten sind für den NWT-Unterricht gedacht; Text und Bilder bleiben
 Eigentum des Autors. Die Schritt-für-Schritt-Fassung mit den neuen Screenshots
 ist eine eigene Umsetzung in FreeCAD 1.1.
+

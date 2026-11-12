@@ -430,12 +430,18 @@ def run():
                 pass
         view.viewTop(); view.fitAll(); pump(600)
         edges = []
+        # Nur die 8 Schraubenloecher senken: obere/untere Reihe, Spalten 1, 3, 7, 9
+        want = [(-48, 30), (-24, 30), (24, 30), (48, 30),
+                (-48, -30), (-24, -30), (24, -30), (48, -30)]
         for i, e in enumerate(lp.Shape.Edges):
             try:
                 if e.Curve.TypeId == "Part::GeomCircle" and abs(e.Curve.Radius - 1.5) < 0.01 and abs(e.Curve.Center.z - 5.0) < 0.01:
-                    edges.append("Edge%d" % (i + 1))
+                    c = e.Curve.Center
+                    if any(abs(c.x - wx) < 0.6 and abs(c.y - wy) < 0.6 for wx, wy in want):
+                        edges.append("Edge%d" % (i + 1))
             except Exception:
                 pass
+        log("Senkungskanten: %d" % len(edges))
         Gui.Selection.clearSelection()
         for en in edges:
             Gui.Selection.addSelection(lp, en)

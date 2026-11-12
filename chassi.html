@@ -134,6 +134,26 @@
   .low-goal figure{margin:0}
   .low-goal img{width:100%;border-radius:9px;border:1px solid #cbd5e0;box-shadow:0 8px 22px rgba(24,40,60,.12)}
   .low-goal figcaption{font-size:12.5px;color:var(--muted);margin-top:8px;text-align:center}
+  .status{display:none;margin:16px 0 0;padding-top:12px;border-top:1px dashed #d9e1ea}
+  body[data-help="viel"] .status{display:block}
+  .status-label{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#2f8b57;background:#eef8f1;border:1px solid #cfe8d8;border-radius:999px;padding:3px 8px}
+  .status-label::before{content:"✓";font-size:11px}
+  .status img{width:100%;height:auto;border-radius:8px;border:1px solid #cbd5e0;background:#1b1e26;box-shadow:0 8px 20px rgba(24,40,60,.10);margin-top:8px;cursor:zoom-in}
+  .status figcaption{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4;text-align:center}
+  .deep{display:none;margin-top:16px;border:1px solid var(--line);border-radius:10px;background:#f8fbfe;padding:10px 14px}
+  body[data-help="viel"] .deep{display:block}
+  .deep summary{cursor:pointer;font-weight:700;color:var(--blue);font-size:14px;list-style:none;user-select:none}
+  .deep summary::-webkit-details-marker{display:none}
+  .deep summary::before{content:"＋";display:inline-block;width:1.1em;color:var(--blue2);font-weight:800}
+  .deep[open] summary::before{content:"−"}
+  .deep-body{font-size:14px;color:#33465a;padding-top:8px;line-height:1.6}
+  .deep-body p{margin:6px 0}
+  .deep-body ul{margin:6px 0;padding-left:20px}
+  .deep-body li{margin:3px 0}
+  .deep-body img{width:100%;border-radius:7px;border:1px solid #cbd5e0;margin-top:8px}
+  .tool-callout{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+  .tool-callout img{width:46px;height:46px;object-fit:contain;flex:none}
+  .tool-callout div{font-size:13.5px;line-height:1.45}
 
   /* ---------- Sichtbarkeit nach Hilfestufe ---------- */
   body[data-help="wenig"] .row[data-level="2"],
@@ -244,12 +264,13 @@
       <div class="badge-row">
         <span class="badge">116 × 70 × 5 mm</span>
         <span class="badge">45 Löcher</span>
+        <span class="badge">8 Senkungen</span>
         <span class="badge">FreeCAD 1.1</span>
         <span class="badge">ca. 45–60 Min.</span>
       </div>
     </div>
     <figure class="hero-img">
-      <img src="assets/chassi/26_rot.png" alt="Fertiges rotes Chassi mit 45 gesenkten Löchern" data-zoom>
+      <img src="assets/chassi/26_rot.png" alt="Fertiges rotes Chassi mit 45 Löchern, 8 davon gesenkt" data-zoom>
       <figcaption>So sieht dein Chassi am Ende aus.</figcaption>
     </figure>
   </section>
@@ -516,10 +537,32 @@
           <li>Die Skizze wird grün – alles ist bestimmt.</li>
         </ul>
         <div class="tip"><b>Tipp:</b> Es entsteht genau <b>ein</b> Kreis. Die anderen 44 kommen gleich per Muster.</div>
+        <p class="note">Die 10 mm und 5 mm werden von der Plattenkante gemessen – dafür brauchst du <img class="ui" src="assets/chassi/icons/Sketcher_CompExternal.png" alt="Externe Geometrie"> <b>Externe Geometrie</b>.</p>
       </div>
       <figure class="visual">
         <img src="assets/chassi/13_kreis.png" alt="Kreis mit Radius 1,5 mm und den Maßen 10 mm und 5 mm" data-zoom>
         <figcaption>R 1,5 mm, 10 mm von links, 5 mm von oben.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="3">
+      <div class="text">
+        <span class="pill">Zusatzschritt</span>
+        <p class="lead">So holst du dir den Eckpunkt: <img class="ui" src="assets/chassi/icons/Sketcher_CompExternal.png" alt="Externe Geometrie"> <b>Externe Geometrie</b>.</p>
+        <div class="tool-callout">
+          <img src="assets/chassi/icons/Sketcher_CompExternal.png" alt="Werkzeug Externe Geometrie">
+          <div><b>Externe Geometrie</b><br>Werkzeug anklicken und dann die Kante der Platte anwählen.</div>
+        </div>
+        <ul class="steps">
+          <li>Zuerst die <b>linke Kante</b>, dann die <b>obere Kante</b> der Platte anklicken.</li>
+          <li>Die Kanten erscheinen als <b>Bezugskanten</b> in der Skizze.</li>
+          <li>Jetzt den Kreis mit <b>10 mm</b> und <b>5 mm</b> von diesen Kanten bemaßen.</li>
+        </ul>
+        <div class="tip"><b>Warum?</b> Ohne Bezugskante weiß FreeCAD nicht, wo die 10 mm und 5 mm gemessen werden sollen.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/chassi/28_externe_geometrie.png" alt="Kreis mit Bezugskanten und den Maßen 10 mm, 5 mm und R1,5" data-zoom>
+        <figcaption>Die Maße 10 mm und 5 mm werden von den Plattenkanten aus gemessen.</figcaption>
       </figure>
     </div>
 
@@ -712,38 +755,39 @@
     <div class="section-head">
       <span class="num">5.)</span>
       <h2>Senkungen</h2>
-      <span class="goal">Ziel: alle 45 Löcher mit 1,5 mm ansenken</span>
+      <span class="goal">Ziel: die 8 Schraubenlöcher mit 1,5 mm ansenken</span>
       <label class="done-toggle"><input type="checkbox" data-done="senkungen"> <span>erledigt</span></label>
     </div>
 
     <div class="low-summary">
       <h3>Das ist zu tun</h3>
       <ul>
-        <li>In den <b>Drahtgittermodus</b> wechseln und alle Kreise auswählen.</li>
-        <li>Mit <img class="ui" src="assets/chassi/icons/PartDesign_Chamfer.png" alt="Fase"> <b>Fase</b> eine Kantenbrechung von <b>1,5 mm</b> erzeugen.</li>
-        <li>Zurück in die Normalansicht wechseln.</li>
+        <li><b>Nicht alle 45 Löcher</b> werden gesenkt, sondern nur die <b>8 Schraubenlöcher</b>.</li>
+        <li>Obere und untere Reihe: jeweils das <b>1., 3., 7. und 9. Loch</b>.</li>
+        <li>Im Drahtgittermodus diese 8 Kreise auswählen und mit <b>Fase 1,5 mm</b> ansenken.</li>
       </ul>
     </div>
     <div class="low-goal">
       <figure>
-        <img src="assets/chassi/25_senkung_fertig.png" alt="Chassi mit 45 gesenkten Löchern" data-zoom>
-        <figcaption>Alle Löcher sind angesenkt – die Schraubenköpfe passen später hinein.</figcaption>
+        <img src="assets/chassi/25_senkung_fertig.png" alt="Chassi mit 8 gesenkten Schraubenlöchern" data-zoom>
+        <figcaption>Nur die 8 Schraubenlöcher sind angesenkt – die übrigen 37 bleiben klein.</figcaption>
       </figure>
     </div>
 
     <div class="row" data-level="2">
       <div class="text">
         <span class="pill">Schritt 1</span>
-        <p class="lead">Wechsle in den <b>Drahtgittermodus</b> und wähle alle <b>Kreise</b> auf der Oberseite aus.</p>
+        <p class="lead">Wechsle in den <b>Drahtgittermodus</b> und wähle nur die <b>8 Schraubenlöcher</b> aus.</p>
         <ul class="steps">
-          <li>Die ausgewählten Kanten werden grün markiert.</li>
-          <li>Es sind alle 45 Löcher.</li>
+          <li>Obere Reihe: das <b>1., 3., 7. und 9. Loch</b>.</li>
+          <li>Untere Reihe: das <b>1., 3., 7. und 9. Loch</b>.</li>
+          <li>Die übrigen <b>37 Löcher</b> bleiben ohne Senkung.</li>
         </ul>
-        <div class="tip"><b>Tipp:</b> Mit <span class="kbd">Strg</span> + Klick kannst du mehrere Kanten gleichzeitig auswählen.</div>
+        <div class="tip"><b>Warum?</b> Die 8 Löcher sind für die Schrauben der Radhalterungen. Die anderen Löcher sparen nur Gewicht.</div>
       </div>
       <figure class="visual">
-        <img src="assets/chassi/23_senkung_auswahl.png" alt="Drahtgittermodus mit allen ausgewählten Lochkreisen" data-zoom>
-        <figcaption>Alle 45 Kreise sind ausgewählt.</figcaption>
+        <img src="assets/chassi/23_senkung_auswahl.png" alt="Drahtgittermodus mit 8 ausgewählten Schraubenlöchern" data-zoom>
+        <figcaption>8 grüne Kreise – genau die Schraubenlöcher.</figcaption>
       </figure>
     </div>
 
@@ -753,46 +797,47 @@
         <p class="lead">Klicke auf <img class="ui" src="assets/chassi/icons/PartDesign_Chamfer.png" alt="Fase"> <b>Fase</b> und trage <b>1,50 mm</b> ein.</p>
         <ul class="steps">
           <li>Typ <b>Gleicher Abstand</b> stehen lassen.</li>
-          <li>Mit <b>OK</b> bestätigen.</li>
-          <li>Danach wieder in die <b>Normalansicht</b> wechseln.</li>
+          <li>In der Liste müssen <b>8 Kanten</b> stehen.</li>
+          <li>Mit <b>OK</b> bestätigen und in die <b>Normalansicht</b> wechseln.</li>
         </ul>
-        <div class="tip">Durch die Fase verschwinden die Schraubenköpfe später komplett in der Platte.</div>
+        <div class="tip">Die Fase wird nur an den 8 ausgewählten Löchern erzeugt.</div>
       </div>
       <figure class="visual">
-        <img src="assets/chassi/24_senkung.png" alt="Dialog Fase mit Abstand 1,5 mm" data-zoom>
-        <figcaption>Abstand <b>1,50 mm</b> – alle Kanten sind bereits ausgewählt.</figcaption>
+        <img src="assets/chassi/24_senkung.png" alt="Dialog Fase mit 8 Kanten und Abstand 1,5 mm" data-zoom>
+        <figcaption>8 Kanten in der Liste, Abstand <b>1,50 mm</b>.</figcaption>
       </figure>
     </div>
 
     <div class="row" data-level="2">
       <div class="text">
         <span class="pill">Ergebnis</span>
-        <p class="lead">Alle 45 Löcher sind jetzt angesenkt.</p>
+        <p class="lead">Die <b>8 Schraubenlöcher</b> sind jetzt angesenkt.</p>
         <ul class="steps">
-          <li>Die Platte sieht aus wie in der PDF.</li>
+          <li>Die übrigen 37 Löcher bleiben unverändert.</li>
+          <li>Kontrolle: 8 große Senkungen, 37 kleine Löcher.</li>
           <li>Jetzt fehlt nur noch die Farbe.</li>
         </ul>
       </div>
       <figure class="visual">
-        <img src="assets/chassi/25_senkung_fertig.png" alt="Fertige Senkungen an allen Löchern" data-zoom>
-        <figcaption>Die Senkungen sind deutlich sichtbar.</figcaption>
+        <img src="assets/chassi/25_senkung_fertig.png" alt="8 Senkungen an den Schraubenlöchern" data-zoom>
+        <figcaption>Acht Senkungen – nicht 45.</figcaption>
       </figure>
     </div>
 
     <div class="row" data-level="3">
       <div class="text">
         <span class="pill">Profi-Tipp</span>
-        <p class="lead">Wenn eine Kante fehlt, kannst du sie im Dialog über <b>Auswählen</b> nachträglich hinzufügen.</p>
+        <p class="lead">Die 8 Positionen ergeben sich aus den <b>Radhaltern</b>: 2 Schrauben pro Halter, 4 Halter.</p>
         <ul class="steps">
-          <li>Die Liste zeigt alle ausgewählten Kanten (Edge58, Edge59, …).</li>
-          <li>Mit <b>Entfernen</b> nimmst du eine Kante wieder heraus.</li>
-          <li>Die Vorschau zeigt die Fase sofort.</li>
+          <li>Oben und unten jeweils außen und zwei Löcher weiter innen.</li>
+          <li>Die mittleren 37 Löcher sind nur zur Gewichtsersparnis da.</li>
+          <li>Falls dein Radhalter anders sitzt, kannst du die Auswahl anpassen.</li>
         </ul>
         <div class="tip"><b>Merke:</b> 1,5 mm ist der Abstand der Fase – nicht der Lochdurchmesser.</div>
       </div>
       <figure class="visual">
-        <img src="assets/chassi/25_senkung_fertig.png" alt="Senkungen in der 3D-Ansicht" data-zoom>
-        <figcaption>Fertig – alle Löcher sind gleichmäßig angesenkt.</figcaption>
+        <img src="assets/chassi/25_senkung_fertig.png" alt="Senkungen nur an den 8 Schraubenlöchern" data-zoom>
+        <figcaption>Nur die 8 Schraubenlöcher sind angesenkt.</figcaption>
       </figure>
     </div>
   </section>
@@ -815,7 +860,7 @@
     </div>
     <div class="low-goal">
       <figure>
-        <img src="assets/chassi/26_rot.png" alt="Rotes Chassi mit 45 gesenkten Löchern" data-zoom>
+        <img src="assets/chassi/26_rot.png" alt="Rotes Chassi mit 45 Löchern, 8 davon gesenkt" data-zoom>
         <figcaption>Dein fertiges Chassi in Rot.</figcaption>
       </figure>
     </div>
@@ -864,7 +909,7 @@
       </div>
       <figure class="visual">
         <img src="assets/chassi/26_rot.png" alt="Fertiges Chassi als Kontrolle" data-zoom>
-        <figcaption>Kontrolle: 45 Löcher, alle gesenkt, Körper rot.</figcaption>
+        <figcaption>Kontrolle: 45 Löcher, 8 davon gesenkt, Körper rot.</figcaption>
       </figure>
     </div>
   </section>
@@ -873,11 +918,11 @@
   <section class="finish">
     <div>
       <h2>Fertig! 🎉</h2>
-      <p>Dein Chassi ist rot, hat 45 gesenkte Löcher und ist gespeichert. Jetzt kann es mit dem Rad weitergehen.</p>
+      <p>Dein Chassi ist rot, hat 45 Löcher (8 davon gesenkt) und ist gespeichert. Jetzt kann es mit dem Rad weitergehen.</p>
       <ul class="checklist">
         <li>116 × 70 × 5 mm</li>
         <li>9 × 5 = 45 Löcher</li>
-        <li>Senkungen 1,5 mm</li>
+        <li>8 Senkungen à 1,5 mm</li>
         <li>Farbe rot</li>
         <li>Gespeichert als <span class="mono">Chassi.FCStd</span> im Ordner <b>Carry</b></li>
       </ul>
@@ -908,6 +953,7 @@
   <div class="caption" id="lbCaption"></div>
 </div>
 
+<script src="assets/chassi/deep.js"></script>
 <script>
 (function(){
   'use strict';
@@ -918,7 +964,7 @@
   var texts = {
     wenig: '<b>Wenig:</b> Du bekommst das Ziel und die wichtigsten Arbeitsschritte. Die Details erarbeitest du selbst.',
     mittel: '<b>Mittel:</b> Die wichtigsten Schritte mit Bildern – wie in der PDF-Anleitung.',
-    viel: '<b>Viel:</b> Jeder einzelne Klick wird erklärt, mit Ausschnitt und Symbol. Ideal, wenn du noch unsicher bist.'
+    viel: '<b>Viel:</b> Jeder einzelne Klick, ein Statusbild und „Mehr erklären“ zum Aufklappen. Ideal, wenn du noch unsicher bist.'
   };
 
   function setHelp(level, save){
@@ -999,6 +1045,10 @@
 </script>
 </body>
 </html>
+
+
+
+
 
 
 
