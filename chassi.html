@@ -213,18 +213,27 @@
   }
 
   @media print{
-    @page{size:A4;margin:14mm}
-    body{font-size:10.5pt;background:#fff}
+    @page{size:A4;margin:13mm 12mm}
+    html,body{background:#fff}
+    body{font-size:10.5pt;line-height:1.5}
     .topbar,.helpbar,.toc,.lightbox,.done-toggle,footer .no-print{display:none!important}
     .wrap{max-width:none;padding:0}
-    .hero{grid-template-columns:1fr 1fr;gap:18px;padding:0 0 10px}
-    h1{font-size:38pt}
-    .hero-img img{box-shadow:none}
-    .section{break-inside:auto;margin:12px 0;border-color:#bbb;border-radius:8px}
-    .row{break-inside:avoid;grid-template-columns:1fr 1fr}
-    .row .visual img{box-shadow:none}
-    .low-goal img,.finish img{box-shadow:none}
-    .tip{background:#f4f4f4}
+    .hero{grid-template-columns:1.05fr .95fr;gap:12mm;padding:0 0 8mm;break-after:page;page-break-after:always}
+    h1{font-size:34pt}
+    .hero-img img{box-shadow:none;max-height:78mm;object-fit:contain}
+    .goalbox{break-inside:avoid;page-break-inside:avoid}
+    .section{break-before:page;page-break-before:always;break-inside:auto;page-break-inside:auto;margin:0;border:1px solid #bbb;border-radius:0;overflow:visible}
+    .section-head{break-after:avoid;page-break-after:avoid;background:#f7f9fb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .row{break-inside:avoid;page-break-inside:avoid;grid-template-columns:1fr 1fr}
+    .row .text{padding:10px 12px}
+    .row .visual{padding:8px;border-left:1px solid #ddd}
+    .row .visual img{box-shadow:none;max-height:105mm;width:auto;max-width:100%;object-fit:contain}
+    .row .visual figcaption{font-size:10pt}
+    .low-summary,.low-goal,.finish{break-inside:avoid;page-break-inside:avoid}
+    .low-goal img,.finish img{box-shadow:none;max-height:120mm;width:auto;max-width:100%;object-fit:contain}
+    .finish{break-before:page;page-break-before:always}
+    .status,.deep,.deep-note{display:none!important}
+    .tip{background:#f4f4f4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     a{color:inherit;text-decoration:none}
   }
 </style>
@@ -1069,6 +1078,7 @@
 </script>
 </body>
 </html>
+
 
 
 

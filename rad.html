@@ -213,18 +213,27 @@
   }
 
   @media print{
-    @page{size:A4;margin:14mm}
-    body{font-size:10.5pt;background:#fff}
+    @page{size:A4;margin:13mm 12mm}
+    html,body{background:#fff}
+    body{font-size:10.5pt;line-height:1.5}
     .topbar,.helpbar,.toc,.lightbox,.done-toggle,footer .no-print{display:none!important}
     .wrap{max-width:none;padding:0}
-    .hero{grid-template-columns:1fr 1fr;gap:18px;padding:0 0 10px}
-    h1{font-size:38pt}
-    .hero-img img{box-shadow:none}
-    .section{break-inside:auto;margin:12px 0;border-color:#bbb;border-radius:8px}
-    .row{break-inside:avoid;grid-template-columns:1fr 1fr}
-    .row .visual img{box-shadow:none}
-    .low-goal img,.finish img{box-shadow:none}
-    .tip{background:#f4f4f4}
+    .hero{grid-template-columns:1.05fr .95fr;gap:12mm;padding:0 0 8mm;break-after:page;page-break-after:always}
+    h1{font-size:34pt}
+    .hero-img img{box-shadow:none;max-height:78mm;object-fit:contain}
+    .goalbox{break-inside:avoid;page-break-inside:avoid}
+    .section{break-before:page;page-break-before:always;break-inside:auto;page-break-inside:auto;margin:0;border:1px solid #bbb;border-radius:0;overflow:visible}
+    .section-head{break-after:avoid;page-break-after:avoid;background:#f7f9fb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .row{break-inside:avoid;page-break-inside:avoid;grid-template-columns:1fr 1fr}
+    .row .text{padding:10px 12px}
+    .row .visual{padding:8px;border-left:1px solid #ddd}
+    .row .visual img{box-shadow:none;max-height:105mm;width:auto;max-width:100%;object-fit:contain}
+    .row .visual figcaption{font-size:10pt}
+    .low-summary,.low-goal,.finish{break-inside:avoid;page-break-inside:avoid}
+    .low-goal img,.finish img{box-shadow:none;max-height:120mm;width:auto;max-width:100%;object-fit:contain}
+    .finish{break-before:page;page-break-before:always}
+    .status,.deep,.deep-note{display:none!important}
+    .tip{background:#f4f4f4!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     a{color:inherit;text-decoration:none}
   }
 </style>
@@ -319,7 +328,7 @@
     </div>
     <div class="low-goal">
       <figure>
-        <img src="assets/rad/profil_masse.svg" alt="Profil des Rads mit den Maßen 5, 17,5, 2, 1 mm und R1,75" data-zoom>
+        <img src="assets/rad/skizze_pdf.png" alt="Technische Zeichnung des Radprofils mit 5, 17,5, 2, 1 mm und R1,75" data-zoom>
         <figcaption>So sieht das bemaßte Profil aus.</figcaption>
       </figure>
     </div>
@@ -421,7 +430,7 @@
         <div class="tip"><b>Tipp:</b> Die Maße in der Zeichnung sind in Millimetern.</div>
       </div>
       <figure class="visual">
-        <img src="assets/rad/profil_masse.svg" alt="Bemaßtes Profil mit 5, 17,5, 2, 1 mm und R1,75" data-zoom>
+        <img src="assets/rad/skizze_pdf.png" alt="Bemaßtes Profil mit 5, 17,5, 2, 1 mm und R1,75" data-zoom>
         <figcaption>7 mm breit, 17,5 mm Radius, 2 mm Stufen, 1 mm Rand, R1,75 Nut.</figcaption>
       </figure>
     </div>
@@ -553,7 +562,7 @@
         <div class="tip">Die Bohrung ist später für die Achse bzw. das Lager.</div>
       </div>
       <figure class="visual">
-        <img src="assets/rad/08_bohrung_annot.png" alt="Zentrale Bohrung Ø8 im Rad" data-zoom>
+        <img src="assets/rad/08_bohrung.png" alt="Zentrale Bohrung Ø8 im Rad" data-zoom>
         <figcaption>Die zentrale Bohrung hat <b>Ø8 mm</b>.</figcaption>
       </figure>
     </div>
@@ -695,6 +704,7 @@
         <li>Einen <b>neuen Körper</b> anlegen – der Gummiring wird ein eigenes Teil.</li>
         <li>Auf der <b>XZ-Ebene</b> einen Kreis <b>R1,75</b> bei <b>18,5 mm</b> von der Achse zeichnen.</li>
         <li><b>360°</b> rotieren und schwarz färben.</li>
+        <li>Die Körper in <b>Radfelge</b> und <b>Gummiring</b> umbenennen.</li>
       </ul>
     </div>
     <div class="low-goal">
@@ -725,13 +735,13 @@
         <span class="pill">Schritt 2</span>
         <p class="lead">Neue Skizze auf der <b>XZ-Ebene</b>: Kreis <b>R1,75</b>, Mittelpunkt <b>18,5 mm</b> von der Achse.</p>
         <ul class="steps">
-          <li>Kreis mit <b>Radius 2,2 mm</b> zeichnen.</li>
+          <li>Kreis mit <b>Radius 1,75 mm</b> zeichnen.</li>
           <li>Mittelpunkt <b>18,5 mm</b> vom Ursprung entfernt setzen.</li>
           <li>Die Skizze wird grün.</li>
         </ul>
       </div>
       <figure class="visual">
-        <img src="assets/rad/gummi_profil.svg" alt="Gummiprofil: Kreis R1,75 bei 18,5 mm von der Achse" data-zoom>
+        <img src="assets/rad/gummi_pdf.png" alt="Gummiprofil: Kreis R1,75 bei 18,5 mm von der Achse" data-zoom>
         <figcaption>Der Gummiquerschnitt: <b>R1,75</b> bei <b>18,5 mm</b>.</figcaption>
       </figure>
     </div>
@@ -756,7 +766,7 @@
         <span class="pill">Profi-Tipp</span>
         <p class="lead">Der Gummiring ist bewusst ein <b>eigenes Teil</b> – so kann er später in der Baugruppe anders gefärbt oder ersetzt werden.</p>
         <ul class="steps">
-          <li>Radius <b>2,2 mm</b> ergibt den schwarzen Ring.</li>
+          <li>Radius <b>1,75 mm</b> ergibt den schwarzen Ring.</li>
           <li>Der Ring sitzt bei <b>18,5 mm</b> – also außen am Rad.</li>
           <li>Beide Körper bleiben in derselben Datei.</li>
         </ul>
@@ -764,6 +774,23 @@
       <figure class="visual">
         <img src="assets/rad/16_fertig.png" alt="Fertiges Rad mit Gummiring" data-zoom>
         <figcaption>Rad und Gummiring zusammen.</figcaption>
+      </figure>
+    </div>
+
+    <div class="row" data-level="2">
+      <div class="text">
+        <span class="pill">Schritt 4</span>
+        <p class="lead">Benenne die beiden Körper im Modellbaum um: <b>Radfelge</b> und <b>Gummiring</b>.</p>
+        <ul class="steps">
+          <li>Rechtsklick auf den Radkörper → <b>Umbenennen</b> (oder <b>F2</b>).</li>
+          <li>Namen <b>Radfelge</b> eintragen.</li>
+          <li>Den zweiten Körper <b>Gummiring</b> nennen.</li>
+        </ul>
+        <div class="tip">So kannst du die Teile später in der Baugruppe besser unterscheiden.</div>
+      </div>
+      <figure class="visual">
+        <img src="assets/rad/teile_umbenennen.svg" alt="Modellbaum mit Radfelge und Gummiring" data-zoom>
+        <figcaption>Radfelge und Gummiring sind eindeutig benannt.</figcaption>
       </figure>
     </div>
   </section>
@@ -833,6 +860,7 @@
         <li>Ø35 mm, 7 mm breit</li>
         <li>Zentrale Bohrung Ø8</li>
         <li>6 Löcher Ø5 im polaren Muster</li>
+        <li>Radfelge und Gummiring</li>
         <li>Gummiring R1,75</li>
         <li>Gespeichert als <span class="mono">Rad.FCStd</span> im Ordner <b>Carry</b></li>
       </ul>
@@ -952,6 +980,10 @@
 </script>
 </body>
 </html>
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Lochskizze: Kreis R2,5 bei 10 mm vom Mittelpunkt">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Lochskizze: Kreis R2,5 bei 10 mm vom Mittelpunkt">
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#d33a3a"/>
@@ -13,7 +13,7 @@
   <!-- zentrale Bohrung -->
   <circle cx="200" cy="200" r="32" fill="#ffffff" stroke="#17202b" stroke-width="3"/>
   <!-- Loch R2,5 bei 10 mm -->
-  <circle cx="200" cy="120" r="20" fill="#ffffff" stroke="#d33a3a" stroke-width="3"/>
+  <circle cx="200" cy="120" r="20" fill="#ffffff" stroke="#17202b" stroke-width="3"/>
   <!-- Maß 10 mm -->
   <line x1="200" y1="200" x2="200" y2="120" stroke="#d33a3a" stroke-width="1.8" marker-start="url(#a)" marker-end="url(#a)"/>
   <text x="210" y="165" fill="#d33a3a" font-family="Segoe UI,Arial" font-size="15" font-weight="700">10 mm</text>
@@ -24,3 +24,4 @@
   <text x="20" y="28" fill="#5f6b7a" font-family="Segoe UI,Arial" font-size="13">Innenseite des Rads</text>
   <text x="212" y="382" fill="#5f6b7a" font-family="Segoe UI,Arial" font-size="12">Kreis auf der YZ-Ebene</text>
 </svg>
+

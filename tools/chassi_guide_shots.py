@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Erzeugt die Screenshots fuer die neue Chassi-Anleitung (FreeCAD 1.1, dunkles Theme).
 
 Aufruf (Beispiel):
@@ -252,16 +252,13 @@ def run():
         add_rect(sk, 116, 70)
         doc.recompute(); view.fitAll(); pump(500)
         c1 = point(view, -58, -35, 0); c2 = point(view, 58, 35, 0)
-        canvas("06_rechteck", sk, marks=[{"x": c1[0], "y": c1[1], "r": 26},
-                                         {"x": c2[0], "y": c2[1], "r": 26}], pad=100)
+        canvas("06_rechteck", sk, pad=100)
 
         # Symmetry: mark two opposite corners and the origin
         sk.addConstraint(Sketcher.Constraint("Symmetric", 0, 1, 2, 1, -1, 1))
         doc.recompute(); view.fitAll(); pump(500)
         p1 = point(view, -58, -35, 0); p2 = point(view, 58, 35, 0); o = point(view, 0, 0, 0)
-        canvas("07_symmetrie", sk, marks=[{"x": p1[0], "y": p1[1], "r": 28, "label": "1"},
-                                          {"x": p2[0], "y": p2[1], "r": 28, "label": "2"},
-                                          {"x": o[0], "y": o[1], "r": 30, "label": "3"}], pad=100)
+        canvas("07_symmetrie", sk, pad=100)
 
         # dimensions
         sk.addConstraint(Sketcher.Constraint("Distance", 2, 116.0))
@@ -300,7 +297,7 @@ def run():
         log("top face %s" % top)
         select(pad, top); pump(400)
         c = point(view, 0, 0, 5)
-        canvas("12_flaeche", pad, marks=[{"x": c[0], "y": c[1], "r": 95, "label": "Oberseite"}], pad=110)
+        canvas("12_flaeche", pad, pad=110)
 
         # Hole sketch
         hs = body.newObject("Sketcher::SketchObject", "HoleSketch")
@@ -516,3 +513,4 @@ def run():
         QtCore.QTimer.singleShot(1000, QtWidgets.QApplication.quit)
 
 QtCore.QTimer.singleShot(5000, run)
+
